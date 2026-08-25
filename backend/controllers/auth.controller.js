@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import userModel from "../models/user.model";
+import userModel from "../models/user.model.js";
 
 // user registration controller
 export const userRegister = async (req, res) => {
@@ -9,7 +9,7 @@ export const userRegister = async (req, res) => {
 
     const existingUser = await userModel.findOne({ email });
 
-    if (!existingUser) {
+    if (existingUser) {
       return res.status(400).json({ message: "Email already registered" });
     }
 
@@ -43,7 +43,7 @@ export const userRegister = async (req, res) => {
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
@@ -100,12 +100,12 @@ export const userLogin = async (req, res) => {
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       message: "User login successfully",
       accessToken,
@@ -152,12 +152,12 @@ export const refresh = async (req, res) => {
 
     res.cookie("refreshToken", newRefreshToken, {
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    res.status(403).json({ accessToken: newAccessToken });
+    res.status(200).json({ accessToken: newAccessToken });
   } catch (error) {
     return res
       .status(403)
@@ -169,10 +169,9 @@ export const refresh = async (req, res) => {
 export const userLogout = (req, res) => {
   res.clearCookie("refreshToken", {
     httpOnly: true,
-    secure: true,
+    secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
   });
 
   res.json({ message: " User logged out successfully" });
 };
-
