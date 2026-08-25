@@ -5,17 +5,21 @@ node_modules/
 # Environment files (sensitive credentials)
 .env
 .env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.development
+.env.test
+.env.production
 **/.env
-**/.env.*
+**/.env.local
+**/.env.development
+**/.env.production
 
 # Production builds
 dist/
-dist-ssr/
+**/dist/
 build/
+**/build/
 out/
+**/out/
 
 # Logs
 logs/
@@ -24,9 +28,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
 
-# Diagnostic reports (Node.js)
+# Diagnostic reports
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # System Files
@@ -38,7 +41,5 @@ Thumbs.db
 !.vscode/extensions.json
 .idea/
 *.suo
-*.ntvs*
-*.njsproj
 *.sln
-*.sw?
+
