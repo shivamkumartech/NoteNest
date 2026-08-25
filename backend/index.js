@@ -1,40 +1,38 @@
-import express from 'express'
-import dotenv from 'dotenv'
-import mongoose from 'mongoose'
-import cors from 'cors'
+import express from "express";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import cors from "cors";
+import noteRoutes from "./routes/note.route.js";
+import cookieParser from "cookie-parser";
 
-import noteRoutes from './routes/note.route.js'
+const app = express();
 
-const app = express()
-
-dotenv.config()
-const port = process.env.PORT || 3000
+dotenv.config();
+const port = process.env.PORT || 3000;
 
 // DB connection
 try {
-    mongoose.connect(process.env.MONGO_URL)
-        console.log("connected");
-        
+  mongoose.connect(process.env.MONGO_URL);
+  console.log("connected");
 } catch (error) {
-    console.log("error", error);
-    
+  console.log("error", error);
 }
 
 // routing middleware
 
-app.use(express.json())
+app.use(express.json());
 
-app.use(cors({
+app.use(
+  cors({
     origin: process.env.FRONTEND_URL,
-    credentials:true
-}))
+    credentials: true,
+  }),
+);
 
+app.use(cookieParser());
 
-app.use("/api/v1/notesapp", noteRoutes)
-
-
+app.use("/api/v1/notesapp", noteRoutes);
 
 app.listen(port, () => {
-    console.log(`server is running at ${port}`);
-    
-})
+  console.log(`server is running at ${port}`);
+});
