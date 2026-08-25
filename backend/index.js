@@ -5,9 +5,10 @@ import cors from "cors";
 import noteRoutes from "./routes/note.route.js";
 import cookieParser from "cookie-parser";
 
-const app = express();
-
 dotenv.config();
+
+
+const app = express();
 const port = process.env.PORT || 3000;
 
 // DB connection
