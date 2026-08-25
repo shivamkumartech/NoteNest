@@ -3,10 +3,10 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
 import noteRoutes from "./routes/note.route.js";
+import authRoutes from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
-
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -32,7 +32,11 @@ app.use(
 
 app.use(cookieParser());
 
+// Note routes
 app.use("/api/v1/notesapp", noteRoutes);
+
+// Auth routes
+app.use("/api/v1/notenest/auth", authRoutes);
 
 app.listen(port, () => {
   console.log(`server is running at ${port}`);
