@@ -1,17 +1,18 @@
 # NoteNest 📝
 
-NoteNest is a responsive, full-stack note-taking application built using the modern **MERN stack** (MongoDB, Express, React, Node.js). Engineered with a clean architecture, it features a React 19 frontend stylized with Tailwind CSS v4, managed globally via the React Context API, and backed by a secure Express REST API with JWT authentication and RBAC-ready middleware protection.
+NoteNest is a responsive, full-stack note-taking application built using the modern **MERN stack** (MongoDB, Express, React, Node.js). Engineered with a clean architecture, it features a React 19 frontend stylized with Tailwind CSS v4, managed globally via the React Context API, and backed by a secure Express REST API with JWT authentication, user-scoped note authorization, and RBAC-ready middleware protection.
 
 ---
 
 ## 🚀 Key Features
 
 - **JWT Authentication & Authorization:** Secure user registration, login, logout, and token rotation using short-lived JWT Access Tokens and HttpOnly Refresh Token cookies.
+- **User-Scoped Data Privacy:** Each note is securely linked to its owner (`owner: ObjectId -> User`). Users can only access, update, and delete their own notes.
 - **Protected Endpoints:** Middleware-enforced authorization ensures user data privacy across all note operations.
 - **Intuitive CRUD Operations:** Create, read, update, and delete notes instantly with automatic, reactive state updates.
 - **Dynamic Dark-Themed UI:** A fully responsive, modern dashboard crafted with Tailwind CSS v4 and Lucide icons.
 - **Context-Driven State Management:** Lightweight global state handling using the React Context API, preventing prop drilling and Redux overhead.
-- **Robust Persistence:** MongoDB document store integration with pre-trimmed field validators, hashed passwords (bcrypt), and automated audit timestamps (`createdAt`, `updatedAt`).
+- **Robust Persistence:** MongoDB document store integration with pre-trimmed field validators, hashed passwords (`bcryptjs`), and automated audit timestamps (`createdAt`, `updatedAt`).
 - **High-Performance Development:** Powered by Vite for lightning-fast bundling, and linted with Oxlint for code quality checks.
 
 ---
@@ -22,7 +23,7 @@ NoteNest is a responsive, full-stack note-taking application built using the mod
 - **Framework:** React 19 (Functional Components & Hooks)
 - **Routing:** React Router DOM v7
 - **Styling:** Tailwind CSS v4 (native Vite compiler integration)
-- **API Client:** Axios (configured with base URL and credentials)
+- **API Client:** Axios (configured with environment base URL and credentials support)
 - **Icons:** Lucide React
 
 ### Backend
@@ -37,7 +38,7 @@ NoteNest is a responsive, full-stack note-taking application built using the mod
 
 ## 📐 System Architecture
 
-The application is structured around a decoupled client-server architecture with secure token authentication:
+The application is structured around a decoupled client-server architecture with secure token authentication and user data isolation:
 
 ```mermaid
 graph TD
@@ -60,9 +61,9 @@ graph TD
         Ax -.->|HTTP Request + Bearer Token| Router
         Router -->|/api/v1/auth| AuthCtrl
         Router -->|/api/v1/notes| AuthMW
-        AuthMW --> NoteCtrl
+        AuthMW -->|req.userId| NoteCtrl
         AuthCtrl --> UserModel
-        NoteCtrl --> NoteModel
+        NoteCtrl -->|Scoped Query by owner| NoteModel
     end
 
     subgraph Database [Database Layer]
@@ -85,16 +86,16 @@ graph TD
 | **POST** | `/refresh-token` | Obtain new access token via refresh cookie | *HttpOnly Cookie* | `{ "accessToken": "..." }` |
 | **POST** | `/logout` | Log out user and clear refresh cookie | *HttpOnly Cookie* | `{ "message": "User logged out successfully" }` |
 
-### 📝 Notes Endpoints (`/api/v1/notes`) — *Protected*
+### 📝 Notes Endpoints (`/api/v1/notes`) — *Protected & User-Scoped*
 
 > 🔒 **Header Required:** `Authorization: Bearer <accessToken>`
 
 | Method | Endpoint | Description | Request Body Schema |
 | :--- | :--- | :--- | :--- |
-| **GET** | `/get-AllNotes` | Retrieve all notes | *None* |
-| **POST** | `/create-note` | Create a new note | `{ "title": "String", "content": "String" }` |
-| **PUT** | `/update-note/:id` | Update title or content of an existing note | `{ "title": "String", "content": "String" }` |
-| **DELETE** | `/delete-note/:id` | Remove a note permanently | *None* |
+| **GET** | `/get-AllNotes` | Retrieve all notes owned by authenticated user | *None* |
+| **POST** | `/create-note` | Create a new note bound to authenticated user | `{ "title": "String", "content": "String" }` |
+| **PUT** | `/update-note/:id` | Update an existing note owned by authenticated user | `{ "title": "String", "content": "String" }` |
+| **DELETE** | `/delete-note/:id` | Remove a note owned by authenticated user | *None* |
 
 ---
 
@@ -111,7 +112,7 @@ NoteNest/
 │   │   │   └── note.controller.js
 │   │   ├── middlewares/  # Express middlewares (JWT Auth protection)
 │   │   │   └── auth.middleware.js
-│   │   ├── models/       # Mongoose schemas (User & Note)
+│   │   ├── models/       # Mongoose schemas (User & Note with owner ref)
 │   │   │   ├── note.model.js
 │   │   │   └── user.model.js
 │   │   ├── routes/       # Express route definitions
@@ -141,6 +142,8 @@ NoteNest/
     │   └── main.jsx      # React entry point & routing setup
     ├── index.html
     ├── vite.config.js    # Vite configuration
+    ├── .env.example
+    ├── .env
     └── package.json
 ```
 
@@ -170,8 +173,7 @@ npm install
 
 ### Step 2: Configure Environment Variables
 
-Create a `.env` file in the `/backend` directory based on `.env.example`:
-
+#### Backend `.env` (`/backend/.env`):
 ```env
 PORT=4001
 MONGO_URI=mongodb+srv://<username>:<password>@cluster0.example.mongodb.net/notenest
@@ -179,6 +181,11 @@ FRONTEND_URL=http://localhost:5173
 JWT_ACCESS_SECRET=your_jwt_access_secret_here
 JWT_REFRESH_SECRET=your_jwt_refresh_secret_here
 NODE_ENV=development
+```
+
+#### Frontend `.env` (`/frontend/.env`):
+```env
+VITE_API_URL=http://localhost:4001
 ```
 
 ### Step 3: Run the Application
@@ -201,8 +208,9 @@ npm run dev
 
 ## 🧠 Engineering Decisions & Best Practices
 
+- **User Data Isolation:** The `Note` schema strictly references `User` via `owner: ObjectId`. All queries filter by `owner: req.userId` to ensure complete data security between users.
 - **Dual-Token Authentication Flow:** Access tokens expire quickly (15 mins) for minimal risk exposure, while refresh tokens (7 days) are stored in HttpOnly, SameSite cookies to protect against XSS attacks.
 - **Separation of Concerns (SoC):** Clean layered architecture split across routes, middlewares, controllers, models, and database configurations.
-- **Middleware Authorization:** Route protection is decoupled into a reusable Express middleware (`protect`), verifying signatures before reaching controller handlers.
+- **Middleware Authorization:** Route protection is decoupled into a reusable Express middleware (`protect`), verifying signatures and extracting `req.userId` before reaching controller handlers.
 - **React Context API for State:** Lightweight global state handling without unnecessary boilerplate libraries, tailored specifically for note state operations.
-- **Fast Build Times & DX:** Configured Vite along with Oxlint to guarantee instant Hot Module Replacement (HMR) and sub-millisecond static code linting.
+- **Fast Build Times & DX:** Configured Vite along with Oxlint to guarantee instant Hot Module Replacement (HMR) and static code linting.
