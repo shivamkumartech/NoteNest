@@ -5,15 +5,16 @@ import {
   getAllNotes,
   updateNote,
 } from "../controllers/note.controller.js";
+import { protect } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-router.get("/get-AllNotes", getAllNotes);
+router.get("/get-AllNotes", protect, getAllNotes);
 
-router.post("/create-note", createNote);
+router.post("/create-note", protect, createNote);
 
-router.put("/update-note/:id", updateNote);
+router.put("/update-note/:id", protect, updateNote);
 
-router.delete("/delete-note/:id", deleteNote);
+router.delete("/delete-note/:id", protect, deleteNote);
 
 export default router;
