@@ -2,7 +2,9 @@ import Note from "../models/note.model.js";
 
 export const getAllNotes = async (req, res) => {
   try {
-    const notes = await Note.find().sort({ createdAt: -1 });
+    const notes = await Note.find({ owner: req.userId }).sort({
+      createdAt: -1,
+    });
     res.status(200).json(notes);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -17,7 +19,7 @@ export const createNote = async (req, res) => {
         .status(400)
         .json({ message: "Title and Content are required" });
     }
-    const newNote = new Note({ title, content });
+    const newNote = new Note({ title, content, owner: req.userId });
     await newNote.save();
     res.status(201).json(newNote);
   } catch (error) {
@@ -28,8 +30,8 @@ export const createNote = async (req, res) => {
 export const updateNote = async (req, res) => {
   try {
     const { title, content } = req.body;
-    const updatedNote = await Note.findByIdAndUpdate(
-      req.params.id,
+    const updatedNote = await Note.findOneAndUpdate(
+      { _id: req.params.id, owner: req.userId },
       { title, content },
       { returnDocument: "after" },
     );
@@ -44,7 +46,10 @@ export const updateNote = async (req, res) => {
 
 export const deleteNote = async (req, res) => {
   try {
-    const deletedNote = await Note.findByIdAndDelete(req.params.id);
+    const deletedNote = await Note.findOneAndDelete({
+      _id: req.params.id,
+      owner: req.userId,
+    });
     if (!deletedNote) {
       return res.status(404).json({ message: "Note not found" });
     }
