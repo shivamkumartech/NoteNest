@@ -2,13 +2,14 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
-import noteRoutes from "./routes/note.route.js";
 import authRoutes from "./routes/auth.route.js";
+import noteRoutes from "./routes/note.route.js";
 
 const app = express();
 
-// Core Middlewares
+// Middlewares
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(
   cors({
@@ -17,10 +18,16 @@ app.use(
   }),
 );
 
-app.use(cookieParser());
+// Health Check Endpoint
+app.get("/api/v1/health", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "NoteNest API is running",
+  });
+});
 
-// API Routes
-app.use("/api/v1/notes", noteRoutes);
+// Routes
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/notes", noteRoutes);
 
 export default app;
