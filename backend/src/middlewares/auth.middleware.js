@@ -4,7 +4,10 @@ export const protect = (req, res, next) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({ message: "Not authorized, no token" });
+    return res.status(401).json({
+      success: false,
+      message: "Not authorized, no access token provided",
+    });
   }
 
   const token = authHeader.split(" ")[1];
@@ -16,6 +19,9 @@ export const protect = (req, res, next) => {
 
     next();
   } catch (error) {
-    return res.status(401).json({ message: "Access token expired or invaid" });
+    return res.status(401).json({
+      success: false,
+      message: "Access token expired or invalid",
+    });
   }
 };
