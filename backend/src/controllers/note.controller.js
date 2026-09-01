@@ -1,46 +1,103 @@
 import Note from "../models/note.model.js";
 
-export const getAllNotes = async (req, res) => {
-  try {
-    const notes = await Note.find({ owner: req.userId }).sort({
-      createdAt: -1,
-    });
-    res.status(200).json(notes);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
 export const createNote = async (req, res) => {
   try {
     const { title, content } = req.body;
-    if (!title || !content) {
-      return res
-        .status(400)
-        .json({ message: "Title and Content are required" });
+
+    if (!title?.trim() || !content?.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: "Title and content are required",
+      });
     }
-    const newNote = new Note({ title, content, owner: req.userId });
-    await newNote.save();
-    res.status(201).json(newNote);
+
+    const newNote = await Note.create({
+      title: title.trim(),
+      content: content.trim(),
+      owner: req.userId,
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: "Note created successfully",
+      note: newNote,
+    });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Create note error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
+export const getAllNotes = async (req, res) => {
+  try {
+    const notes = await Note.find({
+      owner: req.userId,
+    }).sort({
+      createdAt: -1,
+    });
+
+    return res.status(200).json({
+      success: true,
+      notes,
+    });
+  } catch (error) {
+    console.error("Get notes error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
   }
 };
 
 export const updateNote = async (req, res) => {
   try {
     const { title, content } = req.body;
-    const updatedNote = await Note.findOneAndUpdate(
-      { _id: req.params.id, owner: req.userId },
-      { title, content },
-      { returnDocument: "after" },
-    );
-    if (!updatedNote) {
-      return res.status(404).json({ message: "Notes not found" });
+
+    if (!title?.trim() || !content?.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: "Title and content are required",
+      });
     }
-    res.status(200).json(updatedNote);
+
+    const updatedNote = await Note.findOneAndUpdate(
+      {
+        _id: req.params.id,
+        owner: req.userId,
+      },
+      {
+        title: title.trim(),
+        content: content.trim(),
+      },
+      {
+        returnDocument: "after",
+      },
+    );
+
+    if (!updatedNote) {
+      return res.status(404).json({
+        success: false,
+        message: "Note not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Note updated successfully",
+      note: updatedNote,
+    });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Update note error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
   }
 };
 
@@ -50,11 +107,24 @@ export const deleteNote = async (req, res) => {
       _id: req.params.id,
       owner: req.userId,
     });
+
     if (!deletedNote) {
-      return res.status(404).json({ message: "Note not found" });
+      return res.status(404).json({
+        success: false,
+        message: "Note not found",
+      });
     }
-    res.status(200).json({ message: "Note deleted successfully" });
+
+    return res.status(200).json({
+      success: true,
+      message: "Note deleted successfully",
+    });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Delete note error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
   }
 };

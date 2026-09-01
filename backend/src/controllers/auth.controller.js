@@ -2,7 +2,7 @@ import userModel from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { generateAccessToken, generateRefreshToken } from "../utils/token.js";
-import cookieOptions from "../utils/cookieOptions.js";
+import { cookieOptions, clearCookieOptions } from "../utils/cookieOptions.js";
 import { hashToken, compareToken } from "../utils/hashToken.js";
 
 // ================= REGISTER =================
@@ -193,14 +193,14 @@ export const userLogout = async (req, res) => {
       });
     }
 
-    res.clearCookie("refreshToken", cookieOptions);
+    res.clearCookie("refreshToken", clearCookieOptions);
 
     return res.status(200).json({
       success: true,
       message: " User logged out successfully",
     });
   } catch (error) {
-    res.clearCookie("refreshToken", cookieOptions);
+    res.clearCookie("refreshToken", clearCookieOptions);
 
     return res.status(200).json({
       success: true,
