@@ -1,15 +1,21 @@
 {
-  "name": "backend",
+  "name": "notenest-backend",
   "version": "1.0.0",
-  "description": "full stack notes app",
+  "description": "Backend API for the NoteNest full-stack notes application",
   "license": "ISC",
   "author": "",
   "type": "module",
-  "main": "index.js",
+  "main": "server.js",
+
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js"
   },
+
+  "engines": {
+    "node": ">=20"
+  },
+
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
@@ -19,6 +25,7 @@
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.7.4"
   },
+
   "devDependencies": {
     "nodemon": "^3.1.14"
   }
