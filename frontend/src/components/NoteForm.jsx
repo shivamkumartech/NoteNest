@@ -74,7 +74,7 @@ function Noteform() {
               title: e.target.value,
             })
           }
-          disabled={actionLoading}
+          disabled={isCreating}
         />
 
         <textarea
