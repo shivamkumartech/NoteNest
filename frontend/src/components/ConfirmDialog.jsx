@@ -7,6 +7,8 @@ function ConfirmDialog({
   onConfirm,
   onCancel,
   loading = false,
+  confirmText = "Delete",
+  confirmLoadingText = "Deleting...",
 }) {
   useEffect(() => {
     if (!isOpen) {
@@ -69,9 +71,9 @@ function ConfirmDialog({
             type="button"
             onClick={onConfirm}
             disabled={loading}
-            className="rounded-lg bg-red-600 px-4 py-2 font-medium text-white transition hover:bg-red-700"
+            className="rounded-lg bg-red-600 px-4 py-2 font-medium text-white transition hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? "Deleting..." : "Delete"}
+            {loading ? confirmLoadingText : confirmText}
           </button>
         </div>
       </div>

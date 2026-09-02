@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, NotebookText, X } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "sonner";
+import ConfirmDialog from "./ConfirmDialog";
 
 function NavLinks({ user, location, onNavigate, onLogout, mobile = false }) {
   const linkClass = (path) =>
@@ -71,16 +72,25 @@ function Navbar() {
   const { user, logout } = useContext(AuthContext);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showLogoutDialog, setShowLogoutDialog] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
 
-  const handleLogout = async () => {
+  const handleOpenLogoutDialog = () => {
+    closeMenu();
+    setShowLogoutDialog(true);
+  };
+
+  const handleConfirmLogout = async () => {
     try {
+      setIsLoggingOut(true);
+
       await logout();
 
-      closeMenu();
+      setShowLogoutDialog(false);
 
       toast.success("Logged out successfully");
 
@@ -91,6 +101,8 @@ function Navbar() {
       toast.error(
         error.response?.data?.message || "Unable to logout. Please try again.",
       );
+    } finally {
+      setIsLoggingOut(false);
     }
   };
 
@@ -110,7 +122,7 @@ function Navbar() {
             user={user}
             location={location}
             onNavigate={undefined}
-            onLogout={handleLogout}
+            onLogout={handleOpenLogoutDialog}
           />
         </div>
 
@@ -135,12 +147,23 @@ function Navbar() {
               user={user}
               location={location}
               onNavigate={closeMenu}
-              onLogout={handleLogout}
+              onLogout={handleOpenLogoutDialog}
               mobile
             />
           </div>
         </div>
       )}
+
+      <ConfirmDialog
+        isOpen={showLogoutDialog}
+        title="Log out of NoteNest?"
+        message="Are you sure you want to log out of your account?"
+        onConfirm={handleConfirmLogout}
+        onCancel={() => setShowLogoutDialog(false)}
+        loading={isLoggingOut}
+        confirmText="Logout"
+        confirmLoadingText="Logging out..."
+      />
     </nav>
   );
 }
