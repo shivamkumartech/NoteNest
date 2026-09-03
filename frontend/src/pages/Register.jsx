@@ -59,13 +59,13 @@ function Register() {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto mt-10 bg-gray-800 border border-gray-700 rounded-2xl shadow-lg p-6 sm:p-8">
-      <h1 className="text-2xl font-bold text-center text-blue-400 mb-6">
+    <div className="w-full max-w-md mx-auto mt-6 sm:mt-10 rounded-2xl border border-gray-800 bg-gray-900/70 p-6 sm:p-8 shadow-sm">
+      <h1 className="text-2xl font-bold tracking-tight text-center text-blue-400 mb-6">
         Create Account
       </h1>
 
       {error && (
-        <div className="mb-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3">
+        <div className="mb-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 text-sm">
           {error}
         </div>
       )}
@@ -89,7 +89,7 @@ function Register() {
             onChange={handleChange}
             autoComplete="name"
             autoFocus
-            className="w-full px-4 py-2 rounded-lg border border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 outline-none"
+            className="w-full rounded-lg border border-gray-700 bg-gray-800/80 px-4 py-2.5 text-sm text-white placeholder-gray-500 outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
           />
         </div>
 
@@ -110,7 +110,7 @@ function Register() {
             value={formData.email}
             onChange={handleChange}
             autoComplete="email"
-            className="w-full px-4 py-2 rounded-lg border border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 outline-none"
+            className="w-full rounded-lg border border-gray-700 bg-gray-800/80 px-4 py-2.5 text-sm text-white placeholder-gray-500 outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
           />
         </div>
 
@@ -132,7 +132,7 @@ function Register() {
               value={formData.password}
               onChange={handleChange}
               autoComplete="new-password"
-              className="w-full px-4 py-2 pr-11 rounded-lg border border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 outline-none"
+              className="w-full rounded-lg border border-gray-700 bg-gray-800/80 px-4 py-2.5 pr-11 text-sm text-white placeholder-gray-500 outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
             />
 
             <button
@@ -141,7 +141,7 @@ function Register() {
               className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-200 transition"
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
-              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
           </div>
         </div>
@@ -149,15 +149,15 @@ function Register() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-semibold py-2 rounded-lg transition"
+          className="w-full cursor-pointer rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading ? "Creating account..." : "Register"}
         </button>
       </form>
 
-      <p className="text-center text-gray-400 mt-5">
+      <p className="text-center text-sm text-gray-400 mt-5">
         Already have an account?{" "}
-        <Link to="/login" className="text-blue-400 hover:text-blue-300">
+        <Link to="/login" className="text-blue-400 hover:text-blue-300 font-medium">
           Login
         </Link>
       </p>

@@ -1,10 +1,7 @@
-
 function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-400 py-4 border-t border-gray-800">
-      <div className="text-center text-sm">
-        © {new Date().getFullYear()} <span className="text-blue-400 font-semibold">NoteNest</span>. All rights reserved.
-      </div>
+    <footer className="mt-auto border-t border-gray-900/60 py-6 text-center text-xs text-gray-500">
+      <p>© {new Date().getFullYear()} NoteNest. All rights reserved.</p>
     </footer>
   );
 }

@@ -31,7 +31,7 @@ function Landing() {
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
               to="/register"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-blue-500 px-6 py-3 font-medium text-white transition hover:bg-blue-600 sm:w-auto"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700 sm:w-auto"
             >
               Get Started
               <ArrowRight className="h-4 w-4" />
@@ -50,7 +50,7 @@ function Landing() {
       {/* Features */}
       <section className="border-t border-gray-800 px-4 py-12">
         <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-3">
-          <div className="rounded-2xl border border-gray-700 bg-gray-800 p-6 shadow-lg transition-all hover:border-gray-600 hover:shadow-xl">
+          <div className="rounded-2xl border border-gray-800 bg-gray-900/70 p-6 shadow-sm transition-all hover:border-gray-700 hover:bg-gray-900/90 hover:shadow-md">
             <NotebookText className="mb-4 h-7 w-7 text-blue-400" />
 
             <h2 className="text-lg font-semibold text-white">
@@ -63,7 +63,7 @@ function Landing() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-gray-700 bg-gray-800 p-6 shadow-lg transition-all hover:border-gray-600 hover:shadow-xl">
+          <div className="rounded-2xl border border-gray-800 bg-gray-900/70 p-6 shadow-sm transition-all hover:border-gray-700 hover:bg-gray-900/90 hover:shadow-md">
             <ShieldCheck className="mb-4 h-7 w-7 text-blue-400" />
 
             <h2 className="text-lg font-semibold text-white">
@@ -76,7 +76,7 @@ function Landing() {
             </p>
           </div>
 
-          <div className="rounded-2xl border border-gray-700 bg-gray-800 p-6 shadow-lg transition-all hover:border-gray-600 hover:shadow-xl">
+          <div className="rounded-2xl border border-gray-800 bg-gray-900/70 p-6 shadow-sm transition-all hover:border-gray-700 hover:bg-gray-900/90 hover:shadow-md">
             <Zap className="mb-4 h-7 w-7 text-blue-400" />
 
             <h2 className="text-lg font-semibold text-white">

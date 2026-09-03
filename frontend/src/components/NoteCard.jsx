@@ -74,7 +74,7 @@ function NoteCard({ note }) {
   };
 
   return (
-    <div className="bg-gray-800 border border-gray-700 rounded-2xl shadow-lg hover:shadow-xl hover:border-gray-600 transition-all p-6 flex flex-col">
+    <div className="group relative flex flex-col rounded-2xl border border-gray-800 bg-gray-900/70 p-6 shadow-sm transition-all duration-200 hover:border-gray-700 hover:bg-gray-900/90 hover:shadow-md">
       {isEditing ? (
         <>
           {/* Edit Mode */}
@@ -88,7 +88,7 @@ function NoteCard({ note }) {
               })
             }
             disabled={isUpdating}
-            className="border border-gray-600 rounded-lg p-2 w-full mb-3 focus:ring-2 focus:ring-blue-500 outline-none bg-gray-700 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+            className="mb-3 w-full rounded-lg border border-gray-700 bg-gray-800/80 px-4 py-2.5 text-sm text-white placeholder-gray-500 outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
           />
 
           <textarea
@@ -101,15 +101,15 @@ function NoteCard({ note }) {
               })
             }
             disabled={isUpdating}
-            className="border border-gray-600 rounded-lg p-2 w-full mb-3 focus:ring-2 focus:ring-blue-500 outline-none bg-gray-700 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+            className="mb-4 w-full rounded-lg border border-gray-700 bg-gray-800/80 px-4 py-2.5 text-sm text-white placeholder-gray-500 outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
           />
 
-          <div className="flex gap-2">
+          <div className="flex gap-2.5">
             <button
               type="button"
               onClick={handleUpdate}
               disabled={isUpdating}
-              className="bg-green-500 hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 py-1.5 rounded-lg transition"
+              className="cursor-pointer rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isUpdating ? "Saving..." : "Save"}
             </button>
@@ -118,7 +118,7 @@ function NoteCard({ note }) {
               type="button"
               onClick={handleCancelEdit}
               disabled={isUpdating}
-              className="bg-gray-400 hover:bg-gray-500 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 py-1.5 rounded-lg transition"
+              className="cursor-pointer rounded-lg border border-gray-700 bg-gray-800/50 px-4 py-2 text-sm font-medium text-gray-300 transition hover:border-gray-600 hover:bg-gray-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
             >
               Cancel
             </button>
@@ -127,11 +127,11 @@ function NoteCard({ note }) {
       ) : (
         <>
           {/* View Mode */}
-          <h2 className="text-xl font-semibold text-white break-words">
+          <h2 className="text-lg font-semibold tracking-tight text-white wrap-break-word">
             {note.title}
           </h2>
 
-          <p className="text-gray-300 mt-2 flex-1 line-clamp-4 break-words">
+          <p className="mt-2.5 flex-1 text-sm leading-relaxed text-gray-300 line-clamp-2 wrap-break-word">
             {note.content}
           </p>
 
@@ -145,12 +145,12 @@ function NoteCard({ note }) {
               })}
             </span>
 
-            <div className="flex gap-2">
+            <div className="flex items-center gap-1 transition sm:opacity-60 sm:group-hover:opacity-100">
               <button
                 type="button"
                 onClick={() => setIsEditing(true)}
                 disabled={isDeleting}
-                className="cursor-pointer rounded-lg bg-gray-700/60 p-2 text-gray-300 transition hover:bg-yellow-500/20 hover:text-yellow-400 disabled:cursor-not-allowed disabled:opacity-50"
+                className="cursor-pointer rounded-lg p-1.5 text-gray-400 transition hover:bg-gray-800 hover:text-gray-200 disabled:cursor-not-allowed disabled:opacity-50"
                 title="Edit note"
                 aria-label="Edit note"
               >
@@ -161,7 +161,7 @@ function NoteCard({ note }) {
                 type="button"
                 onClick={() => setShowDeleteDialog(true)}
                 disabled={isDeleting}
-                className="cursor-pointer rounded-lg bg-gray-700/60 p-2 text-gray-300 transition hover:bg-red-500/20 hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-50"
+                className="cursor-pointer rounded-lg p-1.5 text-gray-400 transition hover:bg-red-500/10 hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-50"
                 title="Delete note"
                 aria-label="Delete note"
               >

@@ -42,7 +42,7 @@ function ConfirmDialog({
       onClick={onCancel}
     >
       <div
-        className="w-full max-w-md rounded-2xl border border-gray-700 bg-gray-800 p-6 shadow-2xl"
+        className="w-full max-w-md rounded-2xl border border-gray-800 bg-gray-900/95 p-6 shadow-2xl backdrop-blur-md"
         role="dialog"
         aria-modal="true"
         aria-labelledby="confirm-dialog-title"
@@ -51,21 +51,21 @@ function ConfirmDialog({
       >
         <h2
           id="confirm-dialog-title"
-          className="text-xl font-semibold text-white"
+          className="text-lg font-semibold tracking-tight text-white"
         >
           {title}
         </h2>
 
-        <p id="confirm-dialog-message" className="mt-2 text-gray-400">
+        <p id="confirm-dialog-message" className="mt-2 text-sm text-gray-400">
           {message}
         </p>
 
-        <div className="mt-6 flex justify-end gap-3">
+        <div className="mt-6 flex justify-end gap-2.5">
           <button
             type="button"
             onClick={onCancel}
             disabled={loading}
-            className="cursor-pointer rounded-lg border border-gray-600 px-4 py-2 font-medium text-gray-300 transition hover:bg-gray-700 hover:text-white"
+            className="cursor-pointer rounded-lg border border-gray-700 bg-gray-800/50 px-4 py-2 text-sm font-medium text-gray-300 transition hover:border-gray-600 hover:bg-gray-800 hover:text-white"
           >
             Cancel
           </button>
@@ -74,7 +74,7 @@ function ConfirmDialog({
             type="button"
             onClick={onConfirm}
             disabled={loading}
-            className="cursor-pointer rounded-lg bg-red-600 px-4 py-2 font-medium text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50"
+            className="cursor-pointer rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-500 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {loading ? confirmLoadingText : confirmText}
           </button>

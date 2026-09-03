@@ -5,15 +5,20 @@ import { AuthContext } from "../context/AuthContext";
 import { toast } from "sonner";
 import ConfirmDialog from "./ConfirmDialog";
 
-function NavLinks({ user, loading, location, onNavigate, onLogout, mobile = false }) {
+function NavLinks({
+  user,
+  loading,
+  location,
+  onNavigate,
+  onLogout,
+  mobile = false,
+}) {
   if (loading) {
     return null;
   }
 
   const linkClass = (path) =>
-    `hover:text-blue-400 transition ${
-      mobile ? "py-1.5" : ""
-    } ${
+    `hover:text-blue-400 transition ${mobile ? "py-1.5" : ""} ${
       location.pathname === path
         ? "text-blue-400 font-semibold"
         : "text-gray-300"
@@ -45,11 +50,7 @@ function NavLinks({ user, loading, location, onNavigate, onLogout, mobile = fals
 
   return (
     <>
-      <Link
-        to="/login"
-        onClick={onNavigate}
-        className={linkClass("/login")}
-      >
+      <Link to="/login" onClick={onNavigate} className={linkClass("/login")}>
         Login
       </Link>
 
@@ -129,13 +130,19 @@ function Navbar() {
   const homePath = user ? "/notes" : "/";
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-gray-800 bg-gray-900/95 px-6 py-3 text-white shadow-sm backdrop-blur-md">
+    <nav className="sticky top-0 z-50 border-b border-gray-800/80 bg-gray-950/80 px-6 py-3.5 text-white backdrop-blur-md">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
-        <Link to={homePath} onClick={closeMenu} className="flex items-center gap-2">
-          <NotebookText className="h-7 w-7 text-blue-400" />
+        <Link
+          to={homePath}
+          onClick={closeMenu}
+          className="flex items-center gap-2"
+        >
+          <NotebookText className="h-6 w-6 text-blue-400" />
 
-          <span className="text-2xl tracking-wide text-blue-400">NoteNest</span>
+          <span className="text-xl font-bold tracking-tight text-white">
+            Note<span className="text-blue-400">Nest</span>
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -154,13 +161,13 @@ function Navbar() {
           <button
             type="button"
             onClick={() => setIsMenuOpen((prev) => !prev)}
-            className="cursor-pointer text-gray-300 transition hover:text-blue-400 md:hidden"
+            className="cursor-pointer text-gray-300 transition hover:text-white md:hidden"
             aria-label={
               isMenuOpen ? "Close navigation menu" : "Open navigation menu"
             }
             aria-expanded={isMenuOpen}
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         )}
       </div>
@@ -169,12 +176,12 @@ function Navbar() {
       {isMenuOpen && !loading && (
         <>
           <div
-            className="fixed inset-0 top-[57px] z-40 bg-black/50 md:hidden"
+            className="fixed inset-0 top:57px z-40 bg-black/60 md:hidden"
             onClick={closeMenu}
             aria-hidden="true"
           />
 
-          <div className="absolute left-0 right-0 top-full z-50 border-t border-gray-800 bg-gray-900 px-6 py-4 shadow-xl md:hidden">
+          <div className="absolute left-0 right-0 top-full z-50 border-t border-gray-800/80 bg-gray-950/95 px-6 py-4 shadow-xl backdrop-blur-md md:hidden">
             <div className="flex flex-col gap-4">
               <NavLinks
                 user={user}
