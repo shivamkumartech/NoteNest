@@ -88,6 +88,7 @@ function Register() {
             value={formData.name}
             onChange={handleChange}
             autoComplete="name"
+            autoFocus
             className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 outline-none"
           />
         </div>
