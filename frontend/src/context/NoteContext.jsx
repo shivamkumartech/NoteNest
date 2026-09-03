@@ -5,8 +5,7 @@ import { AuthContext } from "./AuthContext";
 export const NoteContext = createContext();
 
 export const NoteProvider = ({ children }) => {
-  const { user, accessToken, loading: authLoading } =
-    useContext(AuthContext);
+  const { user, accessToken, loading: authLoading } = useContext(AuthContext);
 
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -25,10 +24,7 @@ export const NoteProvider = ({ children }) => {
     } catch (error) {
       console.error("Error fetching notes:", error);
 
-      setError(
-        error.response?.data?.message ||
-          "Unable to fetch notes",
-      );
+      setError(error.response?.data?.message || "Unable to fetch notes");
     } finally {
       setLoading(false);
     }
@@ -42,18 +38,13 @@ export const NoteProvider = ({ children }) => {
 
       const response = await BACKEND_URL.post("/notes", note);
 
-      setNotes((prevNotes) => [
-        response.data.note,
-        ...prevNotes,
-      ]);
+      setNotes((prevNotes) => [response.data.note, ...prevNotes]);
 
       return response.data.note;
     } catch (error) {
       console.error("Error creating note:", error);
 
-      const message =
-        error.response?.data?.message ||
-        "Unable to create note";
+      const message = error.response?.data?.message || "Unable to create note";
 
       setError(message);
 
@@ -67,24 +58,17 @@ export const NoteProvider = ({ children }) => {
     try {
       setError("");
 
-      const response = await BACKEND_URL.put(
-        `/notes/${id}`,
-        updatedNote,
-      );
+      const response = await BACKEND_URL.put(`/notes/${id}`, updatedNote);
 
       setNotes((prevNotes) =>
-        prevNotes.map((note) =>
-          note._id === id ? response.data.note : note,
-        ),
+        prevNotes.map((note) => (note._id === id ? response.data.note : note)),
       );
 
       return response.data.note;
     } catch (error) {
       console.error("Error updating note:", error);
 
-      const message =
-        error.response?.data?.message ||
-        "Unable to update note";
+      const message = error.response?.data?.message || "Unable to update note";
 
       setError(message);
 
@@ -100,15 +84,11 @@ export const NoteProvider = ({ children }) => {
 
       await BACKEND_URL.delete(`/notes/${id}`);
 
-      setNotes((prevNotes) =>
-        prevNotes.filter((note) => note._id !== id),
-      );
+      setNotes((prevNotes) => prevNotes.filter((note) => note._id !== id));
     } catch (error) {
       console.error("Error deleting note:", error);
 
-      const message =
-        error.response?.data?.message ||
-        "Unable to delete note";
+      const message = error.response?.data?.message || "Unable to delete note";
 
       setError(message);
 
