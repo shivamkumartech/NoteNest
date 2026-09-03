@@ -40,6 +40,8 @@ app.get("/api/v1/debug/ip", (req, res) => {
     ip: req.ip,
     forwardedFor: req.headers["x-forwarded-for"] || null,
     cfConnectingIp: req.headers["cf-connecting-ip"] || null,
+    xVercelForwardedFor:
+      req.headers["x-vercel-forwarded-for"] || null,
   });
 });
 
