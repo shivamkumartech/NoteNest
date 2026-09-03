@@ -48,48 +48,48 @@ function Landing() {
       </section>
 
       {/* Features */}
-<section className="border-t border-gray-800 px-4 py-12">
-  <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-3">
-    <div className="rounded-xl border border-gray-800 bg-gray-900/60 p-6 transition hover:border-gray-700">
-      <NotebookText className="mb-4 h-7 w-7 text-blue-400" />
+      <section className="border-t border-gray-800 px-4 py-12">
+        <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-3">
+          <div className="rounded-2xl border border-gray-700 bg-gray-800 p-6 shadow-lg transition-all hover:border-gray-600 hover:shadow-xl">
+            <NotebookText className="mb-4 h-7 w-7 text-blue-400" />
 
-      <h2 className="text-lg font-semibold text-white">
-        Create & Manage
-      </h2>
+            <h2 className="text-lg font-semibold text-white">
+              Create & Manage
+            </h2>
 
-      <p className="mt-2 text-sm leading-6 text-gray-400">
-        Create notes quickly and keep your thoughts organized in one
-        simple workspace.
-      </p>
-    </div>
+            <p className="mt-2 text-sm leading-6 text-gray-400">
+              Create notes quickly and keep your thoughts organized in one
+              simple workspace.
+            </p>
+          </div>
 
-    <div className="rounded-xl border border-gray-800 bg-gray-900/60 p-6 transition hover:border-gray-700">
-      <ShieldCheck className="mb-4 h-7 w-7 text-blue-400" />
+          <div className="rounded-2xl border border-gray-700 bg-gray-800 p-6 shadow-lg transition-all hover:border-gray-600 hover:shadow-xl">
+            <ShieldCheck className="mb-4 h-7 w-7 text-blue-400" />
 
-      <h2 className="text-lg font-semibold text-white">
-        Private by Account
-      </h2>
+            <h2 className="text-lg font-semibold text-white">
+              Private by Account
+            </h2>
 
-      <p className="mt-2 text-sm leading-6 text-gray-400">
-        Your notes are associated with your account and protected by
-        authenticated access.
-      </p>
-    </div>
+            <p className="mt-2 text-sm leading-6 text-gray-400">
+              Your notes are associated with your account and protected by
+              authenticated access.
+            </p>
+          </div>
 
-    <div className="rounded-xl border border-gray-800 bg-gray-900/60 p-6 transition hover:border-gray-700">
-      <Zap className="mb-4 h-7 w-7 text-blue-400" />
+          <div className="rounded-2xl border border-gray-700 bg-gray-800 p-6 shadow-lg transition-all hover:border-gray-600 hover:shadow-xl">
+            <Zap className="mb-4 h-7 w-7 text-blue-400" />
 
-      <h2 className="text-lg font-semibold text-white">
-        Focus on Your Ideas
-      </h2>
+            <h2 className="text-lg font-semibold text-white">
+              Focus on Your Ideas
+            </h2>
 
-      <p className="mt-2 text-sm leading-6 text-gray-400">
-        A focused note-taking experience without unnecessary features
-        getting in the way.
-      </p>
-    </div>
-  </div>
-</section>
+            <p className="mt-2 text-sm leading-6 text-gray-400">
+              A focused note-taking experience without unnecessary features
+              getting in the way.
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

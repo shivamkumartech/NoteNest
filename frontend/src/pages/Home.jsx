@@ -1,10 +1,12 @@
 import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import { NoteContext } from "../context/NoteContext";
 import NoteCard from "../components/NoteCard";
 import { Link } from "react-router-dom";
 import { NotebookPen, Plus } from "lucide-react";
 
 function Home() {
+  const { user } = useContext(AuthContext);
   const { notes, loading, error, getNotes } = useContext(NoteContext);
 
   if (loading) {
@@ -39,8 +41,21 @@ function Home() {
   }
 
   return (
-    <div className="container mx-auto px-6 py-8">
-      <h1 className="text-3xl font-bold text-blue-400 mb-6">Your Notes</h1>
+    <div className="w-full py-4 sm:py-8">
+      {/* Dashboard Welcome Header */}
+      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+          Welcome back{user?.name ? `, ${user.name}` : ""} 👋
+        </h1>
+
+        <Link
+          to="/create-note"
+          className="hidden items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 sm:inline-flex"
+        >
+          <Plus size={18} />
+          <span>New Note</span>
+        </Link>
+      </div>
 
       {notes.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-center">
@@ -70,7 +85,7 @@ function Home() {
       {/* Mobile Create Note FAB */}
       <Link
         to="/create-note"
-        className="fixed bottom-19 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition hover:bg-blue-700 sm:hidden"
+        className="fixed bottom-20 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition hover:bg-blue-700 sm:hidden"
         title="Create note"
         aria-label="Create note"
       >

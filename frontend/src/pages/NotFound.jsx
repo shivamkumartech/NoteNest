@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FileQuestion } from "lucide-react";
+import { AuthContext } from "../context/AuthContext";
 
 function NotFound() {
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center text-center px-4">
       <FileQuestion className="w-16 h-16 text-gray-500 mb-4" />
@@ -17,10 +21,10 @@ function NotFound() {
       </p>
 
       <Link
-        to="/"
+        to={user ? "/notes" : "/"}
         className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-lg transition"
       >
-        Back to Home
+        Back to NoteNest
       </Link>
     </div>
   );

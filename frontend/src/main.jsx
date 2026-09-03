@@ -23,7 +23,6 @@ import Landing from "./pages/Landing.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-      
       <Route element={<PublicRoute />}>
         <Route index element={<Landing />} />
         <Route path="login" element={<Login />} />
@@ -31,10 +30,9 @@ const router = createBrowserRouter(
       </Route>
 
       <Route element={<ProtectedRoute />}>
-        <Route path="app" element={<Home />} />
+        <Route path="notes" element={<Home />} />
         <Route path="create-note" element={<Createnote />} />
       </Route>
-
       <Route path="*" element={<NotFound />} />
     </Route>,
   ),

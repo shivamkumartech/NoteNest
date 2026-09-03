@@ -1,70 +1,69 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, NotebookText, X } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "sonner";
 import ConfirmDialog from "./ConfirmDialog";
 
-function NavLinks({ user, location, onNavigate, onLogout, mobile = false }) {
-  const homePath = user ? "/app" : "/";
+function NavLinks({ user, loading, location, onNavigate, onLogout, mobile = false }) {
+  if (loading) {
+    return null;
+  }
 
   const linkClass = (path) =>
     `hover:text-blue-400 transition ${
+      mobile ? "py-1.5" : ""
+    } ${
       location.pathname === path
         ? "text-blue-400 font-semibold"
         : "text-gray-300"
     }`;
 
+  if (user) {
+    if (mobile) {
+      return (
+        <button
+          type="button"
+          onClick={onLogout}
+          className="cursor-pointer py-1.5 text-left text-gray-300 transition hover:text-red-400"
+        >
+          Logout
+        </button>
+      );
+    }
+
+    return (
+      <button
+        type="button"
+        onClick={onLogout}
+        className="cursor-pointer rounded-lg border border-gray-700 px-3 py-1.5 text-sm text-gray-300 transition hover:border-gray-600 hover:bg-gray-800 hover:text-red-400"
+      >
+        Logout
+      </button>
+    );
+  }
+
   return (
     <>
-      <Link to={homePath} onClick={onNavigate} className={linkClass(homePath)}>
-        Home
+      <Link
+        to="/login"
+        onClick={onNavigate}
+        className={linkClass("/login")}
+      >
+        Login
       </Link>
 
-      {user && (
-        <Link
-          to="/create-note"
-          onClick={onNavigate}
-          className={linkClass("/create-note")}
-        >
-          Create Note
-        </Link>
-      )}
-
-      {user ? (
-        <>
-          <span className="text-gray-300">Hi, {user.name}</span>
-
-          <button
-            onClick={onLogout}
-            className={
-              mobile
-                ? "text-left text-gray-300 hover:text-red-400 transition"
-                : "text-gray-300 hover:text-red-400 transition"
-            }
-          >
-            Logout
-          </button>
-        </>
-      ) : (
-        <>
-          <Link
-            to="/login"
-            onClick={onNavigate}
-            className={linkClass("/login")}
-          >
-            Login
-          </Link>
-
-          <Link
-            to="/register"
-            onClick={onNavigate}
-            className={linkClass("/register")}
-          >
-            Register
-          </Link>
-        </>
-      )}
+      <Link
+        to="/register"
+        onClick={onNavigate}
+        className={
+          mobile
+            ? linkClass("/register")
+            : "rounded-lg bg-blue-600 px-3.5 py-1.5 text-sm font-medium text-white transition hover:bg-blue-700"
+        }
+      >
+        Register
+      </Link>
     </>
   );
 }
@@ -73,7 +72,7 @@ function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { user, logout } = useContext(AuthContext);
+  const { user, loading, logout } = useContext(AuthContext);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showLogoutDialog, setShowLogoutDialog] = useState(false);
@@ -82,6 +81,23 @@ function Navbar() {
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+      return () => window.removeEventListener("keydown", handleKeyDown);
+    }
+  }, [isMenuOpen]);
 
   const handleOpenLogoutDialog = () => {
     closeMenu();
@@ -110,11 +126,13 @@ function Navbar() {
     }
   };
 
+  const homePath = user ? "/notes" : "/";
+
   return (
-    <nav className="relative sticky top-0 z-50 bg-gray-900 px-6 py-3 text-white shadow-lg">
+    <nav className="sticky top-0 z-50 border-b border-gray-800 bg-gray-900/95 px-6 py-3 text-white shadow-sm backdrop-blur-md">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" onClick={closeMenu} className="flex items-center gap-2">
+        <Link to={homePath} onClick={closeMenu} className="flex items-center gap-2">
           <NotebookText className="h-7 w-7 text-blue-400" />
 
           <span className="text-2xl tracking-wide text-blue-400">NoteNest</span>
@@ -124,6 +142,7 @@ function Navbar() {
         <div className="hidden items-center gap-6 md:flex">
           <NavLinks
             user={user}
+            loading={loading}
             location={location}
             onNavigate={undefined}
             onLogout={handleOpenLogoutDialog}
@@ -131,31 +150,43 @@ function Navbar() {
         </div>
 
         {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="text-gray-300 transition hover:text-blue-400 md:hidden"
-          aria-label={
-            isMenuOpen ? "Close navigation menu" : "Open navigation menu"
-          }
-          aria-expanded={isMenuOpen}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {!loading && (
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+            className="cursor-pointer text-gray-300 transition hover:text-blue-400 md:hidden"
+            aria-label={
+              isMenuOpen ? "Close navigation menu" : "Open navigation menu"
+            }
+            aria-expanded={isMenuOpen}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        )}
       </div>
 
-      {/* Mobile Navigation */}
-      {isMenuOpen && (
-        <div className="absolute left-0 right-0 top-full border-t border-gray-800 bg-gray-900 px-6 py-4 shadow-lg md:hidden">
-          <div className="flex flex-col gap-4">
-            <NavLinks
-              user={user}
-              location={location}
-              onNavigate={closeMenu}
-              onLogout={handleOpenLogoutDialog}
-              mobile
-            />
+      {/* Mobile Navigation Drawer & Backdrop */}
+      {isMenuOpen && !loading && (
+        <>
+          <div
+            className="fixed inset-0 top-[57px] z-40 bg-black/50 md:hidden"
+            onClick={closeMenu}
+            aria-hidden="true"
+          />
+
+          <div className="absolute left-0 right-0 top-full z-50 border-t border-gray-800 bg-gray-900 px-6 py-4 shadow-xl md:hidden">
+            <div className="flex flex-col gap-4">
+              <NavLinks
+                user={user}
+                loading={loading}
+                location={location}
+                onNavigate={closeMenu}
+                onLogout={handleOpenLogoutDialog}
+                mobile
+              />
+            </div>
           </div>
-        </div>
+        </>
       )}
 
       <ConfirmDialog

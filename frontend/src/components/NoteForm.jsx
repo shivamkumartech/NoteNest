@@ -39,7 +39,7 @@ function Noteform() {
         content: "",
       });
 
-      navigate("/");
+      navigate("/notes");
     } catch (error) {
       setError(
         error.response?.data?.message ||
@@ -51,7 +51,7 @@ function Noteform() {
   };
 
   return (
-    <div className="max-w-xl mx-auto mt-10 bg-gray-800 rounded-2xl shadow-lg p-6">
+    <div className="w-full max-w-xl mx-auto bg-gray-800 border border-gray-700 rounded-2xl shadow-lg p-6 sm:p-8">
       <h2 className="text-2xl font-bold text-center text-blue-400 mb-6">
         Create a New Note
       </h2>
@@ -66,7 +66,8 @@ function Noteform() {
         <input
           type="text"
           placeholder="Enter title..."
-          className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 outline-none"
+          autoFocus
+          className="w-full px-4 py-2 rounded-lg border border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 outline-none"
           value={note.title}
           onChange={(e) =>
             setNote({
@@ -79,7 +80,7 @@ function Noteform() {
 
         <textarea
           placeholder="Write your note here..."
-          className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 outline-none"
+          className="w-full px-4 py-2 rounded-lg border border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 outline-none"
           rows="5"
           value={note.content}
           onChange={(e) =>
@@ -91,13 +92,24 @@ function Noteform() {
           disabled={isCreating}
         />
 
-        <button
-          type="submit"
-          disabled={isCreating}
-          className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition text-white font-semibold py-2 rounded-lg shadow-md"
-        >
-          {isCreating ? "Creating..." : "Add Note"}
-        </button>
+        <div className="flex gap-3">
+          <button
+            type="submit"
+            disabled={isCreating}
+            className="flex-1 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition text-white font-semibold py-2.5 rounded-lg shadow-md cursor-pointer"
+          >
+            {isCreating ? "Creating..." : "Add Note"}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => navigate("/notes")}
+            disabled={isCreating}
+            className="cursor-pointer rounded-lg border border-gray-700 px-5 py-2.5 font-medium text-gray-300 transition hover:border-gray-600 hover:bg-gray-700/50 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
 
 function ConfirmDialog({
   isOpen,
@@ -21,9 +22,11 @@ function ConfirmDialog({
       }
     };
 
+    document.body.style.overflow = "hidden";
     document.addEventListener("keydown", handleKeyDown);
 
     return () => {
+      document.body.style.overflow = "unset";
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen, loading, onCancel]);
@@ -32,14 +35,14 @@ function ConfirmDialog({
     return null;
   }
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4"
       role="presentation"
       onClick={onCancel}
     >
       <div
-        className="w-full max-w-md rounded-2xl border border-gray-700 bg-gray-800 p-6 shadow-xl"
+        className="w-full max-w-md rounded-2xl border border-gray-700 bg-gray-800 p-6 shadow-2xl"
         role="dialog"
         aria-modal="true"
         aria-labelledby="confirm-dialog-title"
@@ -62,7 +65,7 @@ function ConfirmDialog({
             type="button"
             onClick={onCancel}
             disabled={loading}
-            className="rounded-lg bg-gray-600 px-4 py-2 font-medium text-white transition hover:bg-gray-500"
+            className="cursor-pointer rounded-lg border border-gray-600 px-4 py-2 font-medium text-gray-300 transition hover:bg-gray-700 hover:text-white"
           >
             Cancel
           </button>
@@ -71,13 +74,14 @@ function ConfirmDialog({
             type="button"
             onClick={onConfirm}
             disabled={loading}
-            className="rounded-lg bg-red-600 px-4 py-2 font-medium text-white transition hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="cursor-pointer rounded-lg bg-red-600 px-4 py-2 font-medium text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {loading ? confirmLoadingText : confirmText}
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 

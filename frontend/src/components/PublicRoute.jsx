@@ -14,7 +14,7 @@ function PublicRoute() {
   }
 
   if (user) {
-    return <Navigate to="/app" replace />;
+    return <Navigate to="/notes" replace />;
   }
 
   return <Outlet />;

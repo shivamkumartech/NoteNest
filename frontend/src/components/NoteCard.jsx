@@ -19,6 +19,11 @@ function NoteCard({ note }) {
   });
 
   const handleUpdate = async () => {
+    if (!editData.title.trim() || !editData.content.trim()) {
+      toast.error("Title and content are required");
+      return;
+    }
+
     try {
       setIsUpdating(true);
 
@@ -69,7 +74,7 @@ function NoteCard({ note }) {
   };
 
   return (
-    <div className="bg-gray-800 border border-gray-700 rounded-xl shadow-md hover:shadow-lg transition-all p-5 flex flex-col">
+    <div className="bg-gray-800 border border-gray-700 rounded-2xl shadow-lg hover:shadow-xl hover:border-gray-600 transition-all p-6 flex flex-col">
       {isEditing ? (
         <>
           {/* Edit Mode */}
@@ -122,11 +127,11 @@ function NoteCard({ note }) {
       ) : (
         <>
           {/* View Mode */}
-          <h2 className="text-xl font-semibold text-white capitalize">
+          <h2 className="text-xl font-semibold text-white break-words">
             {note.title}
           </h2>
 
-          <p className="text-gray-300 mt-2 flex-1 line-clamp-4">
+          <p className="text-gray-300 mt-2 flex-1 line-clamp-4 break-words">
             {note.content}
           </p>
 
@@ -145,7 +150,7 @@ function NoteCard({ note }) {
                 type="button"
                 onClick={() => setIsEditing(true)}
                 disabled={isDeleting}
-                className="bg-yellow-500 hover:bg-yellow-600 disabled:opacity-50 disabled:cursor-not-allowed text-white p-2 rounded-lg transition"
+                className="cursor-pointer rounded-lg bg-gray-700/60 p-2 text-gray-300 transition hover:bg-yellow-500/20 hover:text-yellow-400 disabled:cursor-not-allowed disabled:opacity-50"
                 title="Edit note"
                 aria-label="Edit note"
               >
@@ -156,7 +161,7 @@ function NoteCard({ note }) {
                 type="button"
                 onClick={() => setShowDeleteDialog(true)}
                 disabled={isDeleting}
-                className="bg-red-500 hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed text-white p-2 rounded-lg transition"
+                className="cursor-pointer rounded-lg bg-gray-700/60 p-2 text-gray-300 transition hover:bg-red-500/20 hover:text-red-400 disabled:cursor-not-allowed disabled:opacity-50"
                 title="Delete note"
                 aria-label="Delete note"
               >

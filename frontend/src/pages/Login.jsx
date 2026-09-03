@@ -41,7 +41,7 @@ function Login() {
 
       toast.success("Logged in successfully");
 
-      navigate("/");
+      navigate("/notes");
     } catch (error) {
       setError(
         error.response?.data?.message || "Unable to login. Please try again.",
@@ -52,7 +52,7 @@ function Login() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 bg-gray-800 rounded-2xl shadow-lg p-6">
+    <div className="w-full max-w-md mx-auto mt-10 bg-gray-800 border border-gray-700 rounded-2xl shadow-lg p-6 sm:p-8">
       <h1 className="text-2xl font-bold text-center text-blue-400 mb-6">
         Login
       </h1>
@@ -82,7 +82,7 @@ function Login() {
             onChange={handleChange}
             autoComplete="email"
             autoFocus
-            className="w-full px-4 py-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 outline-none"
+            className="w-full px-4 py-2 rounded-lg border border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 outline-none"
           />
         </div>
 
@@ -104,7 +104,7 @@ function Login() {
               value={formData.password}
               onChange={handleChange}
               autoComplete="current-password"
-              className="w-full px-4 py-2 pr-11 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 outline-none"
+              className="w-full px-4 py-2 pr-11 rounded-lg border border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 outline-none"
             />
 
             <button
