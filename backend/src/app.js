@@ -4,10 +4,12 @@ import cookieParser from "cookie-parser";
 
 import authRoutes from "./routes/auth.route.js";
 import noteRoutes from "./routes/note.route.js";
+import helmet from "helmet";
 
 const app = express();
 
 // Middlewares
+app.use(helmet());
 app.use(express.json());
 app.use(cookieParser());
 
