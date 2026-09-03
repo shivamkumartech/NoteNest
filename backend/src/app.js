@@ -7,6 +7,8 @@ import noteRoutes from "./routes/note.route.js";
 
 const app = express();
 
+app.set("trust proxy", 1);
+
 // Middlewares
 app.use(express.json());
 app.use(cookieParser());
@@ -36,8 +38,8 @@ app.use("/api/v1/notes", noteRoutes);
 app.get("/api/v1/debug/ip", (req, res) => {
   res.json({
     ip: req.ip,
-    ips: req.ips,
     forwardedFor: req.headers["x-forwarded-for"] || null,
+    cfConnectingIp: req.headers["cf-connecting-ip"] || null,
   });
 });
 
