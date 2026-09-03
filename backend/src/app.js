@@ -32,4 +32,13 @@ app.get("/api/v1/health", (req, res) => {
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/notes", noteRoutes);
 
+
+app.get("/api/v1/debug/ip", (req, res) => {
+  res.json({
+    ip: req.ip,
+    ips: req.ips,
+    forwardedFor: req.headers["x-forwarded-for"] || null,
+  });
+});
+
 export default app;
