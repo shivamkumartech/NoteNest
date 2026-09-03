@@ -5,14 +5,15 @@ import {
   userLogout,
   userRegister,
 } from "../controllers/auth.controller.js";
+import { authRateLimiter } from "../middlewares/rateLimit.middleware.js";
 
 const router = Router();
 
-router.post("/register", userRegister);
+router.post("/register", authRateLimiter, userRegister);
 
-router.post("/login", userLogin);
+router.post("/login", authRateLimiter, userLogin);
 
-router.post("/refresh-token", refresh);
+router.post("/refresh-token", authRateLimiter, refresh);
 
 router.post("/logout", userLogout);
 
