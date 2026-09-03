@@ -6,6 +6,8 @@ import { toast } from "sonner";
 import ConfirmDialog from "./ConfirmDialog";
 
 function NavLinks({ user, location, onNavigate, onLogout, mobile = false }) {
+  const homePath = user ? "/app" : "/";
+
   const linkClass = (path) =>
     `hover:text-blue-400 transition ${
       location.pathname === path
@@ -15,17 +17,19 @@ function NavLinks({ user, location, onNavigate, onLogout, mobile = false }) {
 
   return (
     <>
-      <Link to="/" onClick={onNavigate} className={linkClass("/")}>
+      <Link to={homePath} onClick={onNavigate} className={linkClass(homePath)}>
         Home
       </Link>
 
-      <Link
-        to="/create-note"
-        onClick={onNavigate}
-        className={linkClass("/create-note")}
-      >
-        Create Note
-      </Link>
+      {user && (
+        <Link
+          to="/create-note"
+          onClick={onNavigate}
+          className={linkClass("/create-note")}
+        >
+          Create Note
+        </Link>
+      )}
 
       {user ? (
         <>

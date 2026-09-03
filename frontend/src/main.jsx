@@ -18,19 +18,23 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import { Toaster } from "sonner";
 import NotFound from "./pages/NotFound.jsx";
 import PublicRoute from "./components/PublicRoute.jsx";
+import Landing from "./pages/Landing.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
+      
       <Route element={<PublicRoute />}>
+        <Route index element={<Landing />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
       </Route>
 
       <Route element={<ProtectedRoute />}>
-        <Route path="" element={<Home />} />
+        <Route path="app" element={<Home />} />
         <Route path="create-note" element={<Createnote />} />
       </Route>
+
       <Route path="*" element={<NotFound />} />
     </Route>,
   ),
