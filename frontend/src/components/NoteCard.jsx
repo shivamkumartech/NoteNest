@@ -127,11 +127,11 @@ function NoteCard({ note }) {
       ) : (
         <>
           {/* View Mode */}
-          <h2 className="text-lg font-semibold tracking-tight text-white wrap-break-word">
+          <h2 className="text-lg font-semibold tracking-tight text-white break-words">
             {note.title}
           </h2>
 
-          <p className="mt-2.5 flex-1 text-sm leading-relaxed text-gray-300 line-clamp-2 wrap-break-word">
+          <p className="mt-2.5 flex-1 text-sm leading-relaxed text-gray-300 line-clamp-2 break-words">
             {note.content}
           </p>
 

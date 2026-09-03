@@ -176,7 +176,7 @@ function Navbar() {
       {isMenuOpen && !loading && (
         <>
           <div
-            className="fixed inset-0 top:57px z-40 bg-black/60 md:hidden"
+            className="fixed inset-0 top-[57px] z-40 bg-black/60 md:hidden"
             onClick={closeMenu}
             aria-hidden="true"
           />
