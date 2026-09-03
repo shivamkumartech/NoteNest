@@ -7,8 +7,6 @@ import noteRoutes from "./routes/note.route.js";
 
 const app = express();
 
-app.set("trust proxy", 1);
-
 // Middlewares
 app.use(express.json());
 app.use(cookieParser());
@@ -33,16 +31,5 @@ app.get("/api/v1/health", (req, res) => {
 // Routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/notes", noteRoutes);
-
-
-app.get("/api/v1/debug/ip", (req, res) => {
-  res.json({
-    ip: req.ip,
-    forwardedFor: req.headers["x-forwarded-for"] || null,
-    cfConnectingIp: req.headers["cf-connecting-ip"] || null,
-    xVercelForwardedFor:
-      req.headers["x-vercel-forwarded-for"] || null,
-  });
-});
 
 export default app;
