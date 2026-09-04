@@ -23,16 +23,21 @@ import Landing from "./pages/Landing.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
+      {/* Public Landing Page */}
+      <Route index element={<Landing />} />
+
+      {/* Public Auth Pages */}
       <Route element={<PublicRoute />}>
-        <Route index element={<Landing />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
       </Route>
 
+      {/* Protected App Pages */}
       <Route element={<ProtectedRoute />}>
         <Route path="notes" element={<Home />} />
         <Route path="create-note" element={<Createnote />} />
       </Route>
+
       <Route path="*" element={<NotFound />} />
     </Route>,
   ),
