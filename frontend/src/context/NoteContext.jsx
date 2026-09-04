@@ -1,5 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import BACKEND_URL from "../api/url";
+import {
+  createNoteApi,
+  deleteNoteApi,
+  getNotesApi,
+  updateNoteApi,
+} from "../api/notes";
 import { AuthContext } from "./AuthContext";
 
 export const NoteContext = createContext();
@@ -18,9 +23,9 @@ export const NoteProvider = ({ children }) => {
       setLoading(true);
       setError("");
 
-      const response = await BACKEND_URL.get("/notes");
+      const data = await getNotesApi();
 
-      setNotes(response.data.notes);
+      setNotes(data.notes);
     } catch (error) {
       console.error("Error fetching notes:", error);
 
@@ -36,11 +41,11 @@ export const NoteProvider = ({ children }) => {
     try {
       setError("");
 
-      const response = await BACKEND_URL.post("/notes", note);
+      const data = await createNoteApi(note);
 
-      setNotes((prevNotes) => [response.data.note, ...prevNotes]);
+      setNotes((prevNotes) => [data.note, ...prevNotes]);
 
-      return response.data.note;
+      return data.note;
     } catch (error) {
       console.error("Error creating note:", error);
 
@@ -58,13 +63,13 @@ export const NoteProvider = ({ children }) => {
     try {
       setError("");
 
-      const response = await BACKEND_URL.put(`/notes/${id}`, updatedNote);
+      const data = await updateNoteApi(id, updatedNote);
 
       setNotes((prevNotes) =>
-        prevNotes.map((note) => (note._id === id ? response.data.note : note)),
+        prevNotes.map((note) => (note._id === id ? data.note : note)),
       );
 
-      return response.data.note;
+      return data.note;
     } catch (error) {
       console.error("Error updating note:", error);
 
@@ -82,7 +87,7 @@ export const NoteProvider = ({ children }) => {
     try {
       setError("");
 
-      await BACKEND_URL.delete(`/notes/${id}`);
+      await deleteNoteApi(id);
 
       setNotes((prevNotes) => prevNotes.filter((note) => note._id !== id));
     } catch (error) {

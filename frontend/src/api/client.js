@@ -7,14 +7,14 @@ export const setAccessToken = (token) => {
   accessToken = token;
 };
 
-const BACKEND_URL = axios.create({
+const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
 });
 
 // ================= REQUEST INTERCEPTOR =================
 
-BACKEND_URL.interceptors.request.use(
+api.interceptors.request.use(
   (config) => {
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
@@ -29,7 +29,7 @@ BACKEND_URL.interceptors.request.use(
 
 // ================= RESPONSE INTERCEPTOR =================
 
-BACKEND_URL.interceptors.response.use(
+api.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -50,7 +50,7 @@ BACKEND_URL.interceptors.response.use(
 
     try {
       if (!refreshPromise) {
-        refreshPromise = BACKEND_URL.post("/auth/refresh-token");
+        refreshPromise = api.post("/auth/refresh-token");
       }
 
       const response = await refreshPromise;
@@ -72,7 +72,7 @@ BACKEND_URL.interceptors.response.use(
 
       originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
 
-      return BACKEND_URL(originalRequest);
+      return api(originalRequest);
     } catch (refreshError) {
       refreshPromise = null;
 
@@ -85,4 +85,4 @@ BACKEND_URL.interceptors.response.use(
   },
 );
 
-export default BACKEND_URL;
+export default api;

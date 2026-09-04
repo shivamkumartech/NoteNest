@@ -5,18 +5,7 @@ import { AuthContext } from "../context/AuthContext";
 import { toast } from "sonner";
 import ConfirmDialog from "./ConfirmDialog";
 
-function NavLinks({
-  user,
-  loading,
-  location,
-  onNavigate,
-  onLogout,
-  mobile = false,
-}) {
-  if (loading) {
-    return null;
-  }
-
+function NavLinks({ user, location, onNavigate, onLogout, mobile = false }) {
   const linkClass = (path) =>
     `hover:text-blue-400 transition ${mobile ? "py-1.5" : ""} ${
       location.pathname === path
@@ -73,7 +62,7 @@ function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { user, loading, logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showLogoutDialog, setShowLogoutDialog] = useState(false);
@@ -149,7 +138,6 @@ function Navbar() {
         <div className="hidden items-center gap-6 md:flex">
           <NavLinks
             user={user}
-            loading={loading}
             location={location}
             onNavigate={undefined}
             onLogout={handleOpenLogoutDialog}
@@ -157,23 +145,21 @@ function Navbar() {
         </div>
 
         {/* Mobile Menu Button */}
-        {!loading && (
-          <button
-            type="button"
-            onClick={() => setIsMenuOpen((prev) => !prev)}
-            className="cursor-pointer text-gray-300 transition hover:text-white md:hidden"
-            aria-label={
-              isMenuOpen ? "Close navigation menu" : "Open navigation menu"
-            }
-            aria-expanded={isMenuOpen}
-          >
-            {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
-        )}
+        <button
+          type="button"
+          onClick={() => setIsMenuOpen((prev) => !prev)}
+          className="cursor-pointer text-gray-300 transition hover:text-white md:hidden"
+          aria-label={
+            isMenuOpen ? "Close navigation menu" : "Open navigation menu"
+          }
+          aria-expanded={isMenuOpen}
+        >
+          {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
       </div>
 
       {/* Mobile Navigation Drawer & Backdrop */}
-      {isMenuOpen && !loading && (
+      {isMenuOpen && (
         <>
           <div
             className="fixed inset-0 top-[57px] z-40 bg-black/60 md:hidden"
@@ -185,7 +171,6 @@ function Navbar() {
             <div className="flex flex-col gap-4">
               <NavLinks
                 user={user}
-                loading={loading}
                 location={location}
                 onNavigate={closeMenu}
                 onLogout={handleOpenLogoutDialog}

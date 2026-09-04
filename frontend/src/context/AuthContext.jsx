@@ -1,5 +1,6 @@
 import { createContext, useEffect, useRef, useState } from "react";
-import BACKEND_URL, { setAccessToken as setApiAccessToken } from "../api/url";
+import { setAccessToken as setApiAccessToken } from "../api/client";
+import { loginApi, logoutApi, refreshTokenApi, registerApi } from "../api/auth";
 import { toast } from "sonner";
 
 export const AuthContext = createContext();
@@ -18,35 +19,28 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (email, password) => {
-    const response = await BACKEND_URL.post("/auth/login", {
-      email,
-      password,
-    });
+    const data = await loginApi({ email, password });
 
-    setUser(response.data.user);
-    setAccessToken(response.data.accessToken);
-    setApiAccessToken(response.data.accessToken);
+    setUser(data.user);
+    setAccessToken(data.accessToken);
+    setApiAccessToken(data.accessToken);
 
-    return response.data;
+    return data;
   };
 
   const register = async (name, email, password) => {
-    const response = await BACKEND_URL.post("/auth/register", {
-      name,
-      email,
-      password,
-    });
+    const data = await registerApi({ name, email, password });
 
-    setUser(response.data.user);
-    setAccessToken(response.data.accessToken);
-    setApiAccessToken(response.data.accessToken);
+    setUser(data.user);
+    setAccessToken(data.accessToken);
+    setApiAccessToken(data.accessToken);
 
-    return response.data;
+    return data;
   };
 
   const logout = async () => {
     try {
-      await BACKEND_URL.post("/auth/logout");
+      await logoutApi();
     } finally {
       clearAuthState();
     }
@@ -92,11 +86,11 @@ export const AuthProvider = ({ children }) => {
 
     const restoreSession = async () => {
       try {
-        const response = await BACKEND_URL.post("/auth/refresh-token");
+        const data = await refreshTokenApi();
 
-        setAccessToken(response.data.accessToken);
-        setApiAccessToken(response.data.accessToken);
-        setUser(response.data.user);
+        setAccessToken(data.accessToken);
+        setApiAccessToken(data.accessToken);
+        setUser(data.user);
       } catch (error) {
         clearAuthState();
       } finally {

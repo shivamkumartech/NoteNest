@@ -1,11 +1,9 @@
-import Noteform from '../components/NoteForm'
+import Noteform from "../components/NoteForm";
 
-function Createnote() {
+export const CreateNote = () => {
   return (
     <div className="flex items-center justify-center py-6 sm:py-10">
       <Noteform />
     </div>
-  )
-}
-
-export default Createnote
+  );
+};

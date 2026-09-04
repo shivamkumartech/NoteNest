@@ -11,10 +11,10 @@ Completed items are marked with `[x]`.
 ### Performance Optimization
 
 - [x] Fix desktop layout shift (CLS)
-- [ ] Improve mobile initial loading performance
-- [ ] Optimize font loading
+- [x] Improve mobile initial loading performance
+- [x] Optimize font loading
 - [ ] Review initial authentication request
-- [ ] Reduce unused JavaScript
+- [x] Reduce unused JavaScript
 
 ### Notes
 
