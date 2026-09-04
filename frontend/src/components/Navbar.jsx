@@ -51,7 +51,7 @@ function NavLinks({
   return (
     <>
       <Link to="/login" onClick={onNavigate} className={linkClass("/login")}>
-        Login
+        Sign in
       </Link>
 
       <Link
