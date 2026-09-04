@@ -84,7 +84,7 @@ function NoteForm() {
         <textarea
           placeholder="Type anything to remember"
           maxLength={10000}
-          className="w-full rounded-lg border border-gray-700 bg-gray-800/80 px-4 py-2.5 text-sm text-white placeholder-gray-500 outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          className="w-full resize-none rounded-lg border border-gray-700 bg-gray-800/80 px-4 py-2.5 text-sm text-white placeholder-gray-500 outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
           rows="5"
           value={note.content}
           onChange={(e) =>

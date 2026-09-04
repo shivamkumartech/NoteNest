@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { NoteContext } from "../context/NoteContext";
 import NoteCard from "../components/NoteCard";
@@ -9,6 +9,7 @@ import NoteCardSkeleton from "../components/NoteCardSkeleton";
 function Home() {
   const { user } = useContext(AuthContext);
   const { notes, loading, error, getNotes } = useContext(NoteContext);
+  const [editingNoteId, setEditingNoteId] = useState(null);
 
   if (error) {
     return (
@@ -74,7 +75,13 @@ function Home() {
       ) : (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {notes.map((note) => (
-            <NoteCard key={note._id} note={note} />
+            <NoteCard
+              key={note._id}
+              note={note}
+              isEditing={editingNoteId === note._id}
+              onStartEdit={() => setEditingNoteId(note._id)}
+              onCancelEdit={() => setEditingNoteId(null)}
+            />
           ))}
         </div>
       )}

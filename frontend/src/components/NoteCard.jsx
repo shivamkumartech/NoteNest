@@ -4,13 +4,11 @@ import { toast } from "sonner";
 import { Pencil, Trash2 } from "lucide-react";
 import ConfirmDialog from "./ConfirmDialog";
 
-function NoteCard({ note }) {
+function NoteCard({ note, isEditing, onStartEdit, onCancelEdit }) {
   const { deleteNote, updateNote } = useContext(NoteContext);
 
   const [isUpdating, setIsUpdating] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-
-  const [isEditing, setIsEditing] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   const [editData, setEditData] = useState({
@@ -34,7 +32,7 @@ function NoteCard({ note }) {
 
       toast.success("Note updated successfully");
 
-      setIsEditing(false);
+      onCancelEdit();
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
@@ -70,7 +68,7 @@ function NoteCard({ note }) {
       content: note.content,
     });
 
-    setIsEditing(false);
+    onCancelEdit();
   };
 
   return (
@@ -89,11 +87,16 @@ function NoteCard({ note }) {
               })
             }
             disabled={isUpdating}
-            className="mb-3 w-full rounded-lg border border-gray-700 bg-gray-800/80 px-4 py-2.5 text-sm text-white placeholder-gray-500 outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
+            className="mb-2 w-full rounded-lg border border-gray-700 bg-gray-800/80 px-3 py-2.5 text-sm text-white placeholder-gray-500 outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
           />
+          <div className="mb-2 flex justify-end">
+            <span className="text-xs text-gray-500">
+              {editData.title.length}/100
+            </span>
+          </div>
 
           <textarea
-            rows="3"
+            rows="4"
             value={editData.content}
             maxLength={10000}
             onChange={(e) =>
@@ -103,8 +106,13 @@ function NoteCard({ note }) {
               })
             }
             disabled={isUpdating}
-            className="mb-4 w-full rounded-lg border border-gray-700 bg-gray-800/80 px-4 py-2.5 text-sm text-white placeholder-gray-500 outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
+            className=" mb-2 resize-none w-full rounded-lg border border-gray-700 bg-gray-800/80 px-3 py-2.5 text-sm text-white placeholder-gray-500 outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
           />
+          <div className="flex justify-end">
+            <span className="text-xs text-gray-500">
+              {editData.content.length}/10000
+            </span>
+          </div>
 
           <div className="flex gap-2.5">
             <button
@@ -150,7 +158,7 @@ function NoteCard({ note }) {
             <div className="flex items-center gap-1 transition sm:opacity-60 sm:group-hover:opacity-100">
               <button
                 type="button"
-                onClick={() => setIsEditing(true)}
+                onClick={() => onStartEdit(true)}
                 disabled={isDeleting}
                 className="cursor-pointer rounded-lg p-1.5 text-gray-400 transition hover:bg-gray-800 hover:text-gray-200 disabled:cursor-not-allowed disabled:opacity-50"
                 title="Edit note"
