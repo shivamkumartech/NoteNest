@@ -1,8 +1,16 @@
+# NoteNest — Improvements & Future Plans
+
+This document tracks planned improvements, features, and technical enhancements for NoteNest.
+
+Completed items are marked with `[x]`.
+
+---
+
 ## 🔵 Planned Features
 
 ### Performance Optimization
 
-- [ ] Fix desktop layout shift (CLS)
+- [x] Fix desktop layout shift (CLS)
 - [ ] Improve mobile initial loading performance
 - [ ] Optimize font loading
 - [ ] Review initial authentication request
@@ -55,3 +63,7 @@
 - [ ] Optimize frontend rendering
 - [ ] Improve API response performance
 - [ ] Add caching where appropriate
+
+---
+
+> This roadmap is intentionally flexible. Items may be added, removed, reprioritized, or changed as NoteNest evolves.
