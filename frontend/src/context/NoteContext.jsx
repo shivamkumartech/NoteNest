@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import {
   createNoteApi,
   deleteNoteApi,
@@ -10,11 +10,13 @@ import { AuthContext } from "./AuthContext";
 export const NoteContext = createContext();
 
 export const NoteProvider = ({ children }) => {
-  const { user, accessToken, loading: authLoading } = useContext(AuthContext);
+  const { user, accessToken, authStatus } = useContext(AuthContext);
 
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const hasFetchedInitialNotes = useRef(false);
 
   const getNotes = async () => {
     if (!accessToken) return;
@@ -102,15 +104,19 @@ export const NoteProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (authLoading) return;
+    if (authStatus === "checking") return;
 
-    if (!user || !accessToken) {
+    if (authStatus !== "authenticated" || !accessToken) {
       setNotes([]);
+      hasFetchedInitialNotes.current = false;
       return;
     }
 
+    if (hasFetchedInitialNotes.current) return;
+
+    hasFetchedInitialNotes.current = true;
     getNotes();
-  }, [user, accessToken, authLoading]);
+  }, [authStatus, accessToken]);
 
   return (
     <NoteContext.Provider
