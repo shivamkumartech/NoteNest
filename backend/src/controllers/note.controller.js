@@ -25,6 +25,13 @@ export const createNote = async (req, res) => {
   } catch (error) {
     console.error("Create note error:", error);
 
+    if (error.name === "ValidationError") {
+      return res.status(400).json({
+        success: false,
+        message: error.message,
+      });
+    }
+
     return res.status(500).json({
       success: false,
       message: "Internal server error",
@@ -76,6 +83,7 @@ export const updateNote = async (req, res) => {
       },
       {
         returnDocument: "after",
+        runValidators: true,
       },
     );
 
@@ -93,6 +101,13 @@ export const updateNote = async (req, res) => {
     });
   } catch (error) {
     console.error("Update note error:", error);
+
+    if (error.name === "ValidationError") {
+      return res.status(400).json({
+        success: false,
+        message: error.message,
+      });
+    }
 
     return res.status(500).json({
       success: false,
