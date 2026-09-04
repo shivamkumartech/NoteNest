@@ -28,7 +28,7 @@ export const createNote = async (req, res) => {
     if (error.name === "ValidationError") {
       return res.status(400).json({
         success: false,
-        message: error.message,
+        message: Object.values(error.errors)[0].message,
       });
     }
 
@@ -105,7 +105,7 @@ export const updateNote = async (req, res) => {
     if (error.name === "ValidationError") {
       return res.status(400).json({
         success: false,
-        message: error.message,
+        message: Object.values(error.errors)[0].message,
       });
     }
 

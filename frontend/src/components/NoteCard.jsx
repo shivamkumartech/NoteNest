@@ -81,6 +81,7 @@ function NoteCard({ note }) {
           <input
             type="text"
             value={editData.title}
+            maxLength={100}
             onChange={(e) =>
               setEditData({
                 ...editData,
@@ -94,6 +95,7 @@ function NoteCard({ note }) {
           <textarea
             rows="3"
             value={editData.content}
+            maxLength={10000}
             onChange={(e) =>
               setEditData({
                 ...editData,
