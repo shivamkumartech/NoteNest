@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030712"/>
+      <stop offset="100%" stop-color="#0b1329"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.05" stroke="#ffffff" stroke-width="1">
+    <line x1="0" y1="105" x2="1200" y2="105"/>
+    <line x1="0" y1="210" x2="1200" y2="210"/>
+    <line x1="0" y1="315" x2="1200" y2="315"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/>
+    <line x1="0" y1="525" x2="1200" y2="525"/>
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+  </g>
+
+  <!-- Brand Header -->
+  <g transform="translate(100, 100)">
+    <!-- Icon -->
+    <g transform="translate(0, 0)">
+      <rect width="44" height="52" x="8" y="4" rx="6" fill="none" stroke="#60a5fa" stroke-width="4"/>
+      <line x1="4" y1="16" x2="12" y2="16" stroke="#60a5fa" stroke-width="4" stroke-linecap="round"/>
+      <line x1="4" y1="26" x2="12" y2="26" stroke="#60a5fa" stroke-width="4" stroke-linecap="round"/>
+      <line x1="4" y1="36" x2="12" y2="36" stroke="#60a5fa" stroke-width="4" stroke-linecap="round"/>
+      <line x1="22" y1="20" x2="38" y2="20" stroke="#60a5fa" stroke-width="4" stroke-linecap="round"/>
+      <line x1="22" y1="30" x2="44" y2="30" stroke="#60a5fa" stroke-width="4" stroke-linecap="round"/>
+      <line x1="22" y1="40" x2="34" y2="40" stroke="#60a5fa" stroke-width="4" stroke-linecap="round"/>
+    </g>
+
+    <!-- Logo Text -->
+    <text x="70" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="38" font-weight="700" fill="#ffffff" letter-spacing="-1">
+      Note<tspan fill="#60a5fa">Nest</tspan>
+    </text>
+  </g>
+
+  <!-- Main Headline -->
+  <g transform="translate(100, 250)">
+    <text font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="62" font-weight="700" fill="#ffffff" letter-spacing="-2">
+      Keep the things
+    </text>
+    <text y="75" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="62" font-weight="700" fill="#94a3b8" letter-spacing="-2">
+      worth remembering.
+    </text>
+    <text y="150" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" fill="#64748b" font-weight="400">
+  A distraction-free place for your notes, ideas, plans, and reminders.
+</text>
+  </g>
+</svg>
