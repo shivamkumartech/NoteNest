@@ -77,6 +77,9 @@ function NoteForm() {
           }
           disabled={isCreating}
         />
+        <p className="text-right text-xs text-gray-500">
+          {note.title.length}/100
+        </p>
 
         <textarea
           placeholder="Type anything to remember"
@@ -92,6 +95,10 @@ function NoteForm() {
           }
           disabled={isCreating}
         />
+
+        <p className="text-right text-xs text-gray-500">
+          {note.content.length}/10000
+        </p>
 
         <div className="flex gap-3">
           <button
