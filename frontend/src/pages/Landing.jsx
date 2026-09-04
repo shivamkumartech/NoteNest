@@ -1,7 +1,14 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, Navigate } from "react-router-dom";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { AuthContext } from "../context/AuthContext";
 
 function Landing() {
+  const { user, loading } = useContext(AuthContext);
+
+  if (!loading && user) {
+    return <Navigate to="/notes" replace />;
+  }
   return (
     <div className="bg-gray-950 text-white">
       {/* Hero */}

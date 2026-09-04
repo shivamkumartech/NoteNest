@@ -1,14 +1,27 @@
 import { createContext, useEffect, useRef, useState } from "react";
 import { setAccessToken as setApiAccessToken } from "../api/client";
-import { loginApi, logoutApi, refreshTokenApi, registerApi } from "../api/auth";
+import {
+  loginApi,
+  logoutApi,
+  refreshTokenApi,
+  registerApi,
+} from "../api/auth";
 import { toast } from "sonner";
+import {
+  clearSessionHint,
+  hasSessionHint,
+  setSessionHint,
+} from "../utils/sessionHint";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
-  const [loading, setLoading] = useState(true);
+
+  const [authStatus, setAuthStatus] = useState(() =>
+    hasSessionHint() ? "checking" : "anonymous",
+  );
 
   const hasRestoredSession = useRef(false);
 
@@ -24,6 +37,8 @@ export const AuthProvider = ({ children }) => {
     setUser(data.user);
     setAccessToken(data.accessToken);
     setApiAccessToken(data.accessToken);
+    setSessionHint();
+    setAuthStatus("authenticated");
 
     return data;
   };
@@ -34,6 +49,8 @@ export const AuthProvider = ({ children }) => {
     setUser(data.user);
     setAccessToken(data.accessToken);
     setApiAccessToken(data.accessToken);
+    setSessionHint();
+    setAuthStatus("authenticated");
 
     return data;
   };
@@ -43,12 +60,16 @@ export const AuthProvider = ({ children }) => {
       await logoutApi();
     } finally {
       clearAuthState();
+      clearSessionHint();
+      setAuthStatus("anonymous");
     }
   };
 
   useEffect(() => {
     const handleSessionExpired = () => {
       clearAuthState();
+      clearSessionHint();
+      setAuthStatus("anonymous");
 
       toast.error("Your session has expired. Please log in again.");
     };
@@ -56,7 +77,10 @@ export const AuthProvider = ({ children }) => {
     window.addEventListener("auth:session-expired", handleSessionExpired);
 
     return () => {
-      window.removeEventListener("auth:session-expired", handleSessionExpired);
+      window.removeEventListener(
+        "auth:session-expired",
+        handleSessionExpired,
+      );
     };
   }, []);
 
@@ -66,6 +90,8 @@ export const AuthProvider = ({ children }) => {
 
       setAccessToken(accessToken);
       setApiAccessToken(accessToken);
+      setSessionHint();
+      setAuthStatus("authenticated");
 
       if (user) {
         setUser(user);
@@ -75,7 +101,10 @@ export const AuthProvider = ({ children }) => {
     window.addEventListener("auth:token-refreshed", handleTokenRefreshed);
 
     return () => {
-      window.removeEventListener("auth:token-refreshed", handleTokenRefreshed);
+      window.removeEventListener(
+        "auth:token-refreshed",
+        handleTokenRefreshed,
+      );
     };
   }, []);
 
@@ -85,16 +114,23 @@ export const AuthProvider = ({ children }) => {
     hasRestoredSession.current = true;
 
     const restoreSession = async () => {
+      if (!hasSessionHint()) {
+        setAuthStatus("anonymous");
+        return;
+      }
+
       try {
         const data = await refreshTokenApi();
 
         setAccessToken(data.accessToken);
         setApiAccessToken(data.accessToken);
         setUser(data.user);
+        setSessionHint();
+        setAuthStatus("authenticated");
       } catch (error) {
         clearAuthState();
-      } finally {
-        setLoading(false);
+        clearSessionHint();
+        setAuthStatus("anonymous");
       }
     };
 
@@ -106,7 +142,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         user,
         accessToken,
-        loading,
+        authStatus,
         login,
         register,
         logout,

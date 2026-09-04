@@ -62,7 +62,7 @@ function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { user, logout } = useContext(AuthContext);
+  const { user, authStatus, logout } = useContext(AuthContext);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showLogoutDialog, setShowLogoutDialog] = useState(false);
@@ -136,12 +136,14 @@ function Navbar() {
 
         {/* Desktop Navigation */}
         <div className="hidden items-center gap-6 md:flex">
-          <NavLinks
-            user={user}
-            location={location}
-            onNavigate={undefined}
-            onLogout={handleOpenLogoutDialog}
-          />
+          {authStatus !== "checking" && (
+            <NavLinks
+              user={user}
+              location={location}
+              onNavigate={undefined}
+              onLogout={handleOpenLogoutDialog}
+            />
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -169,13 +171,15 @@ function Navbar() {
 
           <div className="absolute left-0 right-0 top-full z-50 border-t border-gray-800/80 bg-gray-950/95 px-6 py-4 shadow-xl backdrop-blur-md md:hidden">
             <div className="flex flex-col gap-4">
-              <NavLinks
-                user={user}
-                location={location}
-                onNavigate={closeMenu}
-                onLogout={handleOpenLogoutDialog}
-                mobile
-              />
+              {authStatus !== "checking" && (
+                <NavLinks
+                  user={user}
+                  location={location}
+                  onNavigate={closeMenu}
+                  onLogout={handleOpenLogoutDialog}
+                  mobile
+                />
+              )}
             </div>
           </div>
         </>

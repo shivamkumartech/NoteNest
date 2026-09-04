@@ -47,7 +47,7 @@ function Register() {
 
       toast.success("Account created successfully");
 
-      navigate("/notes");
+      navigate("/notes", { replace: true });
     } catch (error) {
       setError(
         error.response?.data?.message ||

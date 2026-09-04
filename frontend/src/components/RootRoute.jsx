@@ -2,7 +2,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
-function PublicRoute() {
+function RootRoute() {
   const { user, authStatus } = useContext(AuthContext);
 
   if (authStatus === "checking") {
@@ -20,4 +20,4 @@ function PublicRoute() {
   return <Outlet />;
 }
 
-export default PublicRoute;
+export default RootRoute;

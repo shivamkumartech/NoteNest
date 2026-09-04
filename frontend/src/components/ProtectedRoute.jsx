@@ -1,20 +1,20 @@
-import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 function ProtectedRoute() {
-  const { user, loading } = useContext(AuthContext);
+  const { user, authStatus } = useContext(AuthContext);
 
-  if (loading) {
+  if (authStatus === "checking") {
     return (
-      <div className="flex flex-col justify-center items-center min-h-[60vh]">
-        <div className="w-10 h-10 border-4 border-gray-700 border-t-blue-400 rounded-full animate-spin mb-4" />
-        <p className="text-gray-400 text-sm">Loading NoteNest...</p>
+      <div className="flex min-h-[60vh] flex-col items-center justify-center">
+        <div className="mb-4 h-10 w-10 animate-spin rounded-full border-4 border-gray-700 border-t-blue-400" />
+        <p className="text-sm text-gray-400">Loading NoteNest...</p>
       </div>
     );
   }
 
-  if (!user) {
+  if (authStatus === "anonymous") {
     return <Navigate to="/login" replace />;
   }
 
