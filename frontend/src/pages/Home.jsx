@@ -4,20 +4,11 @@ import { NoteContext } from "../context/NoteContext";
 import NoteCard from "../components/NoteCard";
 import { Link } from "react-router-dom";
 import { NotebookPen, Plus } from "lucide-react";
+import NoteCardSkeleton from "../components/NoteCardSkeleton";
 
 function Home() {
   const { user } = useContext(AuthContext);
   const { notes, loading, error, getNotes } = useContext(NoteContext);
-
-  if (loading) {
-    return (
-      <div className="flex flex-col justify-center items-center min-h-[60vh]">
-        <div className="w-10 h-10 border-4 border-gray-700 border-t-blue-400 rounded-full animate-spin mb-4" />
-
-        <p className="text-gray-400 text-lg">Loading notes...</p>
-      </div>
-    );
-  }
 
   if (error) {
     return (
@@ -57,25 +48,31 @@ function Home() {
         </Link>
       </div>
 
-      {notes.length === 0 ? (
+      {loading ? (
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <NoteCardSkeleton key={index} />
+          ))}
+        </div>
+      ) : notes.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-center">
-          <NotebookPen className="w-12 h-12 text-gray-500 mb-4" />
+          <NotebookPen className="mb-4 h-12 w-12 text-gray-500" />
 
           <h2 className="text-xl font-semibold text-white">No notes yet</h2>
 
-          <p className="text-gray-400 mt-2 mb-6">
+          <p className="mt-2 mb-6 text-gray-400">
             Start by creating your first note.
           </p>
 
           <Link
             to="/create-note"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-lg transition"
+            className="rounded-lg bg-blue-600 px-5 py-2.5 font-semibold text-white transition hover:bg-blue-700"
           >
             Create your first note
           </Link>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {notes.map((note) => (
             <NoteCard key={note._id} note={note} />
           ))}
