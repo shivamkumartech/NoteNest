@@ -6,19 +6,22 @@ NoteNest is a modern, responsive, full-stack note-taking application built with 
 
 ## 🚀 Key Features
 
+- **🔍 Live Real-Time Note Search:** Integrated search bar directly in the Navbar (compact desktop input + expandable mobile search overlay) with instant, real-time filtering across note titles and content, dynamic result count badges, and zero-match empty states.
+- **✨ Editorial & Minimalist Landing Page:** Clean, human-crafted landing experience with live "Today's note" preview, core product principles, and distraction-free typography.
 - **🔐 Dual-Token Authentication with Rotation:** Short-lived JWT Access Tokens (15m) paired with HttpOnly, SameSite Refresh Token cookies (7d). User profile data is automatically synchronized upon token refresh.
 - **🛡️ Refresh Token Hashing & Rotation:** Refresh tokens are hashed with `bcryptjs` before storage in MongoDB, and rotated upon every refresh request to mitigate replay attacks.
 - **👤 User-Scoped Data Privacy:** Notes are strictly bound to their creator (`owner: ObjectId -> User`). Users can only query, create, edit, and delete their own notes.
-- **⚡ Reactive Global State:** Context API (`AuthContext`, `NoteContext`) provides clean, lightweight state management without external store overhead.
+- **⚡ Reactive Global State:** Context API (`AuthContext`, `NoteContext`) provides clean, lightweight state management for authentication, notes CRUD, and global search query synchronization without external store overhead.
 - **🔄 Auto Token Interceptors:** Axios request interceptor attaches bearer tokens dynamically, while response interceptors automatically intercept 401s, perform silent background refreshes, and transparently replay failed requests.
 - **🛡️ Comprehensive Route Guards:**
   - `ProtectedRoute`: Blocks unauthorized access to notes and dashboard views.
-  - `PublicRoute`: Redirects already-authenticated users away from login and registration pages.
+  - `PublicRoute`: Redirects already-authenticated users away from landing, login, and registration pages.
   - `NotFound`: Dedicated 404 page for unmatched routes.
 - **⚠️ Interactive Confirmation Dialogs:** Modal confirmation dialogs with keyboard accessibility (Escape key support) for irreversible actions like deleting a note or logging out.
 - **🍞 Rich Toast Notifications:** Integrated [Sonner](https://sonner.emilkowal.ski/) for crisp, non-blocking feedback across auth, creation, update, and deletion events.
 - **👁️ Password Visibility Toggles:** Interactive eye toggle to view or hide passwords on login and registration forms.
-- **📱 Fully Responsive Dark UI:** Mobile-first layout with collapsible navigation drawer, mobile floating action button (FAB) for quick note creation, and smooth transitions.
+- **🎨 Modern Dark Theme & Typography:** Engineered with Plus Jakarta Sans typography, deep matte `bg-gray-950` canvas, tactile cards with ghost action buttons, and a clean mobile viewport with hidden native scrollbars.
+- **📱 Fully Responsive UI:** Mobile-first layout featuring a frosted-glass navigation bar, full-screen mobile search drawer, and mobile floating action button (FAB) for rapid note creation.
 - **🌐 Reverse Proxy & Multi-Origin CORS:** Vercel SPA rewrite rules proxying `/api/v1` to the Render backend for seamless production deployment without cross-site cookie issues; backend supports comma-separated `FRONTEND_URL` origins.
 - **🩺 API Health Check:** Dedicated `/api/v1/health` endpoint for uptime monitoring.
 
@@ -30,6 +33,7 @@ NoteNest is a modern, responsive, full-stack note-taking application built with 
 - **Framework:** React 19
 - **Routing:** React Router DOM v7
 - **Styling:** Tailwind CSS v4 (native Vite integration)
+- **Typography:** Plus Jakarta Sans (Google Fonts)
 - **HTTP Client:** Axios (custom instance with automatic request/response token refresh interceptors)
 - **Notifications:** Sonner
 - **Icons:** Lucide React
@@ -153,23 +157,24 @@ NoteNest/
     │   │   └── url.js
     │   ├── components/         # Reusable UI components
     │   │   ├── ConfirmDialog.jsx   # Generic confirmation modal (logout, delete)
-    │   │   ├── Footer.jsx
-    │   │   ├── Navbar.jsx          # Responsive header with mobile drawer
+    │   │   ├── Footer.jsx          # Minimalist, quiet copyright footer
+    │   │   ├── Navbar.jsx          # Responsive header with live search & mobile drawer
     │   │   ├── NoteCard.jsx        # Note item with inline edit & delete confirmation
     │   │   ├── NoteForm.jsx        # Note creation form
     │   │   ├── ProtectedRoute.jsx  # Route guard for authenticated users
     │   │   └── PublicRoute.jsx     # Route guard redirecting logged-in users away from auth pages
     │   ├── context/            # React Context providers
     │   │   ├── AuthContext.jsx     # Session & auth state management
-    │   │   └── NoteContext.jsx     # Notes CRUD state management
+    │   │   └── NoteContext.jsx     # Notes CRUD & global search query state
     │   ├── pages/              # Application views & pages
-    │   │   ├── Createnote.jsx
-    │   │   ├── Home.jsx
-    │   │   ├── Login.jsx
+    │   │   ├── Createnote.jsx      # Note creation page
+    │   │   ├── Home.jsx            # Notes dashboard with "Recent notes" & live filtering
+    │   │   ├── Landing.jsx         # Minimalist editorial landing page
+    │   │   ├── Login.jsx           # Clean authentication view
     │   │   ├── NotFound.jsx        # 404 Not Found fallback
-    │   │   └── Register.jsx
-    │   ├── index.css           # Global stylesheet & Tailwind CSS v4 imports
-    │   ├── Layout.jsx          # App shell wrapper (Navbar, Main, Footer, session spinner)
+    │   │   └── Register.jsx        # Account registration view
+    │   ├── index.css           # Global stylesheet with Plus Jakarta Sans & scrollbar rules
+    │   ├── Layout.jsx          # App shell wrapper (Navbar, adaptive Main, Footer)
     │   └── main.jsx            # Application entry, router & Sonner Toaster provider
     ├── index.html
     ├── vite.config.js

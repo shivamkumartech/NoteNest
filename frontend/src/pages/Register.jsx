@@ -60,7 +60,7 @@ function Register() {
 
   return (
     <div className="w-full max-w-md mx-auto mt-6 sm:mt-10 rounded-2xl border border-gray-800 bg-gray-900/70 p-6 sm:p-8 shadow-sm">
-      <h1 className="text-2xl font-bold tracking-tight text-center text-blue-400 mb-6">
+      <h1 className="text-2xl font-semibold tracking-tight text-center text-white mb-6">
         Create Account
       </h1>
 

@@ -22,7 +22,7 @@ function NotFound() {
 
       <Link
         to={user ? "/notes" : "/"}
-        className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-lg transition"
+        className="mt-6 inline-flex cursor-pointer items-center rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-blue-500"
       >
         Back to NoteNest
       </Link>

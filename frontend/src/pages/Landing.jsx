@@ -1,96 +1,197 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, NotebookText, ShieldCheck, Zap } from "lucide-react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 
 function Landing() {
   return (
-    <div className="flex min-h-[calc(100vh-140px)] flex-col">
+    <main className="overflow-x-hidden bg-gray-950 text-white">
+      {/* Hero */}
+      <section className="relative flex min-h-[calc(100vh-64px)] items-center px-6 sm:px-10 lg:px-16">
+        <div className="mx-auto w-full max-w-5xl">
+          <div className="grid items-center gap-16 lg:grid-cols-[1fr_320px] lg:gap-24">
+            {/* Main Content */}
+            <div>
+              <h1 className="max-w-3xl text-5xl font-medium leading-[1.04] tracking-[-0.045em] text-gray-100 sm:text-6xl lg:text-7xl">
+                Keep the things
+                <br />
+                <span className="text-gray-500">
+                  worth remembering.
+                </span>
+              </h1>
 
-          {/* Hero */}
-      <section className="flex flex-1 items-center justify-center px-4 py-16 sm:py-20">
-        <div className="mx-auto max-w-4xl text-center">
-          <div className="mb-7 flex justify-center">
-            <div className="rounded-2xl bg-blue-500/10 p-4 ring-1 ring-blue-500/20">
-              <NotebookText className="h-12 w-12 text-blue-400" />
+              <p className="mt-7 max-w-xl text-base leading-7 text-gray-500">
+                Ideas, plans, reminders, and everything in between. Write it
+                down and come back to it whenever you need.
+              </p>
+
+              {/* Actions */}
+              <div className="mt-9 flex items-center gap-6">
+                <Link
+                  to="/register"
+                  className="group inline-flex items-center gap-2 text-sm font-medium text-blue-400 transition-colors duration-200 hover:text-blue-300"
+                >
+                  Start writing
+
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </Link>
+
+                <Link
+                  to="/login"
+                  className="text-sm text-gray-600 transition-colors duration-200 hover:text-gray-300"
+                >
+                  Sign in
+                </Link>
+              </div>
+            </div>
+
+            {/* Quick Note */}
+            <div className="border-l border-gray-800 pl-6 sm:pl-8">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-gray-700">
+                Note
+              </p>
+
+              <p className="mt-5 max-w-xs text-sm leading-6 text-gray-500">
+                Don't overthink it. Write something down while it's still in
+                your head.
+              </p>
+
+              <div className="mt-6 h-px w-8 bg-gray-800" />
+
+              <p className="mt-5 text-xs leading-5 text-gray-700">
+                A thought doesn't need a system.
+                <br />
+                Sometimes it just needs a place.
+              </p>
             </div>
           </div>
+        </div>
 
-          <div className="mb-4 inline-flex items-center rounded-full border border-gray-800 bg-gray-900/70 px-4 py-1.5 text-sm text-gray-400">
-            A simple place for your ideas
+        {/* Scroll Indicator */}
+        <a
+          href="#why-notenest"
+          className="group absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-gray-700 transition-colors duration-200 hover:text-gray-500 sm:flex"
+          aria-label="Scroll to Why NoteNest"
+        >
+          <span className="text-[10px] uppercase tracking-[0.18em]">
+            Scroll
+          </span>
+
+          <ArrowDown className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-y-1" />
+        </a>
+      </section>
+
+      {/* Why NoteNest */}
+      <section
+        id="why-notenest"
+        className="scroll-mt-16 border-y border-gray-900 px-6 py-24 sm:px-10 lg:px-16 lg:py-32"
+      >
+        <div className="mx-auto max-w-5xl">
+          <div className="grid gap-10 lg:grid-cols-[160px_1fr]">
+            {/* Label */}
+            <div>
+              <p className="text-xs uppercase tracking-[0.18em] text-gray-700">
+                Why NoteNest
+              </p>
+            </div>
+
+            {/* Content */}
+            <div>
+              <p className="max-w-2xl text-2xl font-medium leading-9 tracking-tight text-gray-300 sm:text-3xl">
+                Not a productivity system.
+                <br />
+                Not another workspace.
+                <br />
+                Just a place for your thoughts.
+              </p>
+
+              <p className="mt-7 max-w-xl text-sm leading-7 text-gray-600">
+                Open a note, write something down, and get back to what you
+                were doing.
+              </p>
+            </div>
           </div>
+        </div>
+      </section>
 
-          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl">
-            Your thoughts.
-            <span className="block text-blue-400">Organized simply.</span>
-          </h1>
+      {/* Principles */}
+      <section className="px-6 py-20 sm:px-10 lg:px-16 lg:py-28">
+        <div className="mx-auto max-w-5xl">
+          <div className="grid gap-12 md:grid-cols-3 md:gap-8">
+            {/* 01 */}
+            <div>
+              <span className="font-mono text-xs text-gray-700">
+                01
+              </span>
 
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-gray-400 sm:text-lg">
-            Create, manage, and organize your notes in one focused workspace.
-            Keep your ideas accessible without unnecessary complexity.
-          </p>
+              <h2 className="mt-4 text-sm font-medium text-gray-300">
+                Write
+              </h2>
 
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <p className="mt-2 max-w-xs text-sm leading-6 text-gray-600">
+                Get the thought out of your head and somewhere you can keep
+                it.
+              </p>
+            </div>
+
+            {/* 02 */}
+            <div>
+              <span className="font-mono text-xs text-gray-700">
+                02
+              </span>
+
+              <h2 className="mt-4 text-sm font-medium text-gray-300">
+                Keep
+              </h2>
+
+              <p className="mt-2 max-w-xs text-sm leading-6 text-gray-600">
+                Keep your notes together instead of letting them disappear
+                across different places.
+              </p>
+            </div>
+
+            {/* 03 */}
+            <div>
+              <span className="font-mono text-xs text-gray-700">
+                03
+              </span>
+
+              <h2 className="mt-4 text-sm font-medium text-gray-300">
+                Return
+              </h2>
+
+              <p className="mt-2 max-w-xs text-sm leading-6 text-gray-600">
+                Come back when you need an old idea, reminder, or thought.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="border-t border-gray-900 px-6 py-20 sm:px-10 lg:px-16">
+        <div className="mx-auto max-w-5xl">
+          <div className="flex flex-col justify-between gap-8 sm:flex-row sm:items-end">
+            <div>
+              <p className="text-2xl font-medium tracking-tight text-gray-300 sm:text-3xl">
+                Have something to remember?
+              </p>
+
+              <p className="mt-2 text-sm text-gray-600">
+                Put it somewhere you'll find it again.
+              </p>
+            </div>
+
             <Link
               to="/register"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700 sm:w-auto"
+              className="group inline-flex w-fit items-center gap-2 rounded-md bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition-colors duration-200 hover:bg-blue-500"
             >
-              Get Started
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+              Create account
 
-            <Link
-              to="/login"
-              className="inline-flex w-full items-center justify-center rounded-lg border border-gray-700 px-6 py-3 font-medium text-gray-200 transition hover:border-gray-600 hover:bg-gray-800 sm:w-auto"
-            >
-              Sign In
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </Link>
           </div>
         </div>
       </section>
-
-      {/* Features */}
-      <section className="border-t border-gray-800 px-4 py-12">
-        <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-3">
-          <div className="rounded-2xl border border-gray-800 bg-gray-900/70 p-6 shadow-sm transition-all hover:border-gray-700 hover:bg-gray-900/90 hover:shadow-md">
-            <NotebookText className="mb-4 h-7 w-7 text-blue-400" />
-
-            <h2 className="text-lg font-semibold text-white">
-              Create & Manage
-            </h2>
-
-            <p className="mt-2 text-sm leading-6 text-gray-400">
-              Create notes quickly and keep your thoughts organized in one
-              simple workspace.
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-gray-800 bg-gray-900/70 p-6 shadow-sm transition-all hover:border-gray-700 hover:bg-gray-900/90 hover:shadow-md">
-            <ShieldCheck className="mb-4 h-7 w-7 text-blue-400" />
-
-            <h2 className="text-lg font-semibold text-white">
-              Private by Account
-            </h2>
-
-            <p className="mt-2 text-sm leading-6 text-gray-400">
-              Your notes are associated with your account and protected by
-              authenticated access.
-            </p>
-          </div>
-
-          <div className="rounded-2xl border border-gray-800 bg-gray-900/70 p-6 shadow-sm transition-all hover:border-gray-700 hover:bg-gray-900/90 hover:shadow-md">
-            <Zap className="mb-4 h-7 w-7 text-blue-400" />
-
-            <h2 className="text-lg font-semibold text-white">
-              Focus on Your Ideas
-            </h2>
-
-            <p className="mt-2 text-sm leading-6 text-gray-400">
-              A focused note-taking experience without unnecessary features
-              getting in the way.
-            </p>
-          </div>
-        </div>
-      </section>
-    </div>
+    </main>
   );
 }
 

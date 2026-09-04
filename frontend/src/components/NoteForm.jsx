@@ -51,7 +51,7 @@ function NoteForm() {
 
   return (
     <div className="w-full max-w-xl mx-auto rounded-2xl border border-gray-800 bg-gray-900/70 p-6 sm:p-8 shadow-sm">
-      <h2 className="text-2xl font-bold tracking-tight text-center text-blue-400 mb-6">
+      <h2 className="text-xl font-semibold tracking-tight text-center text-white mb-6">
         Create a New Note
       </h2>
 
