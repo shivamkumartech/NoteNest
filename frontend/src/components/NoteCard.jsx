@@ -141,7 +141,7 @@ function NoteCard({ note, isEditing, onStartEdit, onCancelEdit }) {
             {note.title}
           </h2>
 
-          <p className="mt-2.5 flex-1 text-sm leading-relaxed text-gray-300 line-clamp-2 wrap-break-word">
+          <p className="mt-2.5 min-h-12 text-sm leading-relaxed text-gray-300 line-clamp-2 wrap-break-word">
             {note.content}
           </p>
 
