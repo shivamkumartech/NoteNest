@@ -4,7 +4,6 @@ import { NoteContext } from "../context/NoteContext";
 import NoteCard from "../components/NoteCard";
 import { Link } from "react-router-dom";
 import { NotebookPen, Plus } from "lucide-react";
-import NoteCardSkeleton from "../components/NoteCardSkeleton";
 
 function Home() {
   const { user } = useContext(AuthContext);
@@ -50,10 +49,11 @@ function Home() {
       </div>
 
       {loading ? (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {Array.from({ length: 3 }).map((_, index) => (
-            <NoteCardSkeleton key={index} />
-          ))}
+        <div className="flex min-h-[60vh] items-center justify-center">
+          <div
+            className="h-10 w-10 animate-spin rounded-full border-4 border-gray-700 border-t-blue-400"
+            aria-label="Loading notes"
+          />
         </div>
       ) : notes.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-center">
@@ -73,7 +73,7 @@ function Home() {
           </Link>
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {notes.map((note) => (
             <NoteCard
               key={note._id}
