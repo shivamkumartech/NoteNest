@@ -3,6 +3,7 @@ import { NoteContext } from "../context/NoteContext";
 import { toast } from "sonner";
 import { Pencil, Trash2 } from "lucide-react";
 import ConfirmDialog from "./ConfirmDialog";
+import formatNoteDate from "../utils/formatNoteDate";
 
 function NoteCard({ note, isEditing, onStartEdit, onCancelEdit }) {
   const { deleteNote, updateNote } = useContext(NoteContext);
@@ -72,7 +73,7 @@ function NoteCard({ note, isEditing, onStartEdit, onCancelEdit }) {
   };
 
   return (
-    <div className="group relative flex flex-col rounded-2xl border border-gray-800 bg-gray-900/70 p-6 shadow-sm transition-all duration-200 hover:border-gray-700 hover:bg-gray-900/90 hover:shadow-md">
+    <div className="group relative flex flex-col rounded-2xl border border-gray-800 bg-gray-900/70 p-4 shadow-sm transition-all duration-200 hover:border-gray-700 hover:bg-gray-900/90 hover:shadow-md">
       {isEditing ? (
         <>
           {/* Edit Mode */}
@@ -147,13 +148,7 @@ function NoteCard({ note, isEditing, onStartEdit, onCancelEdit }) {
 
           {/* Footer: date + actions */}
           <div className="mt-4 flex items-center justify-between text-sm text-gray-400">
-            <span>
-              {new Date(note.createdAt).toLocaleDateString("en-GB", {
-                day: "numeric",
-                month: "short",
-                year: "numeric",
-              })}
-            </span>
+            <span>{formatNoteDate(note.createdAt, note.updatedAt)}</span>
 
             <div className="flex items-center gap-1 transition sm:opacity-60 sm:group-hover:opacity-100">
               <button

@@ -13,19 +13,18 @@ Completed items are marked with `[x]`.
 - [x] Fix desktop layout shift (CLS)
 - [x] Improve mobile initial loading performance
 - [x] Optimize font loading
-- [ ] Review initial authentication request
 - [x] Reduce unused JavaScript
 
 ### Notes
 
 - [ ] Search notes
-- [ ] Add created/updated timestamps to the UI
+- [x] Add created/updated timestamps to the UI
 - [ ] Note reminders
 
 ### Note Editing
 
 - [ ] Dedicated edit-note experience
-- [ ] Improve form validation
+- [x] Improve form validation
 - [ ] Warn users about unsaved changes
 
 ### Sharing
