@@ -9,5 +9,12 @@ export const hashToken = (token) => {
 
 export const compareToken = (token, hashedToken) => {
   const hash = hashToken(token);
-  return crypto.timingSafeEqual(Buffer.from(hash), Buffer.from(hashedToken));
+  const hashBuffer = Buffer.from(hash);
+  const storedBuffer = Buffer.from(hashedToken);
+
+  if (hashBuffer.length !== storedBuffer.length) {
+    return false;
+  }
+
+  return crypto.timingSafeEqual(hashBuffer, storedBuffer);
 };
