@@ -38,7 +38,7 @@ export const userRegister = async (req, res) => {
 
     const refreshToken = generateRefreshToken(user._id);
 
-    const hashedRefreshToken = await hashToken(refreshToken);
+    const hashedRefreshToken = hashToken(refreshToken);
 
     user.refreshToken = hashedRefreshToken;
     await user.save();
@@ -103,7 +103,7 @@ export const userLogin = async (req, res) => {
 
     const refreshToken = generateRefreshToken(user._id);
 
-    const hashedRefreshToken = await hashToken(refreshToken);
+    const hashedRefreshToken = hashToken(refreshToken);
 
     user.refreshToken = hashedRefreshToken;
     await user.save();
@@ -151,7 +151,7 @@ export const refresh = async (req, res) => {
       });
     }
 
-    const isTokenValid = await compareToken(refreshToken, user.refreshToken);
+    const isTokenValid = compareToken(refreshToken, user.refreshToken);
 
     if (!isTokenValid) {
       return res.status(401).json({
@@ -164,7 +164,7 @@ export const refresh = async (req, res) => {
 
     const newRefreshToken = generateRefreshToken(user._id);
 
-    const hashedRefreshToken = await hashToken(newRefreshToken);
+    const hashedRefreshToken = hashToken(newRefreshToken);
 
     user.refreshToken = hashedRefreshToken;
     await user.save();
