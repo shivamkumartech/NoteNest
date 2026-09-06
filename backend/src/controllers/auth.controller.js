@@ -56,12 +56,14 @@ export const userRegister = async (req, res) => {
       },
     });
   } catch (error) {
+    if (error.name === "ValidationError") {
+      return res.status(400).json({
+        success: false,
+        message: Object.values(error.errors)[0].message,
+      });
+    }
     console.error("Register error:", error);
-
-    res.status(500).json({
-      success: false,
-      message: "Internal server error",
-    });
+    res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
 
@@ -79,9 +81,9 @@ export const userLogin = async (req, res) => {
 
     const normalizedEmail = email.toLowerCase().trim();
 
-    const user = await userModel.findOne({
-      email: normalizedEmail,
-    });
+    const user = await userModel
+      .findOne({ email: normalizedEmail })
+      .select("+password");
 
     if (!user) {
       return res.status(401).json({
@@ -93,7 +95,9 @@ export const userLogin = async (req, res) => {
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid)
-      return res.status(401).json({ message: "Incorrect password"});
+      return res
+        .status(401)
+        .json({ success: false, message: "Incorrect password" });
 
     const accessToken = generateAccessToken(user._id);
 
@@ -131,7 +135,9 @@ export const refresh = async (req, res) => {
   const { refreshToken } = req.cookies;
 
   if (!refreshToken)
-    return res.status(401).json({ message: " No refresh token provided" });
+    return res
+      .status(401)
+      .json({ success: false, message: "No refresh token provided" });
 
   try {
     const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
@@ -202,7 +208,7 @@ export const userLogout = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: " User logged out successfully",
+      message: "User logged out successfully",
     });
   } catch (error) {
     res.clearCookie("refreshToken", clearCookieOptions);
