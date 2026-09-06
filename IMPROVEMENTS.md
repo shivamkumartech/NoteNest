@@ -58,7 +58,7 @@ Completed items are marked with `[x]`.
 
 - [ ] Add pagination
 - [ ] Optimize database queries
-- [ ] Add database indexes where needed
+- [x] Add database indexes where needed
 - [ ] Optimize frontend rendering
 - [ ] Improve API response performance
 - [ ] Add caching where appropriate
