@@ -12,17 +12,17 @@ function Home() {
 
   if (error) {
     return (
-      <div className="max-w-2xl mx-auto mt-10 px-4">
+      <div className="mx-auto mt-10 w-full max-w-2xl px-4">
         <div
-          className="rounded-lg bg-(--app-danger)/10 border border-(--app-danger)/30 text-(--app-danger) px-4 py-4"
+          className="rounded-xl border border-(--app-danger)/30 bg-(--app-danger)/10 px-4 py-4 text-(--app-danger)"
           role="alert"
         >
-          <p>{error}</p>
+          <p className="text-sm">{error}</p>
 
           <button
             type="button"
             onClick={getNotes}
-            className="mt-3 bg-(--app-danger) hover:bg-(--app-danger-hover) text-white font-medium px-4 py-2 rounded-lg transition"
+            className="mt-4 cursor-pointer rounded-lg bg-(--app-danger) px-4 py-2 text-sm font-medium text-white transition hover:bg-(--app-danger-hover)"
           >
             Try again
           </button>
@@ -32,26 +32,35 @@ function Home() {
   }
 
   return (
-    <div className="w-full py-4 sm:py-8">
+    <div className="w-full py-6 sm:py-10">
       {/* Dashboard Welcome Header */}
-      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-2xl font-semibold tracking-tight text-(--app-text) sm:text-3xl">
-          What’s on your mind{user?.name ? `, ${user.name}` : ""}?
-        </h1>
+      <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className="text-2xl font-semibold tracking-tight text-(--app-text) sm:text-3xl">
+            What’s on your mind{user?.name ? `, ${user.name}` : ""}?
+          </h1>
+        </div>
 
         <Link
           to="/create-note"
-          className="hidden items-center gap-2 rounded-lg bg-(--app-accent) px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-(--app-accent-hover) sm:inline-flex"
+          className="hidden items-center gap-2 rounded-lg bg-(--app-accent) px-4 py-2.5 text-sm font-medium text-(--app-bg) shadow-sm transition hover:bg-(--app-accent-hover) sm:inline-flex"
         >
           <Plus size={18} />
           <span>New Note</span>
         </Link>
       </div>
 
+      {/* Notes Section */}
+      <div>
+        <p className="mb-2 text-xs font-medium uppercase tracking-[0.18em] text-(--app-text-muted)">
+          Your notes
+        </p>
+      </div>
+
       {loading ? (
         <div className="flex min-h-[60vh] items-center justify-center">
           <div
-            className="h-10 w-10 animate-spin rounded-full border-4"
+            className="h-9 w-9 animate-spin rounded-full border-4"
             style={{
               borderColor: "var(--app-border)",
               borderTopColor: "var(--app-accent)",
@@ -60,26 +69,28 @@ function Home() {
           />
         </div>
       ) : notes.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-20 text-center">
-          <NotebookPen className="mb-4 h-12 w-12 text-(--app-text-muted)" />
+        <div className="flex min-h-[50vh] flex-col items-center justify-center rounded-2xl border border-dashed border-(--app-border) px-6 py-20 text-center">
+          <div className="flex h-14 w-14 items-center justify-center rounded-full border border-(--app-border)">
+            <NotebookPen className="h-6 w-6 text-(--app-text-muted)" />
+          </div>
 
-          <h2 className="text-xl font-semibold text-(--app-text)">
+          <h2 className="mt-5 text-xl font-semibold text-(--app-text)">
             No notes yet
           </h2>
 
-          <p className="mt-2 mb-6 text-(--app-text-secondary)">
+          <p className="mt-2 max-w-sm text-sm text-(--app-text-secondary)">
             Start by creating your first note.
           </p>
 
           <Link
             to="/create-note"
-            className="rounded-lg bg-(--app-accent) px-5 py-2.5 font-semibold text-white transition hover:bg-(--app-accent-hover)"
+            className="mt-6 rounded-full bg-(--app-accent) px-5 py-2.5 text-sm font-medium text-(--app-bg) transition hover:bg-(--app-accent-hover)"
           >
             Create your first note
           </Link>
         </div>
       ) : (
-        <div className="grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 items-start gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {notes.map((note) => (
             <NoteCard
               key={note._id}
@@ -95,7 +106,7 @@ function Home() {
       {/* Mobile Create Note FAB */}
       <Link
         to="/create-note"
-        className="fixed bottom-20 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-(--app-accent) text-white shadow-lg transition hover:bg-(--app-accent-hover) sm:hidden"
+        className="fixed bottom-20 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-(--app-accent) text-(--app-bg) shadow-lg transition hover:bg-(--app-accent-hover) sm:hidden"
         title="Create note"
         aria-label="Create note"
       >

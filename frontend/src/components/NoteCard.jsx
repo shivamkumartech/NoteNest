@@ -31,7 +31,7 @@ function NoteCard({ note, isEditing, onStartEdit, onCancelEdit }) {
         content: editData.content.trim(),
       });
 
-      toast.success("Note updated successfully");
+      toast.success("Note updated.");
 
       onCancelEdit();
     } catch (error) {
@@ -52,7 +52,7 @@ function NoteCard({ note, isEditing, onStartEdit, onCancelEdit }) {
 
       setShowDeleteDialog(false);
 
-      toast.success("Note deleted successfully");
+      toast.success("Note deleted.");
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
@@ -108,7 +108,7 @@ function NoteCard({ note, isEditing, onStartEdit, onCancelEdit }) {
               })
             }
             disabled={isUpdating}
-            className=" mb-2 resize-none w-full rounded-lg border border-(--app-border-hover) bg-(--app-surface-raised)/80 px-3 py-2.5 text-sm text-(--app-text) placeholder-(--app-text-muted) outline-none transition focus:border-(--app-accent) focus:ring-1 focus:ring-(--app-accent) disabled:cursor-not-allowed disabled:opacity-50"
+            className="mb-2 w-full resize-none rounded-lg border border-(--app-border-hover) bg-(--app-surface-raised)/80 px-3 py-2.5 text-sm text-(--app-text) placeholder-(--app-text-muted) outline-none transition focus:border-(--app-accent) focus:ring-1 focus:ring-(--app-accent) disabled:cursor-not-allowed disabled:opacity-50"
           />
 
           <div className="flex justify-end">
@@ -122,7 +122,7 @@ function NoteCard({ note, isEditing, onStartEdit, onCancelEdit }) {
               type="button"
               onClick={handleUpdate}
               disabled={isUpdating}
-              className="cursor-pointer rounded-lg bg-(--app-accent) px-4 py-2 text-sm font-medium text-white transition hover:bg-(--app-accent-hover) disabled:cursor-not-allowed disabled:opacity-50"
+              className="cursor-pointer rounded-lg bg-(--app-accent) px-4 py-2 text-sm font-medium text-(--app-bg) transition hover:bg-(--app-accent-hover) disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isUpdating ? "Saving..." : "Save"}
             </button>
@@ -140,11 +140,11 @@ function NoteCard({ note, isEditing, onStartEdit, onCancelEdit }) {
       ) : (
         <>
           {/* View Mode */}
-          <h2 className="text-lg font-semibold tracking-tight text-(--app-text) line-clamp-1 wrap-break-word">
+          <h2 className="line-clamp-1 wrap-break-word text-lg font-semibold tracking-tight text-(--app-text)">
             {note.title}
           </h2>
 
-          <p className="mt-2.5 min-h-12 text-sm leading-relaxed text-(--app-text-secondary) line-clamp-2 wrap-break-word">
+          <p className="mt-2.5 min-h-12 line-clamp-2 wrap-break-word text-sm leading-relaxed text-(--app-text-secondary)">
             {note.content}
           </p>
 

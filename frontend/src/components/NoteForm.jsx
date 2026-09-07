@@ -31,7 +31,7 @@ function NoteForm() {
 
       await createNote(note);
 
-      toast.success("Note created successfully");
+      toast.success("Note created.");
 
       setNote({
         title: "",
@@ -105,7 +105,7 @@ function NoteForm() {
           <button
             type="submit"
             disabled={isCreating}
-            className="flex-1 cursor-pointer rounded-lg bg-(--app-accent) px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-(--app-accent-hover) disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex-1 cursor-pointer rounded-lg bg-(--app-accent) px-4 py-2.5 text-sm font-medium text-(--app-bg) shadow-sm transition hover:bg-(--app-accent-hover) disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isCreating ? "Creating..." : "Add Note"}
           </button>

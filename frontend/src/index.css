@@ -6,29 +6,36 @@
 
 /* =========================================================
    GLOBAL THEME
-   Change your app's colors and font HERE.
    ========================================================= */
 
 :root {
-  /* ---------- Colors ---------- */
+  /* ---------- Background ---------- */
 
-  --app-bg: #030712;
-  --app-surface: #111827;
-  --app-surface-raised: #1f2937;
+  --app-bg: #f7f7f5;
+  --app-surface: #ffffff;
+  --app-surface-raised: #f0f0ed;
 
-  --app-border: #1f2937;
-  --app-border-hover: #374151;
+  /* ---------- Borders ---------- */
 
-  --app-text: #ffffff;
-  --app-text-secondary: #9ca3af;
-  --app-text-muted: #6b7280;
+  --app-border: #deded9;
+  --app-border-hover: #c9c9c3;
 
-  --app-accent: #3b82f6;
-  --app-accent-hover: #2563eb;
-  --app-accent-soft: rgba(59, 130, 246, 0.12);
+  /* ---------- Text ---------- */
 
-  --app-danger: #ef4444;
-  --app-danger-hover: #dc2626;
+  --app-text: #171717;
+  --app-text-secondary: #686863;
+  --app-text-muted: #999993;
+
+  /* ---------- Accent ---------- */
+
+  --app-accent: #171717;
+  --app-accent-hover: #3a3a37;
+  --app-accent-soft: rgba(23, 23, 23, 0.08);
+
+  /* ---------- Danger ---------- */
+
+  --app-danger: #c94a4a;
+  --app-danger-hover: #a83d3d;
 
   /* ---------- Font ---------- */
 
@@ -43,33 +50,37 @@
 
 /* =========================================================
    TAILWIND COLOR ALIASES
-
-   Existing Tailwind classes can continue working while
-   their actual colors are controlled by the variables above.
    ========================================================= */
 
 @theme {
+  /* ---------- Gray ---------- */
+
   --color-gray-950: var(--app-bg);
   --color-gray-900: var(--app-surface);
   --color-gray-800: var(--app-surface-raised);
   --color-gray-700: var(--app-border-hover);
-  --color-gray-600: #4b5563;
+  --color-gray-600: #777771;
   --color-gray-500: var(--app-text-muted);
   --color-gray-400: var(--app-text-secondary);
-  --color-gray-300: #d1d5db;
-  --color-gray-200: #e5e7eb;
+  --color-gray-300: #b5b5af;
+  --color-gray-200: #d0d0ca;
+
   --color-white: var(--app-text);
+
+  /* ---------- Accent ---------- */
 
   --color-blue-700: var(--app-accent-hover);
   --color-blue-600: var(--app-accent);
   --color-blue-500: var(--app-accent-hover);
   --color-blue-400: var(--app-accent);
-  --color-blue-300: #93c5fd;
+  --color-blue-300: var(--app-accent-hover);
+
+  /* ---------- Danger ---------- */
 
   --color-red-700: var(--app-danger-hover);
   --color-red-600: var(--app-danger);
   --color-red-500: var(--app-danger);
-  --color-red-400: #fca5a5;
+  --color-red-400: #d77b7b;
 }
 
 /* =========================================================
@@ -80,10 +91,7 @@
   html {
     scroll-behavior: smooth;
 
-    /* Firefox */
     scrollbar-width: none;
-
-    /* IE / Edge */
     -ms-overflow-style: none;
   }
 
@@ -112,7 +120,10 @@
   }
 }
 
-/* Chrome, Brave, Safari, Edge */
+/* =========================================================
+   HIDE SCROLLBAR
+   ========================================================= */
+
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;

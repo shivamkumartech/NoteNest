@@ -7,10 +7,12 @@ import ConfirmDialog from "./ConfirmDialog";
 
 function NavLinks({ user, location, onNavigate, onLogout, mobile = false }) {
   const linkClass = (path) =>
-    `hover:text-(--app-accent) transition ${mobile ? "py-1.5" : ""} ${
+    `transition-colors duration-200 ${
+      mobile ? "py-1.5" : ""
+    } ${
       location.pathname === path
-        ? "text-(--app-accent) font-semibold"
-        : "text-(--app-text-secondary)"
+        ? "font-medium text-(--app-text)"
+        : "text-(--app-text-secondary) hover:text-(--app-text)"
     }`;
 
   if (user) {
@@ -19,7 +21,7 @@ function NavLinks({ user, location, onNavigate, onLogout, mobile = false }) {
         <button
           type="button"
           onClick={onLogout}
-          className="cursor-pointer py-1.5 text-left text-(--app-text-secondary) transition hover:text-(--app-danger)"
+          className="cursor-pointer py-1.5 text-left text-(--app-text-secondary) transition-colors duration-200 hover:text-(--app-danger)"
         >
           Logout
         </button>
@@ -30,7 +32,7 @@ function NavLinks({ user, location, onNavigate, onLogout, mobile = false }) {
       <button
         type="button"
         onClick={onLogout}
-        className="cursor-pointer rounded-lg border border-(--app-border-hover) px-3 py-1.5 text-sm text-(--app-text-secondary) transition hover:border-(--app-border) hover:bg-(--app-surface-raised) hover:text-(--app-danger)"
+        className="cursor-pointer rounded-full border border-(--app-border-hover) px-3.5 py-1.5 text-sm text-(--app-text-secondary) transition-colors duration-200 hover:border-(--app-border-hover) hover:bg-(--app-surface-raised) hover:text-(--app-text)"
       >
         Logout
       </button>
@@ -39,7 +41,11 @@ function NavLinks({ user, location, onNavigate, onLogout, mobile = false }) {
 
   return (
     <>
-      <Link to="/login" onClick={onNavigate} className={linkClass("/login")}>
+      <Link
+        to="/login"
+        onClick={onNavigate}
+        className={linkClass("/login")}
+      >
         Sign in
       </Link>
 
@@ -49,7 +55,7 @@ function NavLinks({ user, location, onNavigate, onLogout, mobile = false }) {
         className={
           mobile
             ? linkClass("/register")
-            : "rounded-lg bg-(--app-accent) px-3.5 py-1.5 text-sm font-medium text-white transition hover:bg-(--app-accent-hover)"
+            : "rounded-full bg-(--app-accent) px-4 py-1.5 text-sm font-medium text-(--app-bg) transition-colors duration-200 hover:bg-(--app-accent-hover)"
         }
       >
         Register
@@ -85,6 +91,7 @@ function Navbar() {
 
     if (isMenuOpen) {
       window.addEventListener("keydown", handleKeyDown);
+
       return () => window.removeEventListener("keydown", handleKeyDown);
     }
   }, [isMenuOpen]);
@@ -119,7 +126,7 @@ function Navbar() {
   const homePath = user ? "/notes" : "/";
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-(--app-border) bg-(--app-bg)/80 px-6 py-3.5 text-(--app-text) backdrop-blur-md">
+    <nav className="sticky top-0 z-50 border-b border-(--app-border) bg-(--app-bg)/90 px-6 py-3.5 text-(--app-text) backdrop-blur-md">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link
@@ -127,10 +134,10 @@ function Navbar() {
           onClick={closeMenu}
           className="flex items-center gap-2"
         >
-          <NotebookText className="h-6 w-6 text-(--app-accent)" />
+          <NotebookText className="h-5 w-5 text-(--app-text)" />
 
-          <span className="text-xl font-bold tracking-tight text-(--app-text)">
-            Note<span className="text-(--app-accent)">Nest</span>
+          <span className="text-lg font-semibold tracking-tight text-(--app-text)">
+            NoteNest
           </span>
         </Link>
 
@@ -150,7 +157,7 @@ function Navbar() {
         <button
           type="button"
           onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="cursor-pointer text-(--app-text-secondary) transition hover:text-(--app-text) md:hidden"
+          className="cursor-pointer text-(--app-text-secondary) transition-colors duration-200 hover:text-(--app-text) md:hidden"
           aria-label={
             isMenuOpen ? "Close navigation menu" : "Open navigation menu"
           }
@@ -164,7 +171,7 @@ function Navbar() {
       {isMenuOpen && (
         <>
           <div
-            className="fixed inset-0 top-14.25 z-40 bg-black/60 md:hidden"
+            className="fixed inset-0 top-14.25 z-40 bg-black/50 md:hidden"
             onClick={closeMenu}
             aria-hidden="true"
           />
