@@ -6,7 +6,7 @@ Completed items are marked with `[x]`.
 
 ---
 
-## 🔵 Planned Features
+## Planned Features
 
 ### Performance Optimization
 
@@ -54,7 +54,7 @@ Completed items are marked with `[x]`.
 
 ---
 
-## 🟣 Performance
+## Performance
 
 - [ ] Add pagination
 - [ ] Optimize database queries

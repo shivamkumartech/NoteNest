@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#030712"/>
-      <stop offset="100%" stop-color="#0b1329"/>
+      <stop offset="0%" stop-color="#080808"/>
+      <stop offset="100%" stop-color="#101010"/>
     </linearGradient>
   </defs>
 
@@ -27,31 +27,69 @@
   <g transform="translate(100, 100)">
     <!-- Icon -->
     <g transform="translate(0, 0)">
-      <rect width="44" height="52" x="8" y="4" rx="6" fill="none" stroke="#60a5fa" stroke-width="4"/>
-      <line x1="4" y1="16" x2="12" y2="16" stroke="#60a5fa" stroke-width="4" stroke-linecap="round"/>
-      <line x1="4" y1="26" x2="12" y2="26" stroke="#60a5fa" stroke-width="4" stroke-linecap="round"/>
-      <line x1="4" y1="36" x2="12" y2="36" stroke="#60a5fa" stroke-width="4" stroke-linecap="round"/>
-      <line x1="22" y1="20" x2="38" y2="20" stroke="#60a5fa" stroke-width="4" stroke-linecap="round"/>
-      <line x1="22" y1="30" x2="44" y2="30" stroke="#60a5fa" stroke-width="4" stroke-linecap="round"/>
-      <line x1="22" y1="40" x2="34" y2="40" stroke="#60a5fa" stroke-width="4" stroke-linecap="round"/>
+      <rect
+        width="44"
+        height="52"
+        x="8"
+        y="4"
+        rx="6"
+        fill="none"
+        stroke="#f5f5f5"
+        stroke-width="4"
+      />
+      <line x1="4" y1="16" x2="12" y2="16" stroke="#f5f5f5" stroke-width="4" stroke-linecap="round"/>
+      <line x1="4" y1="26" x2="12" y2="26" stroke="#f5f5f5" stroke-width="4" stroke-linecap="round"/>
+      <line x1="4" y1="36" x2="12" y2="36" stroke="#f5f5f5" stroke-width="4" stroke-linecap="round"/>
+      <line x1="22" y1="20" x2="38" y2="20" stroke="#f5f5f5" stroke-width="4" stroke-linecap="round"/>
+      <line x1="22" y1="30" x2="44" y2="30" stroke="#f5f5f5" stroke-width="4" stroke-linecap="round"/>
+      <line x1="22" y1="40" x2="34" y2="40" stroke="#f5f5f5" stroke-width="4" stroke-linecap="round"/>
     </g>
 
     <!-- Logo Text -->
-    <text x="70" y="42" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="38" font-weight="700" fill="#ffffff" letter-spacing="-1">
-      Note<tspan fill="#60a5fa">Nest</tspan>
+    <text
+      x="70"
+      y="42"
+      font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+      font-size="38"
+      font-weight="700"
+      fill="#f5f5f5"
+      letter-spacing="-1"
+    >
+      NoteNest
     </text>
   </g>
 
   <!-- Main Headline -->
   <g transform="translate(100, 250)">
-    <text font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="62" font-weight="700" fill="#ffffff" letter-spacing="-2">
+    <text
+      font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+      font-size="62"
+      font-weight="700"
+      fill="#f5f5f5"
+      letter-spacing="-2"
+    >
       Keep the things
     </text>
-    <text y="75" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="62" font-weight="700" fill="#94a3b8" letter-spacing="-2">
+
+    <text
+      y="75"
+      font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+      font-size="62"
+      font-weight="700"
+      fill="#999999"
+      letter-spacing="-2"
+    >
       worth remembering.
     </text>
-    <text y="150" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" fill="#64748b" font-weight="400">
-  A distraction-free place for your notes, ideas, plans, and reminders.
-</text>
+
+    <text
+      y="150"
+      font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+      font-size="24"
+      fill="#666666"
+      font-weight="400"
+    >
+      A distraction-free place for your notes, ideas, plans, and reminders.
+    </text>
   </g>
 </svg>
