@@ -13,7 +13,7 @@ router.post("/register", authRateLimiter, userRegister);
 
 router.post("/login", authRateLimiter, userLogin);
 
-router.post("/refresh-token", authRateLimiter, refresh);
+router.post("/refresh-token", refresh);
 
 router.post("/logout", userLogout);
 
