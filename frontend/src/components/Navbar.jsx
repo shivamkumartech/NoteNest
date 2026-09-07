@@ -136,7 +136,7 @@ function Navbar() {
         >
           <NotebookText className="h-5 w-5 text-(--app-text)" />
 
-          <span className="text-lg font-semibold tracking-tight text-(--app-text)">
+          <span className="text-lg font-extrabold tracking-tight text-(--app-text)">
             NoteNest
           </span>
         </Link>

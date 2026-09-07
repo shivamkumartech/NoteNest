@@ -36,7 +36,7 @@ function Home() {
       {/* Dashboard Welcome Header */}
       <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-(--app-text) sm:text-3xl">
+          <h1 className="text-2xl font-bold tracking-tight text-(--app-text) sm:text-3xl">
             What’s on your mind{user?.name ? `, ${user.name}` : ""}?
           </h1>
         </div>
