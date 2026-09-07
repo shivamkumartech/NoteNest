@@ -7,10 +7,10 @@ import ConfirmDialog from "./ConfirmDialog";
 
 function NavLinks({ user, location, onNavigate, onLogout, mobile = false }) {
   const linkClass = (path) =>
-    `hover:text-blue-400 transition ${mobile ? "py-1.5" : ""} ${
+    `hover:text-(--app-accent) transition ${mobile ? "py-1.5" : ""} ${
       location.pathname === path
-        ? "text-blue-400 font-semibold"
-        : "text-gray-300"
+        ? "text-(--app-accent) font-semibold"
+        : "text-(--app-text-secondary)"
     }`;
 
   if (user) {
@@ -19,7 +19,7 @@ function NavLinks({ user, location, onNavigate, onLogout, mobile = false }) {
         <button
           type="button"
           onClick={onLogout}
-          className="cursor-pointer py-1.5 text-left text-gray-300 transition hover:text-red-400"
+          className="cursor-pointer py-1.5 text-left text-(--app-text-secondary) transition hover:text-(--app-danger)"
         >
           Logout
         </button>
@@ -30,7 +30,7 @@ function NavLinks({ user, location, onNavigate, onLogout, mobile = false }) {
       <button
         type="button"
         onClick={onLogout}
-        className="cursor-pointer rounded-lg border border-gray-700 px-3 py-1.5 text-sm text-gray-300 transition hover:border-gray-600 hover:bg-gray-800 hover:text-red-400"
+        className="cursor-pointer rounded-lg border border-(--app-border-hover) px-3 py-1.5 text-sm text-(--app-text-secondary) transition hover:border-(--app-border) hover:bg-(--app-surface-raised) hover:text-(--app-danger)"
       >
         Logout
       </button>
@@ -49,7 +49,7 @@ function NavLinks({ user, location, onNavigate, onLogout, mobile = false }) {
         className={
           mobile
             ? linkClass("/register")
-            : "rounded-lg bg-blue-600 px-3.5 py-1.5 text-sm font-medium text-white transition hover:bg-blue-700"
+            : "rounded-lg bg-(--app-accent) px-3.5 py-1.5 text-sm font-medium text-white transition hover:bg-(--app-accent-hover)"
         }
       >
         Register
@@ -119,7 +119,7 @@ function Navbar() {
   const homePath = user ? "/notes" : "/";
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-gray-800/80 bg-gray-950/80 px-6 py-3.5 text-white backdrop-blur-md">
+    <nav className="sticky top-0 z-50 border-b border-(--app-border) bg-(--app-bg)/80 px-6 py-3.5 text-(--app-text) backdrop-blur-md">
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link
@@ -127,10 +127,10 @@ function Navbar() {
           onClick={closeMenu}
           className="flex items-center gap-2"
         >
-          <NotebookText className="h-6 w-6 text-blue-400" />
+          <NotebookText className="h-6 w-6 text-(--app-accent)" />
 
-          <span className="text-xl font-bold tracking-tight text-white">
-            Note<span className="text-blue-400">Nest</span>
+          <span className="text-xl font-bold tracking-tight text-(--app-text)">
+            Note<span className="text-(--app-accent)">Nest</span>
           </span>
         </Link>
 
@@ -150,7 +150,7 @@ function Navbar() {
         <button
           type="button"
           onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="cursor-pointer text-gray-300 transition hover:text-white md:hidden"
+          className="cursor-pointer text-(--app-text-secondary) transition hover:text-(--app-text) md:hidden"
           aria-label={
             isMenuOpen ? "Close navigation menu" : "Open navigation menu"
           }
@@ -169,7 +169,7 @@ function Navbar() {
             aria-hidden="true"
           />
 
-          <div className="absolute left-0 right-0 top-full z-50 border-t border-gray-800/80 bg-gray-950/95 px-6 py-4 shadow-xl backdrop-blur-md md:hidden">
+          <div className="absolute left-0 right-0 top-full z-50 border-t border-(--app-border) bg-(--app-bg)/95 px-6 py-4 shadow-xl backdrop-blur-md md:hidden">
             <div className="flex flex-col gap-4">
               {authStatus !== "checking" && (
                 <NavLinks

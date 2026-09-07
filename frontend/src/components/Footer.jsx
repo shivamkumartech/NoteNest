@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="mt-auto border-t border-gray-900/60 py-6 text-center text-xs text-gray-500">
+    <footer className="mt-auto border-t border-(--app-border) py-6 text-center text-xs text-(--app-text-muted)">
       <p>© {new Date().getFullYear()} NoteNest. All rights reserved.</p>
     </footer>
   );

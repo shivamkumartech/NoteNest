@@ -14,7 +14,7 @@ function Home() {
     return (
       <div className="max-w-2xl mx-auto mt-10 px-4">
         <div
-          className="rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-4"
+          className="rounded-lg bg-(--app-danger)/10 border border-(--app-danger)/30 text-(--app-danger) px-4 py-4"
           role="alert"
         >
           <p>{error}</p>
@@ -22,7 +22,7 @@ function Home() {
           <button
             type="button"
             onClick={getNotes}
-            className="mt-3 bg-red-600 hover:bg-red-700 text-white font-medium px-4 py-2 rounded-lg transition"
+            className="mt-3 bg-(--app-danger) hover:bg-(--app-danger-hover) text-white font-medium px-4 py-2 rounded-lg transition"
           >
             Try again
           </button>
@@ -35,13 +35,13 @@ function Home() {
     <div className="w-full py-4 sm:py-8">
       {/* Dashboard Welcome Header */}
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+        <h1 className="text-2xl font-semibold tracking-tight text-(--app-text) sm:text-3xl">
           What’s on your mind{user?.name ? `, ${user.name}` : ""}?
         </h1>
 
         <Link
           to="/create-note"
-          className="hidden items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 sm:inline-flex"
+          className="hidden items-center gap-2 rounded-lg bg-(--app-accent) px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-(--app-accent-hover) sm:inline-flex"
         >
           <Plus size={18} />
           <span>New Note</span>
@@ -51,23 +51,29 @@ function Home() {
       {loading ? (
         <div className="flex min-h-[60vh] items-center justify-center">
           <div
-            className="h-10 w-10 animate-spin rounded-full border-4 border-gray-700 border-t-blue-400"
+            className="h-10 w-10 animate-spin rounded-full border-4"
+            style={{
+              borderColor: "var(--app-border)",
+              borderTopColor: "var(--app-accent)",
+            }}
             aria-label="Loading notes"
           />
         </div>
       ) : notes.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-center">
-          <NotebookPen className="mb-4 h-12 w-12 text-gray-500" />
+          <NotebookPen className="mb-4 h-12 w-12 text-(--app-text-muted)" />
 
-          <h2 className="text-xl font-semibold text-white">No notes yet</h2>
+          <h2 className="text-xl font-semibold text-(--app-text)">
+            No notes yet
+          </h2>
 
-          <p className="mt-2 mb-6 text-gray-400">
+          <p className="mt-2 mb-6 text-(--app-text-secondary)">
             Start by creating your first note.
           </p>
 
           <Link
             to="/create-note"
-            className="rounded-lg bg-blue-600 px-5 py-2.5 font-semibold text-white transition hover:bg-blue-700"
+            className="rounded-lg bg-(--app-accent) px-5 py-2.5 font-semibold text-white transition hover:bg-(--app-accent-hover)"
           >
             Create your first note
           </Link>
@@ -89,7 +95,7 @@ function Home() {
       {/* Mobile Create Note FAB */}
       <Link
         to="/create-note"
-        className="fixed bottom-20 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition hover:bg-blue-700 sm:hidden"
+        className="fixed bottom-20 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-(--app-accent) text-white shadow-lg transition hover:bg-(--app-accent-hover) sm:hidden"
         title="Create note"
         aria-label="Create note"
       >

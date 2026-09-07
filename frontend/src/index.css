@@ -4,35 +4,112 @@
 @import "@fontsource/plus-jakarta-sans/700.css";
 @import "tailwindcss";
 
+/* =========================================================
+   GLOBAL THEME
+   Change your app's colors and font HERE.
+   ========================================================= */
+
+:root {
+  /* ---------- Colors ---------- */
+
+  --app-bg: #030712;
+  --app-surface: #111827;
+  --app-surface-raised: #1f2937;
+
+  --app-border: #1f2937;
+  --app-border-hover: #374151;
+
+  --app-text: #ffffff;
+  --app-text-secondary: #9ca3af;
+  --app-text-muted: #6b7280;
+
+  --app-accent: #3b82f6;
+  --app-accent-hover: #2563eb;
+  --app-accent-soft: rgba(59, 130, 246, 0.12);
+
+  --app-danger: #ef4444;
+  --app-danger-hover: #dc2626;
+
+  /* ---------- Font ---------- */
+
+  --app-font:
+    "Plus Jakarta Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+}
+
+/* =========================================================
+   TAILWIND COLOR ALIASES
+
+   Existing Tailwind classes can continue working while
+   their actual colors are controlled by the variables above.
+   ========================================================= */
+
+@theme {
+  --color-gray-950: var(--app-bg);
+  --color-gray-900: var(--app-surface);
+  --color-gray-800: var(--app-surface-raised);
+  --color-gray-700: var(--app-border-hover);
+  --color-gray-600: #4b5563;
+  --color-gray-500: var(--app-text-muted);
+  --color-gray-400: var(--app-text-secondary);
+  --color-gray-300: #d1d5db;
+  --color-gray-200: #e5e7eb;
+  --color-white: var(--app-text);
+
+  --color-blue-700: var(--app-accent-hover);
+  --color-blue-600: var(--app-accent);
+  --color-blue-500: var(--app-accent-hover);
+  --color-blue-400: var(--app-accent);
+  --color-blue-300: #93c5fd;
+
+  --color-red-700: var(--app-danger-hover);
+  --color-red-600: var(--app-danger);
+  --color-red-500: var(--app-danger);
+  --color-red-400: #fca5a5;
+}
+
+/* =========================================================
+   GLOBAL BASE STYLES
+   ========================================================= */
+
 @layer base {
+  html {
+    scroll-behavior: smooth;
+
+    /* Firefox */
+    scrollbar-width: none;
+
+    /* IE / Edge */
+    -ms-overflow-style: none;
+  }
+
   body {
     margin: 0;
     min-width: 320px;
 
-    font-family:
-      "Plus Jakarta Sans",
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      sans-serif;
+    font-family: var(--app-font);
 
-    background: #030712;
-    color: white;
+    background: var(--app-bg);
+    color: var(--app-text);
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-}
 
-html {
-  scroll-behavior: smooth;
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
 
-  /* Firefox */
-  scrollbar-width: none;
-
-  /* IE / Edge */
-  -ms-overflow-style: none;
+  a {
+    color: inherit;
+  }
 }
 
 /* Chrome, Brave, Safari, Edge */

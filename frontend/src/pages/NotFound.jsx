@@ -8,21 +8,21 @@ function NotFound() {
 
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center text-center px-4">
-      <FileQuestion className="w-16 h-16 text-gray-500 mb-4" />
+      <FileQuestion className="w-16 h-16 text-(--app-text-muted) mb-4" />
 
-      <h1 className="text-4xl font-bold text-white">404</h1>
+      <h1 className="text-4xl font-bold text-(--app-text)">404</h1>
 
-      <h2 className="mt-2 text-xl font-semibold text-gray-300">
+      <h2 className="mt-2 text-xl font-semibold text-(--app-text-secondary)">
         Page not found
       </h2>
 
-      <p className="mt-2 text-gray-400">
+      <p className="mt-2 text-(--app-text-secondary)">
         The page you're looking for doesn't exist.
       </p>
 
       <Link
         to={user ? "/notes" : "/"}
-        className="mt-6 inline-flex cursor-pointer items-center rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-blue-500"
+        className="mt-6 inline-flex cursor-pointer items-center rounded-lg bg-(--app-accent) px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-(--app-accent-hover)"
       >
         Back to NoteNest
       </Link>

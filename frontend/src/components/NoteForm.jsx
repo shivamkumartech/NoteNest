@@ -50,13 +50,13 @@ function NoteForm() {
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto rounded-2xl border border-gray-800 bg-gray-900/70 p-6 sm:p-8 shadow-sm">
-      <h2 className="text-xl font-semibold tracking-tight text-center text-white mb-6">
+    <div className="w-full max-w-xl mx-auto rounded-2xl border border-(--app-border) bg-(--app-surface)/70 p-6 sm:p-8 shadow-sm">
+      <h2 className="text-xl font-semibold tracking-tight text-center text-(--app-text) mb-6">
         Create a New Note
       </h2>
 
       {error && (
-        <div className="mb-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 text-sm">
+        <div className="mb-4 rounded-lg bg-(--app-danger)/10 border border-(--app-danger)/30 text-(--app-danger) px-4 py-3 text-sm">
           {error}
         </div>
       )}
@@ -67,7 +67,7 @@ function NoteForm() {
           placeholder="Enter title..."
           maxLength={100}
           autoFocus
-          className="w-full rounded-lg border border-gray-700 bg-gray-800/80 px-4 py-2.5 text-sm text-white placeholder-gray-500 outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          className="w-full rounded-lg border border-(--app-border-hover) bg-(--app-surface-raised)/80 px-4 py-2.5 text-sm text-(--app-text) placeholder-(--app-text-muted) outline-none transition focus:border-(--app-accent) focus:ring-1 focus:ring-(--app-accent)"
           value={note.title}
           onChange={(e) =>
             setNote({
@@ -77,14 +77,15 @@ function NoteForm() {
           }
           disabled={isCreating}
         />
-        <p className="text-right text-xs text-gray-500">
+
+        <p className="text-right text-xs text-(--app-text-muted)">
           {note.title.length}/100
         </p>
 
         <textarea
           placeholder="Type anything to remember"
           maxLength={10000}
-          className="w-full resize-none rounded-lg border border-gray-700 bg-gray-800/80 px-4 py-2.5 text-sm text-white placeholder-gray-500 outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          className="w-full resize-none rounded-lg border border-(--app-border-hover) bg-(--app-surface-raised)/80 px-4 py-2.5 text-sm text-(--app-text) placeholder-(--app-text-muted) outline-none transition focus:border-(--app-accent) focus:ring-1 focus:ring-(--app-accent)"
           rows="5"
           value={note.content}
           onChange={(e) =>
@@ -96,7 +97,7 @@ function NoteForm() {
           disabled={isCreating}
         />
 
-        <p className="text-right text-xs text-gray-500">
+        <p className="text-right text-xs text-(--app-text-muted)">
           {note.content.length}/10000
         </p>
 
@@ -104,7 +105,7 @@ function NoteForm() {
           <button
             type="submit"
             disabled={isCreating}
-            className="flex-1 cursor-pointer rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex-1 cursor-pointer rounded-lg bg-(--app-accent) px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-(--app-accent-hover) disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isCreating ? "Creating..." : "Add Note"}
           </button>
@@ -113,7 +114,7 @@ function NoteForm() {
             type="button"
             onClick={() => navigate("/notes")}
             disabled={isCreating}
-            className="cursor-pointer rounded-lg border border-gray-700 bg-gray-800/50 px-5 py-2.5 text-sm font-medium text-gray-300 transition hover:border-gray-600 hover:bg-gray-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+            className="cursor-pointer rounded-lg border border-(--app-border-hover) bg-(--app-surface-raised)/50 px-5 py-2.5 text-sm font-medium text-(--app-text-secondary) transition hover:border-(--app-border) hover:bg-(--app-surface-raised) hover:text-(--app-text) disabled:cursor-not-allowed disabled:opacity-50"
           >
             Cancel
           </button>

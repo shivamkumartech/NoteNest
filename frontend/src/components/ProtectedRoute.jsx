@@ -8,8 +8,16 @@ function ProtectedRoute() {
   if (authStatus === "checking") {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center">
-        <div className="mb-4 h-10 w-10 animate-spin rounded-full border-4 border-gray-700 border-t-blue-400" />
-        <p className="text-sm text-gray-400">Loading NoteNest...</p>
+        <div
+          className="mb-4 h-10 w-10 animate-spin rounded-full border-4"
+          style={{
+            borderColor: "var(--app-border)",
+            borderTopColor: "var(--app-accent)",
+          }}
+        />
+        <p className="text-sm text-(--app-text-secondary)">
+          Loading NoteNest...
+        </p>
       </div>
     );
   }

@@ -42,7 +42,7 @@ function ConfirmDialog({
       onClick={onCancel}
     >
       <div
-        className="w-full max-w-md rounded-2xl border border-gray-800 bg-gray-900/95 p-6 shadow-2xl backdrop-blur-md"
+        className="w-full max-w-md rounded-2xl border border-(--app-border) bg-(--app-surface)/95 p-6 shadow-2xl backdrop-blur-md"
         role="dialog"
         aria-modal="true"
         aria-labelledby="confirm-dialog-title"
@@ -51,12 +51,15 @@ function ConfirmDialog({
       >
         <h2
           id="confirm-dialog-title"
-          className="text-lg font-semibold tracking-tight text-white"
+          className="text-lg font-semibold tracking-tight text-(--app-text)"
         >
           {title}
         </h2>
 
-        <p id="confirm-dialog-message" className="mt-2 text-sm text-gray-400">
+        <p
+          id="confirm-dialog-message"
+          className="mt-2 text-sm text-(--app-text-secondary)"
+        >
           {message}
         </p>
 
@@ -65,7 +68,7 @@ function ConfirmDialog({
             type="button"
             onClick={onCancel}
             disabled={loading}
-            className="cursor-pointer rounded-lg border border-gray-700 bg-gray-800/50 px-4 py-2 text-sm font-medium text-gray-300 transition hover:border-gray-600 hover:bg-gray-800 hover:text-white"
+            className="cursor-pointer rounded-lg border border-(--app-border-hover) bg-(--app-surface-raised)/50 px-4 py-2 text-sm font-medium text-(--app-text-secondary) transition hover:border-(--app-border) hover:bg-(--app-surface-raised) hover:text-(--app-text)"
           >
             Cancel
           </button>
@@ -74,7 +77,7 @@ function ConfirmDialog({
             type="button"
             onClick={onConfirm}
             disabled={loading}
-            className="cursor-pointer rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-500 disabled:cursor-not-allowed disabled:opacity-50"
+            className="cursor-pointer rounded-lg bg-(--app-danger) px-4 py-2 text-sm font-medium text-white transition hover:bg-(--app-danger-hover) disabled:cursor-not-allowed disabled:opacity-50"
           >
             {loading ? confirmLoadingText : confirmText}
           </button>

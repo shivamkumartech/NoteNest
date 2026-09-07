@@ -8,7 +8,7 @@ function Layout() {
   const isLanding = location.pathname === "/";
 
   return (
-    <div className="relative flex min-h-screen flex-col bg-gray-950 text-white">
+    <div className="relative flex min-h-screen flex-col bg-(--app-bg) text-(--app-text)">
       <Navbar />
 
       <main
@@ -17,7 +17,13 @@ function Layout() {
         <Suspense
           fallback={
             <div className="flex min-h-[50vh] items-center justify-center">
-              <div className="h-8 w-8 animate-spin rounded-full border-3 border-blue-500/20 border-t-blue-500" />
+              <div
+                className="h-8 w-8 animate-spin rounded-full border-3"
+                style={{
+                  borderColor: "var(--app-accent-soft)",
+                  borderTopColor: "var(--app-accent)",
+                }}
+              />
             </div>
           }
         >

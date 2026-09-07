@@ -8,7 +8,13 @@ function PublicRoute() {
   if (authStatus === "checking") {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
-        <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-700 border-t-blue-400" />
+        <div
+          className="h-10 w-10 animate-spin rounded-full border-4"
+          style={{
+            borderColor: "var(--app-border)",
+            borderTopColor: "var(--app-accent)",
+          }}
+        />
       </div>
     );
   }
