@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { NoteContext } from "../context/NoteContext";
 import NoteCard from "../components/NoteCard";
+import LoadingSpinner from "../components/LoadingSpinner";
 import { Link } from "react-router-dom";
 import { NotebookPen, Plus } from "lucide-react";
 
@@ -57,16 +58,7 @@ function Home() {
       </div>
 
       {loading ? (
-        <div className="flex min-h-[60vh] items-center justify-center">
-          <div
-            className="h-9 w-9 animate-spin rounded-full border-4"
-            style={{
-              borderColor: "var(--app-border)",
-              borderTopColor: "var(--app-accent)",
-            }}
-            aria-label="Loading notes"
-          />
-        </div>
+        <LoadingSpinner  />
       ) : notes.length === 0 ? (
         <div className="flex min-h-[50vh] flex-col items-center justify-center rounded-2xl border border-dashed border-(--app-border) px-6 py-20 text-center">
           <div className="flex h-14 w-14 items-center justify-center rounded-full border border-(--app-border)">

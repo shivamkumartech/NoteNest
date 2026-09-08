@@ -226,7 +226,7 @@ function NoteEditor() {
               <button
                 type="button"
                 onClick={handleSave}
-                disabled={isSaving || isDeleting}
+                disabled={isSaving || isDeleting || !canSave}
                 className={`flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg transition disabled:cursor-not-allowed disabled:opacity-50 ${
                   canSave
                     ? "text-(--app-text) hover:bg-(--app-surface-raised)"

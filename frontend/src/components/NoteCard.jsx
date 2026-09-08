@@ -11,12 +11,11 @@ function NoteCard({ note }) {
         {note.title}
       </h2>
 
-      <p className="mt-2.5 min-h-12 line-clamp-2 whitespace-pre-line wrap-break-word text-sm leading-relaxed text-(--app-text-secondary)">
+      <p className="mt-2.5 min-h-12 line-clamp-2 wrap-break-word whitespace-pre-line text-sm leading-relaxed text-(--app-text-secondary)">
         {note.content}
       </p>
 
-      {/* Footer: date */}
-      <div className="mt-4 flex items-center text-sm text-(--app-text-secondary)">
+      <div className="mt-4 flex items-center text-xs text-(--app-text-muted)">
         <span>{formatNoteDate(note.createdAt, note.updatedAt)}</span>
       </div>
     </Link>
