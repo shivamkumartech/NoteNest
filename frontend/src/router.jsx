@@ -11,7 +11,7 @@ import RootRoute from "./components/RootRoute.jsx";
 
 const Landing = lazy(() => import("./pages/Landing.jsx"));
 const Home = lazy(() => import("./pages/Home.jsx"));
-const CreateNote = lazy(() => import("./pages/CreateNote.jsx"));
+const NoteEditor = lazy(() => import("./pages/NoteEditor.jsx"));
 const Login = lazy(() => import("./pages/Login.jsx"));
 const Register = lazy(() => import("./pages/Register.jsx"));
 const NotFound = lazy(() => import("./pages/NotFound.jsx"));
@@ -19,7 +19,6 @@ const NotFound = lazy(() => import("./pages/NotFound.jsx"));
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-
       {/* Public Landing Page */}
       <Route element={<RootRoute />}>
         <Route index element={<Landing />} />
@@ -34,11 +33,11 @@ const router = createBrowserRouter(
       {/* Protected App Pages */}
       <Route element={<ProtectedRoute />}>
         <Route path="notes" element={<Home />} />
-        <Route path="create-note" element={<CreateNote />} />
+        <Route path="create-note" element={<NoteEditor />} />
+        <Route path="notes/:id" element={<NoteEditor />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />
-      
     </Route>,
   ),
 );
