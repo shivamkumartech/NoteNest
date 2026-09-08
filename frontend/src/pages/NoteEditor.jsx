@@ -183,22 +183,24 @@ function NoteEditor() {
     navigate("/notes");
   };
 
+  const formatEditorDate = (date) => {
+    const time = date.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    const dayMonth = date.toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "long",
+    });
+
+    return `${time}, ${dayMonth}`;
+  };
+
   const displayDate =
     isEditing && note
-      ? new Date(note.updatedAt || note.createdAt).toLocaleString("en-US", {
-          weekday: "long",
-          month: "long",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-        })
-      : createdAt.current.toLocaleString("en-US", {
-          weekday: "long",
-          month: "long",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-        });
+      ? formatEditorDate(new Date(note.updatedAt || note.createdAt))
+      : formatEditorDate(createdAt.current);
 
   return (
     <>
@@ -268,7 +270,7 @@ function NoteEditor() {
             />
 
             {/* Metadata */}
-            <div className="mt-4 flex items-center text-xs text-(--app-text-muted) sm:mt-5">
+            <div className="mt-3 flex items-center text-xs text-(--app-text-muted) sm:mt-5">
               <span>{displayDate}</span>
 
               <span className="mx-2">|</span>
@@ -286,7 +288,7 @@ function NoteEditor() {
               onChange={handleContentChange}
               disabled={isSaving || isDeleting}
               placeholder="Write your note..."
-              className="mt-9 min-h-[55vh] w-full flex-1 resize-none border-0 bg-transparent p-0 text-base leading-7 text-(--app-text) outline-none placeholder:text-(--app-text-muted) focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 sm:mt-10 sm:min-h-[430px] sm:text-lg sm:leading-8"
+              className="mt-5 min-h-[55vh] w-full flex-1 resize-none border-0 bg-transparent p-0 text-base leading-7 text-(--app-text) outline-none placeholder:text-(--app-text-muted) focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 sm:mt-10 sm:min-h-107.5 sm:text-lg sm:leading-8"
             />
           </div>
         </div>

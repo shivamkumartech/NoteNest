@@ -11,7 +11,7 @@ function NoteCard({ note }) {
         {note.title}
       </h2>
 
-      <p className="mt-2.5 min-h-12 line-clamp-2 wrap-break-word text-sm leading-relaxed text-(--app-text-secondary)">
+      <p className="mt-2.5 min-h-12 line-clamp-2 whitespace-pre-line wrap-break-word text-sm leading-relaxed text-(--app-text-secondary)">
         {note.content}
       </p>
 
