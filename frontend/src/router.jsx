@@ -8,6 +8,7 @@ import Layout from "./Layout.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import PublicRoute from "./components/PublicRoute.jsx";
 import RootRoute from "./components/RootRoute.jsx";
+import RootErrorBoundary from "./components/RootErrorBoundary.jsx";
 
 const Landing = lazy(() => import("./pages/Landing.jsx"));
 const Home = lazy(() => import("./pages/Home.jsx"));
@@ -18,7 +19,7 @@ const NotFound = lazy(() => import("./pages/NotFound.jsx"));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Layout />}>
+    <Route path="/" element={<Layout />} errorElement={<RootErrorBoundary />}>
       {/* Public Landing Page */}
       <Route element={<RootRoute />}>
         <Route index element={<Landing />} />
