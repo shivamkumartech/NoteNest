@@ -7,9 +7,7 @@ import ConfirmDialog from "./ConfirmDialog";
 
 function NavLinks({ user, location, onNavigate, onLogout, mobile = false }) {
   const linkClass = (path) =>
-    `transition-colors duration-200 ${
-      mobile ? "py-1.5" : ""
-    } ${
+    `transition-colors duration-200 ${mobile ? "py-1.5" : ""} ${
       location.pathname === path
         ? "font-medium text-(--app-text)"
         : "text-(--app-text-secondary) hover:text-(--app-text)"
@@ -41,11 +39,7 @@ function NavLinks({ user, location, onNavigate, onLogout, mobile = false }) {
 
   return (
     <>
-      <Link
-        to="/login"
-        onClick={onNavigate}
-        className={linkClass("/login")}
-      >
+      <Link to="/login" onClick={onNavigate} className={linkClass("/login")}>
         Sign in
       </Link>
 
@@ -194,12 +188,11 @@ function Navbar() {
 
       <ConfirmDialog
         isOpen={showLogoutDialog}
-        title="Log out of NoteNest?"
-        message="Are you sure you want to log out of your account?"
+        message="Are you sure you want to log out?"
         onConfirm={handleConfirmLogout}
         onCancel={() => setShowLogoutDialog(false)}
         loading={isLoggingOut}
-        confirmText="Logout"
+        confirmText="Log out"
         confirmLoadingText="Logging out..."
       />
     </nav>

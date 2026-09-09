@@ -3,18 +3,16 @@ import { createPortal } from "react-dom";
 
 function ConfirmDialog({
   isOpen,
-  title = "Are you sure?",
-  message = "This action cannot be undone.",
+  message = "Are you sure?",
   onConfirm,
   onCancel,
   loading = false,
-  confirmText = "Delete",
-  confirmLoadingText = "Deleting...",
+  cancelText = "Cancel",
+  confirmText = "OK",
+  confirmLoadingText = "Please wait...",
 }) {
   useEffect(() => {
-    if (!isOpen) {
-      return;
-    }
+    if (!isOpen) return;
 
     const handleKeyDown = (event) => {
       if (event.key === "Escape" && !loading) {
@@ -22,62 +20,57 @@ function ConfirmDialog({
       }
     };
 
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+
     document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = previousOverflow;
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen, loading, onCancel]);
 
-  if (!isOpen) {
-    return null;
-  }
+  if (!isOpen) return null;
 
   return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4 backdrop-blur-[3px]"
       role="presentation"
-      onClick={onCancel}
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget && !loading) {
+          onCancel();
+        }
+      }}
     >
       <div
-        className="w-full max-w-md rounded-2xl border border-(--app-border) bg-(--app-surface)/95 p-6 shadow-2xl backdrop-blur-md"
+        className="w-full max-w-sm rounded-2xl bg-(--app-surface) px-6 py-6 shadow-2xl"
         role="dialog"
         aria-modal="true"
-        aria-labelledby="confirm-dialog-title"
         aria-describedby="confirm-dialog-message"
-        onClick={(e) => e.stopPropagation()}
       >
-        <h2
-          id="confirm-dialog-title"
-          className="text-lg font-semibold tracking-tight text-(--app-text)"
-        >
-          {title}
-        </h2>
-
         <p
           id="confirm-dialog-message"
-          className="mt-2 text-sm text-(--app-text-secondary)"
+          className="text-base leading-relaxed text-(--app-text)"
         >
           {message}
         </p>
 
-        <div className="mt-6 flex justify-end gap-2.5">
+        <div className="mt-7 flex justify-end gap-6">
           <button
             type="button"
             onClick={onCancel}
             disabled={loading}
-            className="cursor-pointer rounded-lg border border-(--app-border-hover) bg-(--app-surface-raised)/50 px-4 py-2 text-sm font-medium text-(--app-text-secondary) transition hover:border-(--app-border) hover:bg-(--app-surface-raised) hover:text-(--app-text)"
+            className="cursor-pointer text-sm font-medium text-(--app-text-secondary) transition hover:text-(--app-text) disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Cancel
+            {cancelText}
           </button>
 
           <button
             type="button"
             onClick={onConfirm}
             disabled={loading}
-            className="cursor-pointer rounded-lg bg-(--app-danger) px-4 py-2 text-sm font-medium text-white transition hover:bg-(--app-danger-hover) disabled:cursor-not-allowed disabled:opacity-50"
+            className="cursor-pointer text-sm font-semibold text-(--app-danger) transition hover:text-(--app-danger-hover) disabled:cursor-not-allowed disabled:opacity-50"
           >
             {loading ? confirmLoadingText : confirmText}
           </button>

@@ -33,6 +33,16 @@ function NoteEditor() {
 
   const createdAt = useRef(new Date());
   const titleRef = useRef(null);
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    if (isEditing) return;
+
+    const textarea = contentRef.current;
+    if (!textarea) return;
+
+    textarea.focus();
+  }, [isEditing]);
 
   useEffect(() => {
     if (isEditing && note) {
@@ -283,6 +293,7 @@ function NoteEditor() {
 
             {/* Content */}
             <textarea
+              ref={contentRef}
               value={content}
               maxLength={10000}
               onChange={handleContentChange}
@@ -297,21 +308,22 @@ function NoteEditor() {
       {/* Delete Confirmation */}
       <ConfirmDialog
         isOpen={showDeleteDialog}
-        title="Delete this note?"
-        message="This action cannot be undone."
+        message="Are you sure you want to delete this note?"
         onConfirm={handleDelete}
         onCancel={() => setShowDeleteDialog(false)}
         loading={isDeleting}
+        confirmText="Delete"
+        confirmLoadingText="Deleting..."
       />
 
       {/* Unsaved Changes Confirmation */}
       <ConfirmDialog
         isOpen={showBackDialog}
-        title="Discard changes?"
-        message="You have unsaved changes. If you leave now, your changes will be lost."
+        message="Are you sure you want to discard your changes?"
         onConfirm={handleDiscardChanges}
         onCancel={() => setShowBackDialog(false)}
-        loading={false}
+        cancelText="Keep editing"
+        confirmText="Discard"
       />
     </>
   );
