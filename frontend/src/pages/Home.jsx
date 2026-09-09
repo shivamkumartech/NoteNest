@@ -58,7 +58,7 @@ function Home() {
       </div>
 
       {loading ? (
-        <LoadingSpinner  />
+        <LoadingSpinner />
       ) : notes.length === 0 ? (
         <div className="flex min-h-[50vh] flex-col items-center justify-center rounded-2xl border border-dashed border-(--app-border) px-6 py-20 text-center">
           <div className="flex h-14 w-14 items-center justify-center rounded-full border border-(--app-border)">

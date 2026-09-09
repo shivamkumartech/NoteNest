@@ -5,7 +5,7 @@ function NoteCard({ note }) {
   return (
     <Link
       to={`/notes/${note._id}`}
-      className="group relative flex flex-col rounded-2xl border border-(--app-border) bg-(--app-surface)/70 p-4 shadow-sm transition-all duration-200 hover:border-(--app-border-hover) hover:bg-(--app-surface)/90 hover:shadow-md"
+      className="group relative  flex flex-col rounded-2xl border border-(--app-border) bg-(--app-surface)/70 p-4 shadow-sm transition-all duration-200 hover:border-(--app-border-hover) hover:bg-(--app-surface)/90 hover:shadow-md"
     >
       <h2 className="line-clamp-1 wrap-break-word text-lg font-semibold tracking-tight text-(--app-text)">
         {note.title || "Untitled"}
