@@ -4,7 +4,7 @@ import { NoteContext } from "../context/NoteContext";
 import NoteCard from "../components/NoteCard";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { Link } from "react-router-dom";
-import { NotebookPen, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 
 function Home() {
   const { user } = useContext(AuthContext);
@@ -62,7 +62,6 @@ function Home() {
       ) : notes.length === 0 ? (
         <div className="flex min-h-[50vh] flex-col items-center justify-center rounded-2xl border border-dashed border-(--app-border) px-6 py-20 text-center">
           <div className="flex h-14 w-14 items-center justify-center rounded-full border border-(--app-border)">
-            <NotebookPen className="h-6 w-6 text-(--app-text-muted)" />
           </div>
 
           <h2 className="mt-5 text-xl font-semibold text-(--app-text)">

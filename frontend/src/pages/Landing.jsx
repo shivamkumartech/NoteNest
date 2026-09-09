@@ -29,22 +29,22 @@ function Landing() {
           <div className="grid flex-1 items-center gap-14 py-20 lg:grid-cols-[minmax(0,1fr)_260px] lg:gap-24 lg:py-24">
             {/* Main Content */}
             <div>
-              <h1 className="max-w-5xl text-[clamp(3.5rem,7.5vw,7rem)] font-semibold leading-[0.93] tracking-[-0.05em]">
-                Capture what’s
+              <h1 className="max-w-5xl text-[clamp(2.5rem,7.5vw,5.5rem)] font-semibold leading-[1.1] tracking-[-0.05em]">
+                Keep the things
                 <br />
                 <span className="text-(--app-text-secondary)">
-                  on your mind.
+                  worth remembering
                 </span>
               </h1>
 
-              <div className="mt-9">
+              <div className="mt-7">
                 <p className="max-w-xl text-base leading-7 text-(--app-text-secondary) sm:text-lg">
                   A quiet, distraction-free space for your ideas, plans,
                   reminders, unfinished thoughts, and everything in between
                 </p>
 
                 {/* Actions */}
-                <div className="mt-7 flex items-center gap-5">
+                <div className="mt-9 flex items-center gap-5">
                   <Link
                     to="/register"
                     className="group inline-flex items-center gap-2 rounded-full bg-(--app-accent) px-5 py-2.5 text-sm font-medium text-(--app-bg) transition-all duration-200 hover:-translate-y-0.5 hover:bg-(--app-accent-hover)"
@@ -66,7 +66,7 @@ function Landing() {
             {/* Side Note */}
             <div className="self-center border-l border-(--app-border) pl-6 lg:self-center">
               <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-(--app-text-muted)">
-                Daykeep
+                Note
               </span>
 
               <p className="mt-4 max-w-xs text-sm leading-6 text-(--app-text-secondary)">
@@ -105,7 +105,7 @@ function Landing() {
             </div>
 
             <div>
-              <p className="max-w-4xl text-3xl font-medium leading-[1.08] tracking-[-0.035em] sm:text-4xl lg:text-[3.25rem]">
+              <p className="max-w-4xl text-xl font-medium leading-[1.08] tracking-[-0.035em] sm:text-4xl lg:text-[3.25rem]">
                 Your thoughts don’t always arrive organized.
                 <br />
                 They shouldn’t have to.
@@ -126,16 +126,13 @@ function Landing() {
       </section>
 
       {/* Principles */}
-      <section className="border-t border-(--app-border) px-6 py-20 sm:px-10 lg:px-16 lg:py-28">
+      <section className="border-t border-(--app-border) px-6 py-26 sm:px-10 lg:px-16 lg:py-28">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 flex items-end justify-between">
             <p className="text-xs font-medium uppercase tracking-[0.18em] text-(--app-text-muted)">
               How it works
             </p>
 
-            <span className="hidden text-xs text-(--app-text-muted) sm:block">
-              01 — 03
-            </span>
           </div>
 
           <div className="grid border-t border-(--app-border) md:grid-cols-3">

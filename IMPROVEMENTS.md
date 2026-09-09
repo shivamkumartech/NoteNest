@@ -1,68 +1,71 @@
-# ECOW — Improvements & Future Plans
+# Daykeep — Improvements & Future Plans
 
-This document tracks planned improvements, features, and technical enhancements for ECOW.
+This file tracks the planned improvements and future direction of **Daykeep**.
 
 Completed items are marked with `[x]`.
 
----
+## Current Release
 
-## Planned Features
+### v1.0 — Notes
 
-### Performance Optimization
-
-- [x] Fix desktop layout shift (CLS)
-- [x] Improve mobile initial loading performance
-- [x] Optimize font loading
+- [x] Distraction-free note-taking
+- [x] Create, edit, and delete notes
+- [x] Title-only, content-only, or title + content notes
+- [x] Created/updated timestamps
+- [x] Unsaved changes protection
+- [x] Note validation and character limits
+- [x] Responsive desktop and mobile experience
+- [x] Authentication and protected routes
+- [x] Secure refresh-token rotation
+- [x] Authentication rate limiting
+- [x] Vite stale-chunk recovery
+- [x] Database indexes where needed
+- [x] Font loading and initial loading optimizations
 - [x] Reduce unused JavaScript
+- [x] Fix desktop layout shift (CLS)
 
-### Notes
+## Roadmap
 
-- [ ] Search notes
-- [x] Add created/updated timestamps to the UI
+### v2.0 — Todos & Reminders
+
+- [ ] Todo checklists inside notes
+- [ ] Mark todos as complete
 - [ ] Note reminders
+- [ ] Reminder date and time
+- [ ] Search notes
 
-### Note Editing
+### v3.0 — Focus
 
-- [x] Dedicated edit-note experience
-- [x] Improve form validation
-- [x] Warn users about unsaved changes
+- [ ] Focus / Pomodoro timer
+- [ ] Start and pause focus sessions
+- [ ] Track completed focus sessions
+- [ ] Connect focus sessions with notes
 
-### Sharing
+### v4.0 — Sharing
 
 - [ ] Share notes with other users
 - [ ] Public note links
 - [ ] Permission-based note sharing
+- [ ] Collaboration
 
-### Authentication & Account
+## Technical Improvements
 
-- [ ] Google Authentication
-- [ ] Add user profile/settings page
-- [ ] Add account settings
-- [ ] Add password change functionality
-- [ ] Add account deletion
-
-### User Experience
-
-- [ ] Add theme preferences
-- [ ] Add dark/light mode
-- [ ] Add better onboarding experience
-
-### Offline & PWA
-
-- [ ] Offline notes
-- [ ] Installable web app
-
----
-
-## Performance
-
-- [ ] Add pagination
+- [ ] Pagination for large note collections
 - [ ] Optimize database queries
-- [x] Add database indexes where needed
 - [ ] Optimize frontend rendering
 - [ ] Improve API response performance
 - [ ] Add caching where appropriate
+- [ ] Improve offline support
+- [ ] Installable PWA
 
----
+## Account & UX
 
-> This roadmap is intentionally flexible. Items may be added, removed, reprioritized, or changed as ECOW evolves.
+- [ ] User profile and settings
+- [ ] Account settings
+- [ ] Password change
+- [ ] Account deletion
+- [ ] Theme preferences
+- [ ] Dark/light mode
+- [ ] Improve onboarding experience
+
+> This roadmap is intentionally flexible. Items may be added, removed, reprioritized, or changed as Daykeep evolves.

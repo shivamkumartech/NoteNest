@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { EllipsisVertical, NotebookPen } from "lucide-react";
+import { EllipsisVertical } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "sonner";
 import ConfirmDialog from "./ConfirmDialog";
@@ -137,8 +137,6 @@ function Navbar() {
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link to={homePath} onClick={closeMenu} className="flex items-center">
-          <NotebookPen className="h-5 w-5 text-(--app-text)" />
-
           <span className="text-lg font-extrabold tracking-tight text-(--app-text)">
             Daykeep
           </span>
