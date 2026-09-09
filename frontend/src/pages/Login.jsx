@@ -60,7 +60,7 @@ function Login() {
           </h1>
 
           <p className="mt-2 text-sm text-(--app-text-secondary)">
-            Welcome back to ECOW.
+            Welcome back to Daykeep.
           </p>
         </div>
 

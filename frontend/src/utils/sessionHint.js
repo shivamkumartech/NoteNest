@@ -1,4 +1,4 @@
-const SESSION_HINT_KEY = "ecow_has_session";
+const SESSION_HINT_KEY = "daykeep_has_session";
 
 export const setSessionHint = () => {
   localStorage.setItem(SESSION_HINT_KEY, "true");

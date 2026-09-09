@@ -30,7 +30,7 @@ app.use(
 app.get("/api/v1/health", (req, res) => {
   res.status(200).json({
     success: true,
-    message: "ECOW API is running",
+    message: "Daykeep API is running",
   });
 });
 

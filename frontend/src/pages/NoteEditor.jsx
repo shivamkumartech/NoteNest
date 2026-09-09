@@ -133,14 +133,14 @@ function NoteEditor() {
           content: trimmedContent,
         });
 
-        toast.success("Thought updated.");
+        toast.success("Note updated.");
       } else {
         await createNote({
           title: trimmedTitle,
           content: trimmedContent,
         });
 
-        toast.success("Thought captured.");
+        toast.success("Note captured.");
       }
 
       navigate("/notes");
@@ -148,8 +148,8 @@ function NoteEditor() {
       toast.error(
         error.response?.data?.message ||
           `Unable to ${
-            isEditing ? "update" : "capture"
-          } thought. Please try again.`,
+            isEditing ? "update" : "create"
+          } note. Please try again.`,
       );
     } finally {
       setIsSaving(false);
@@ -164,13 +164,13 @@ function NoteEditor() {
 
       setShowDeleteDialog(false);
 
-      toast.success("Thought deleted.");
+      toast.success("Note deleted.");
 
       navigate("/notes");
     } catch (error) {
       toast.error(
         error.response?.data?.message ||
-          "Unable to delete thought. Please try again.",
+          "Unable to delete Note. Please try again.",
       );
     } finally {
       setIsDeleting(false);
@@ -242,8 +242,8 @@ function NoteEditor() {
                     ? "text-(--app-text) hover:bg-(--app-surface-raised)"
                     : "text-(--app-text-muted) opacity-40 hover:bg-(--app-surface-raised)"
                 }`}
-                title={isEditing ? "Save changes" : "Capture thought"}
-                aria-label={isEditing ? "Save changes" : "Capture thought"}
+                title={isEditing ? "Save changes" : "Create note"}
+                aria-label={isEditing ? "Save changes" : "Create note"}
               >
                 <Check size={21} strokeWidth={2} />
               </button>
@@ -255,8 +255,8 @@ function NoteEditor() {
                   onClick={() => setShowDeleteDialog(true)}
                   disabled={isSaving || isDeleting}
                   className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg text-(--app-text-secondary) transition hover:bg-(--app-danger)/10 hover:text-(--app-danger) disabled:cursor-not-allowed disabled:opacity-50"
-                  title="Delete thought"
-                  aria-label="Delete thought"
+                  title="Delete note"
+                  aria-label="Delete note"
                 >
                   <Trash2 size={20} strokeWidth={2} />
                 </button>
@@ -298,7 +298,7 @@ function NoteEditor() {
               maxLength={10000}
               onChange={handleContentChange}
               disabled={isSaving || isDeleting}
-              placeholder="Let your thoughts flow..."
+              placeholder="Type anything to remember"
               className="mt-5 min-h-[55vh] w-full flex-1 resize-none border-0 bg-transparent p-0 text-base leading-7 text-(--app-text) outline-none placeholder:text-(--app-text-muted) focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 sm:mt-10 sm:min-h-107.5 sm:text-lg sm:leading-8"
             />
           </div>
@@ -308,7 +308,7 @@ function NoteEditor() {
       {/* Delete Confirmation */}
       <ConfirmDialog
         isOpen={showDeleteDialog}
-        message="Are you sure you want to delete this thought?"
+        message="Are you sure you want to delete this note?"
         onConfirm={handleDelete}
         onCancel={() => setShowDeleteDialog(false)}
         loading={isDeleting}

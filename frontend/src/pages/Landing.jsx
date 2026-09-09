@@ -29,11 +29,7 @@ function Landing() {
           <div className="grid flex-1 items-center gap-14 py-20 lg:grid-cols-[minmax(0,1fr)_260px] lg:gap-24 lg:py-24">
             {/* Main Content */}
             <div>
-              <p className="mb-6 text-xs font-medium uppercase tracking-[0.2em] text-(--app-text-muted)">
-                Echo + Flow
-              </p>
-
-              <h1 className="max-w-5xl text-[clamp(3.5rem,7.5vw,7rem)] font-semibold leading-[0.93] tracking-[-0.06em]">
+              <h1 className="max-w-5xl text-[clamp(3.5rem,7.5vw,7rem)] font-semibold leading-[0.93] tracking-[-0.05em]">
                 Capture what’s
                 <br />
                 <span className="text-(--app-text-secondary)">
@@ -43,9 +39,8 @@ function Landing() {
 
               <div className="mt-9">
                 <p className="max-w-xl text-base leading-7 text-(--app-text-secondary) sm:text-lg">
-                  Ideas, plans, reminders, unfinished thoughts, and everything
-                  in between. Let them flow, give them a place, and come back
-                  whenever you need.
+                  A quiet, distraction-free space for your ideas, plans,
+                  reminders, unfinished thoughts, and everything in between
                 </p>
 
                 {/* Actions */}
@@ -71,27 +66,21 @@ function Landing() {
             {/* Side Note */}
             <div className="self-center border-l border-(--app-border) pl-6 lg:self-center">
               <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-(--app-text-muted)">
-                ECOW
+                Daykeep
               </span>
 
               <p className="mt-4 max-w-xs text-sm leading-6 text-(--app-text-secondary)">
-                A thought comes in. Capture it before it disappears. Let it
-                stay with you until you need it again.
-              </p>
-
-              <p className="mt-5 text-xs leading-5 text-(--app-text-muted)">
-                Echo what matters.
-                <br />
-                Let it flow.
+                A thought comes in. Capture it before it disappears. Let it stay
+                with you until you need it again.
               </p>
             </div>
           </div>
 
           {/* Scroll */}
           <a
-            href="#why-ecow"
+            href="#why-daykeep"
             className="group absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-(--app-text-muted) transition-colors duration-200 hover:text-(--app-text) sm:bottom-8"
-            aria-label="Scroll to Why ECOW"
+            aria-label="Scroll to Why Daykeep"
           >
             <span>Scroll</span>
 
@@ -102,16 +91,16 @@ function Landing() {
         </div>
       </section>
 
-      {/* Why ECOW */}
+      {/* Why Daykeep */}
       <section
-        id="why-ecow"
+        id="why-daykeep"
         className="scroll-mt-16 border-t border-(--app-border) px-6 py-24 sm:px-10 lg:px-16 lg:py-32"
       >
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-10 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-20">
             <div>
               <p className="text-xs font-medium uppercase tracking-[0.18em] text-(--app-text-muted)">
-                Why ECOW
+                Why Daykeep
               </p>
             </div>
 
@@ -127,9 +116,9 @@ function Landing() {
               </p>
 
               <p className="mt-7 max-w-xl text-sm leading-7 text-(--app-text-secondary)">
-                ECOW gives your thoughts a simple place to land. Write without
-                interrupting your thinking, keep what matters, and return when
-                the time is right.
+                Daykeep gives your thoughts a simple place to land, just a clean
+                place to write, keep what matters, and return when the time is
+                right.
               </p>
             </div>
           </div>
@@ -141,7 +130,7 @@ function Landing() {
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 flex items-end justify-between">
             <p className="text-xs font-medium uppercase tracking-[0.18em] text-(--app-text-muted)">
-              Echo + Flow
+              How it works
             </p>
 
             <span className="hidden text-xs text-(--app-text-muted) sm:block">
@@ -161,7 +150,7 @@ function Landing() {
               </div>
 
               <h2 className="mt-14 text-lg font-medium tracking-tight">
-                Echo
+                Write
               </h2>
 
               <p className="mt-3 max-w-xs text-sm leading-6 text-(--app-text-secondary)">
@@ -180,13 +169,11 @@ function Landing() {
                 <ArrowUpRight className="h-4 w-4 text-(--app-text-muted) opacity-0 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100" />
               </div>
 
-              <h2 className="mt-14 text-lg font-medium tracking-tight">
-                Flow
-              </h2>
+              <h2 className="mt-14 text-lg font-medium tracking-tight">Keep</h2>
 
               <p className="mt-3 max-w-xs text-sm leading-6 text-(--app-text-secondary)">
-                Keep writing without breaking your train of thought. ECOW
-                stays out of the way while your ideas take shape.
+                Keep your notes without clutter, distractions, or unnecessary
+                complexity.
               </p>
             </div>
 
@@ -205,8 +192,8 @@ function Landing() {
               </h2>
 
               <p className="mt-3 max-w-xs text-sm leading-6 text-(--app-text-secondary)">
-                Come back to your thoughts when they become useful. What you
-                captured today can become something tomorrow.
+                Come back to your notes when they become useful. What you wrote
+                today can become something tomorrow.
               </p>
             </div>
           </div>
@@ -219,11 +206,11 @@ function Landing() {
           <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="max-w-2xl text-3xl font-medium leading-tight tracking-[-0.035em] sm:text-4xl">
-                Let your thoughts flow.
+                Keep what matters.
               </p>
 
               <p className="mt-3 text-sm leading-6 text-(--app-text-secondary)">
-                Capture them now. Come back to them later.
+                Write it now. Come back to it later.
               </p>
             </div>
 

@@ -7,9 +7,9 @@ import App from "./App.jsx";
 window.addEventListener("vite:preloadError", (event) => {
   event.preventDefault();
 
-  const hasReloaded = sessionStorage.getItem("ecow_chunk_reloaded");
+  const hasReloaded = sessionStorage.getItem("daykeep_chunk_reloaded");
   if (!hasReloaded) {
-    sessionStorage.setItem("ecow_chunk_reloaded", "true");
+    sessionStorage.setItem("daykeep_chunk_reloaded", "true");
     window.location.reload();
   }
 });

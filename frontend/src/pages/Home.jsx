@@ -46,14 +46,14 @@ function Home() {
           className="hidden items-center gap-2 rounded-lg bg-(--app-accent) px-4 py-2.5 text-sm font-medium text-(--app-bg) shadow-sm transition hover:bg-(--app-accent-hover) sm:inline-flex"
         >
           <Plus size={18} />
-          <span>New Thought</span>
+          <span>New Note</span>
         </Link>
       </div>
 
       {/* Notes Section */}
       <div>
         <p className="mb-2 text-xs font-medium uppercase tracking-[0.18em] text-(--app-text-muted)">
-          Your thoughts
+          Your Notes
         </p>
       </div>
 
@@ -66,18 +66,18 @@ function Home() {
           </div>
 
           <h2 className="mt-5 text-xl font-semibold text-(--app-text)">
-            Nothing here yet
+            No notes yet
           </h2>
 
           <p className="mt-2 max-w-sm text-sm text-(--app-text-secondary)">
-            Capture your first thought.
+            Start by creating your first note.{" "}
           </p>
 
           <Link
             to="/create-note"
             className="mt-6 rounded-full bg-(--app-accent) px-5 py-2.5 text-sm font-medium text-(--app-bg) transition hover:bg-(--app-accent-hover)"
           >
-            Capture a thought
+            Create your first note
           </Link>
         </div>
       ) : (

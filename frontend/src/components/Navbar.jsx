@@ -140,7 +140,7 @@ function Navbar() {
           <NotebookPen className="h-5 w-5 text-(--app-text)" />
 
           <span className="text-lg font-extrabold tracking-tight text-(--app-text)">
-            ECOW
+            Daykeep
           </span>
         </Link>
 
@@ -187,7 +187,7 @@ function Navbar() {
       {/* Logout Confirmation */}
       <ConfirmDialog
         isOpen={showLogoutDialog}
-        message="Are you sure you want to log out of ECOW?"
+        message="Are you sure you want to log out of Daykeep?"
         onConfirm={handleConfirmLogout}
         onCancel={() => setShowLogoutDialog(false)}
         loading={isLoggingOut}
