@@ -67,9 +67,10 @@ export const NoteProvider = ({ children }) => {
 
       const data = await updateNoteApi(id, updatedNote);
 
-      setNotes((prevNotes) =>
-        prevNotes.map((note) => (note._id === id ? data.note : note)),
-      );
+      setNotes((prevNotes) => [
+        data.note,
+        ...prevNotes.filter((note) => note._id !== id),
+      ]);
 
       return data.note;
     } catch (error) {

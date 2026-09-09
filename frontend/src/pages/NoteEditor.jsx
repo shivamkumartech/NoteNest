@@ -86,7 +86,7 @@ function NoteEditor() {
     setTitle(value);
 
     if (value.length === 100) {
-      toast.info("Title has reached the 100 character limit.");
+      toast.info("Title has reached the character limit.");
     }
   };
 
@@ -96,7 +96,7 @@ function NoteEditor() {
     setContent(value);
 
     if (value.length === 10000) {
-      toast.info("Content has reached the 10,000 character limit.");
+      toast.info("Content has reached the character limit.");
     }
   };
 
@@ -109,8 +109,8 @@ function NoteEditor() {
       return;
     }
 
-    if (!trimmedTitle || !trimmedContent) {
-      toast.error("Title and content are required");
+    if (!trimmedTitle && !trimmedContent) {
+      toast.error("Title or content is required");
       return;
     }
 

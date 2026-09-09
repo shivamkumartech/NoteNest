@@ -4,16 +4,16 @@ export const createNote = async (req, res) => {
   try {
     const { title, content } = req.body;
 
-    if (!title?.trim() || !content?.trim()) {
+    if (!title?.trim() && !content?.trim()) {
       return res.status(400).json({
         success: false,
-        message: "Title and content are required",
+        message: "Title or content are required",
       });
     }
 
     const newNote = await Note.create({
-      title: title.trim(),
-      content: content.trim(),
+      title: title?.trim() || "",
+      content: content?.trim() || "",
       owner: req.userId,
     });
 
@@ -44,7 +44,7 @@ export const getAllNotes = async (req, res) => {
     const notes = await Note.find({
       owner: req.userId,
     }).sort({
-      createdAt: -1,
+      updatedAt: -1,
     });
 
     return res.status(200).json({
@@ -65,10 +65,10 @@ export const updateNote = async (req, res) => {
   try {
     const { title, content } = req.body;
 
-    if (!title?.trim() || !content?.trim()) {
+    if (!title?.trim() && !content?.trim()) {
       return res.status(400).json({
         success: false,
-        message: "Title and content are required",
+        message: "Title or content are required",
       });
     }
 
@@ -78,8 +78,8 @@ export const updateNote = async (req, res) => {
         owner: req.userId,
       },
       {
-        title: title.trim(),
-        content: content.trim(),
+        title: title.trim() || "",
+        content: content.trim() || "",
       },
       {
         returnDocument: "after",
