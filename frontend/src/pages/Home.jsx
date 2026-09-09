@@ -46,14 +46,14 @@ function Home() {
           className="hidden items-center gap-2 rounded-lg bg-(--app-accent) px-4 py-2.5 text-sm font-medium text-(--app-bg) shadow-sm transition hover:bg-(--app-accent-hover) sm:inline-flex"
         >
           <Plus size={18} />
-          <span>New Note</span>
+          <span>New Thought</span>
         </Link>
       </div>
 
       {/* Notes Section */}
       <div>
         <p className="mb-2 text-xs font-medium uppercase tracking-[0.18em] text-(--app-text-muted)">
-          Your notes
+          Your thoughts
         </p>
       </div>
 
@@ -66,22 +66,22 @@ function Home() {
           </div>
 
           <h2 className="mt-5 text-xl font-semibold text-(--app-text)">
-            No notes yet
+            Nothing here yet
           </h2>
 
           <p className="mt-2 max-w-sm text-sm text-(--app-text-secondary)">
-            Start by creating your first note.
+            Capture your first thought.
           </p>
 
           <Link
             to="/create-note"
             className="mt-6 rounded-full bg-(--app-accent) px-5 py-2.5 text-sm font-medium text-(--app-bg) transition hover:bg-(--app-accent-hover)"
           >
-            Create your first note
+            Capture a thought
           </Link>
         </div>
       ) : (
-        <div className="grid grid-cols-1 items-start gap-5  sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 items-start gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {notes.map((note) => (
             <NoteCard key={note._id} note={note} />
           ))}

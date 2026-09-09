@@ -28,7 +28,7 @@ function NotFound() {
         to={user ? "/notes" : "/"}
         className="mt-7 inline-flex cursor-pointer items-center rounded-full bg-(--app-accent) px-5 py-2.5 text-sm font-medium text-(--app-bg) shadow-sm transition hover:bg-(--app-accent-hover)"
       >
-        Back to NoteNest
+        Back to ECOW
       </Link>
     </div>
   );

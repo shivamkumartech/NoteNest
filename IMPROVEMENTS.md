@@ -1,6 +1,6 @@
-# NoteNest — Improvements & Future Plans
+# ECOW — Improvements & Future Plans
 
-This document tracks planned improvements, features, and technical enhancements for NoteNest.
+This document tracks planned improvements, features, and technical enhancements for ECOW.
 
 Completed items are marked with `[x]`.
 
@@ -23,9 +23,9 @@ Completed items are marked with `[x]`.
 
 ### Note Editing
 
-- [ ] Dedicated edit-note experience
+- [x] Dedicated edit-note experience
 - [x] Improve form validation
-- [ ] Warn users about unsaved changes
+- [x] Warn users about unsaved changes
 
 ### Sharing
 
@@ -65,4 +65,4 @@ Completed items are marked with `[x]`.
 
 ---
 
-> This roadmap is intentionally flexible. Items may be added, removed, reprioritized, or changed as NoteNest evolves.
+> This roadmap is intentionally flexible. Items may be added, removed, reprioritized, or changed as ECOW evolves.

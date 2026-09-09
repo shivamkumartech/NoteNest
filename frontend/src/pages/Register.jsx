@@ -67,7 +67,7 @@ function Register() {
           </h1>
 
           <p className="mt-2 text-sm text-(--app-text-secondary)">
-            Start keeping the things worth remembering.
+            Give your thoughts a place to flow.
           </p>
         </div>
 

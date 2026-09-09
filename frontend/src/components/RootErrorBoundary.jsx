@@ -40,7 +40,7 @@ function RootErrorBoundary() {
 
         <p className="mt-2 text-sm text-(--app-text-secondary)">
           {isChunkError
-            ? "A newer version of NoteNest is available. Please reload the page to continue."
+            ? "A newer version of ECOW is available. Please reload the page to continue."
             : error?.message ||
               "An unexpected error occurred while loading this page."}
         </p>
@@ -52,7 +52,7 @@ function RootErrorBoundary() {
             className="flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-(--app-accent) px-5 py-2.5 text-sm font-medium text-(--app-bg) transition hover:bg-(--app-accent-hover)"
           >
             <RotateCw size={16} />
-            <span>Reload NoteNest</span>
+            <span>Reload ECOW</span>
           </button>
 
           {!isChunkError && (

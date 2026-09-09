@@ -6,7 +6,6 @@ import { toast } from "sonner";
 import ConfirmDialog from "./ConfirmDialog";
 
 function NavLinks({ user, onNavigate, onLogout, mobile = false }) {
-  
   if (user) {
     if (mobile) {
       return (
@@ -31,7 +30,7 @@ function NavLinks({ user, onNavigate, onLogout, mobile = false }) {
     );
   }
 
-    return (
+  return (
     <>
       <Link
         to="/login"
@@ -141,7 +140,7 @@ function Navbar() {
           <NotebookPen className="h-5 w-5 text-(--app-text)" />
 
           <span className="text-lg font-extrabold tracking-tight text-(--app-text)">
-            NoteNest
+            ECOW
           </span>
         </Link>
 
@@ -188,7 +187,7 @@ function Navbar() {
       {/* Logout Confirmation */}
       <ConfirmDialog
         isOpen={showLogoutDialog}
-        message="Are you sure you want to log out?"
+        message="Are you sure you want to log out of ECOW?"
         onConfirm={handleConfirmLogout}
         onCancel={() => setShowLogoutDialog(false)}
         loading={isLoggingOut}

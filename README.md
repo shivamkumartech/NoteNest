@@ -1,34 +1,40 @@
-# NoteNest 📝
+# ECOW 📝
 
-NoteNest is a modern, responsive, full-stack note-taking web application built with the **MERN stack** (MongoDB, Express 5, React 19, Node.js). Designed with a clean, distraction-free aesthetic, it pairs a fast Vite-powered React frontend utilizing Tailwind CSS v4 and React Context with an Express REST API featuring HMAC-SHA256 hashed refresh token rotation, JWT authentication, user-scoped data isolation, rate limiting, and HTTP security hardening.
+**ECOW** (*Echo + Flow*) is a modern, responsive, full-stack notes and thoughts web application built with the **MERN stack** (MongoDB, Express 5, React 19, Node.js). Designed with a clean, distraction-free aesthetic centered on the concept of *Echo + Flow* — capture thoughts while fresh, let them flow without friction, and return to what matters whenever needed. It pairs a fast Vite-powered React frontend utilizing Tailwind CSS v4 and React Context with an Express REST API featuring HMAC-SHA256 hashed refresh token rotation, JWT authentication, user-scoped data isolation, rate limiting, and HTTP security hardening.
 
 ---
 
 ## 🚀 Key Features
 
-- **✨ Minimalist & Distraction-Free UI:** Clean, human-crafted design with responsive typography, dark-theme palette, and tactile card interactions designed for quick, effortless note-taking.
+- **✨ Minimalist & Distraction-Free UI (Echo + Flow):** Clean, human-crafted design with responsive typography, dark-theme palette, and tactile card interactions designed for capturing thoughts freely and effortlessly.
+- **📝 Dedicated Note Editor (`NoteEditor`):** Focused distraction-free modal editor supporting both note creation and updates with auto-expanding title, character limits, auto-focus on content, and unsaved changes confirmation safeguards.
+- **💡 Flexible Note Capture & Real-Time Ordering:** Notes can be created or updated with title only, content only, or both. Dashboard notes are sorted by last updated (`updatedAt: -1`), ensuring active thoughts stay at the top.
+- **🕒 Intelligent Dynamic Timestamps:** Contextual date formatting displaying 12-hour time for notes updated within 24 hours, day and month for notes within the past year, and full year for older notes.
+- **🔄 Stale Chunk Auto-Recovery & Error Boundary:** Automatic recovery from post-deployment stale module errors using Vite's `vite:preloadError` event and a unified `RootErrorBoundary` with auto-reload and fallback UI.
 - **🔐 Dual-Token Authentication with Silent Refresh:** Short-lived JWT Access Tokens (15m) stored in memory paired with HttpOnly, SameSite Refresh Token cookies (7d) for secure, seamless session persistence.
 - **🛡️ HMAC-SHA256 Token Hashing & Rotation:** Refresh tokens are hashed using HMAC-SHA256 prior to database storage and validated using `crypto.timingSafeEqual` to prevent timing attacks. Every refresh request rotates tokens to mitigate replay vulnerabilities.
 - **👤 User-Scoped Data Isolation:** Notes are strictly bound to their creator via MongoDB references (`owner: ObjectId -> User`). All query, creation, update, and deletion operations enforce ownership verification on the server.
 - **⚡ Reactive Global State:** React Context API (`AuthContext`, `NoteContext`) provides clean, lightweight state management for user sessions and notes CRUD operations without external state library overhead.
 - **🔄 Resilient Axios Interceptors:** Axios client automatically attaches Bearer tokens to outgoing requests, intercepts 401 Unauthorized responses, performs silent background token refreshes, and transparently replays original requests.
 - **⚡ Route-Level Code Splitting:** Pages are lazily loaded via `React.lazy()` and wrapped in `<Suspense>` with a unified `LoadingSpinner`, keeping initial JavaScript bundle sizes small.
-- **🚀 Instant Session Hinting:** Local storage session hint (`notenest_has_session`) eliminates layout shifts and page flicker on initial app load before network validation completes.
-- **🛡️ Strict Route Guarding:**
-  - `ProtectedRoute`: Prevents unauthorized access to notes dashboard and creation pages.
+- **🚀 Instant Session Hinting:** Local storage session hint (`ecow_has_session`) eliminates layout shifts and page flicker on initial app load before network validation completes.
+- **🛡️ Strict Route Guarding & Error Boundaries:**
+  - `ProtectedRoute`: Prevents unauthorized access to notes dashboard and editor routes.
   - `PublicRoute`: Redirects authenticated users away from guest pages (login, register).
   - `RootRoute`: Routes authenticated users directly to their notes workspace while presenting guests with the landing page.
+  - `RootErrorBoundary`: Catches runtime and module loading exceptions with one-click reload.
   - `NotFound`: Dedicated 404 page for unmatched routes.
 - **🔒 API Defense & Hardening:**
-  - **Rate Limiting:** `express-rate-limit` enforces a strict 10-request window (per 15 min) across authentication endpoints (`/register`, `/login`, `/refresh-token`).
-  - **Security Headers:** `helmet` sets hardened HTTP headers.
+  - **Rate Limiting:** `express-rate-limit` enforces a 10-request window (per 15 min) on sensitive authentication endpoints (`/register`, `/login`).
+  - **Security Headers:** `helmet` sets hardened HTTP security headers.
   - **Payload Size Capping:** Express JSON parser strictly capped at `50kb` to mitigate payload DoS.
   - **Gzip Compression:** `compression` middleware optimizes throughput and response payload sizes.
-- **⚠️ Interactive Confirmation Dialogs:** Accessible modal confirmation dialogs with keyboard support (Escape key) for destructive actions (note deletion and logout).
+- **⚠️ Minimalist Confirmation Dialogs:** Accessible modal confirmation dialogs with backdrop blur, keyboard support (Escape key), and outside-click dismissal for destructive actions (note deletion, discarding edits, and logout).
+- **📱 Responsive Header with Overflow Menu:** Sticky navigation with branded `NotebookPen` logo and a compact `EllipsisVertical` dropdown menu for mobile navigation.
 - **🍞 Streamlined Toast Notifications:** Integrated [Sonner](https://sonner.emilkowal.ski/) for non-blocking user feedback, automatically dismissed on tab switch (`visibilitychange`) or page restoration (`pageshow`).
 - **👁️ Password Visibility Toggles:** Convenient eye toggles to inspect password inputs during authentication.
 - **📏 Character Limit Trackers:** Visual indicators enforce and display character bounds (100 for title, 10,000 for content) across note creation and editing interfaces.
-- **🌐 Reverse Proxy Architecture:** Vite development proxy and Vercel production rewrites route `/api/v1` seamlessly to the Express API, eliminating third-party cookie restrictions.
+- **🌐 Reverse Proxy Architecture & Cache Headers:** Vite development proxy and Vercel production rewrites route `/api/v1` seamlessly to the Express API. Vercel cache control headers prevent caching stale `index.html` while allowing immutable asset caching.
 - **🩺 API Health Monitoring:** Dedicated `/api/v1/health` endpoint for uptime checks.
 
 ---
@@ -37,8 +43,8 @@ NoteNest is a modern, responsive, full-stack note-taking web application built w
 
 ### Frontend
 - **Framework:** React 19 (`v19.2.7`)
-- **Routing:** React Router DOM v7 (`v7.18.1`) with route-level lazy loading
-- **Build Tool:** Vite 8 (`v8.1.1`)
+- **Routing:** React Router DOM v7 (`v7.18.1`) with route-level lazy loading and `errorElement`
+- **Build Tool:** Vite 8 (`v8.1.3`)
 - **Styling:** Tailwind CSS v4 (`v4.3.2`) with `@tailwindcss/vite`
 - **Typography:** Plus Jakarta Sans (`@fontsource/plus-jakarta-sans`)
 - **HTTP Client:** Axios (`v1.18.1`) with request/response interceptors
@@ -90,7 +96,7 @@ sequenceDiagram
     Note over User,DB: Protected API Operations
     User->>API: GET /notes (Authorization: Bearer Access Token)
     API->>API: Verify Access Token (protect middleware)
-    API->>DB: Query notes where owner = req.userId
+    API->>DB: Query notes where owner = req.userId (sort: updatedAt -1)
     DB-->>API: User's notes
     API-->>User: 200 OK + Notes payload
 
@@ -123,7 +129,7 @@ Base URL: `/api/v1`
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **POST** | `/register` | Register a new user account | `{ "name": "...", "email": "...", "password": "..." }` | `{ "success": true, "message": "...", "accessToken": "...", "user": { "id": "...", "name": "...", "email": "..." } }` + HttpOnly Cookie | Yes (10 / 15m) |
 | **POST** | `/login` | Authenticate user credentials | `{ "email": "...", "password": "..." }` | `{ "success": true, "message": "...", "accessToken": "...", "user": { "id": "...", "name": "...", "email": "..." } }` + HttpOnly Cookie | Yes (10 / 15m) |
-| **POST** | `/refresh-token` | Rotate refresh token & issue new access token | *None (HttpOnly Cookie)* | `{ "success": true, "message": "...", "accessToken": "...", "user": { "id": "...", "name": "...", "email": "..." } }` + new HttpOnly Cookie | Yes (10 / 15m) |
+| **POST** | `/refresh-token` | Rotate refresh token & issue new access token | *None (HttpOnly Cookie)* | `{ "success": true, "message": "...", "accessToken": "...", "user": { "id": "...", "name": "...", "email": "..." } }` + new HttpOnly Cookie | No |
 | **POST** | `/logout` | Invalidate stored token & clear cookie | *None (HttpOnly Cookie)* | `{ "success": true, "message": "User logged out successfully" }` | No |
 
 ### 📝 Notes Endpoints (`/api/v1/notes`) — *Protected & User-Scoped*
@@ -132,9 +138,9 @@ Base URL: `/api/v1`
 
 | Method | Endpoint | Description | Request Body | Response Payload |
 | :--- | :--- | :--- | :--- | :--- |
-| **GET** | `/` | Fetch all notes owned by the authenticated user (sorted by `createdAt: -1`) | *None* | `{ "success": true, "notes": [ { "_id": "...", "title": "...", "content": "...", "owner": "...", "createdAt": "...", "updatedAt": "..." } ] }` |
-| **POST** | `/` | Create a new note bound to the authenticated user | `{ "title": "...", "content": "..." }` | `{ "success": true, "message": "Note created successfully", "note": { ... } }` |
-| **PUT** | `/:id` | Update an existing note by ID (owner only) | `{ "title": "...", "content": "..." }` | `{ "success": true, "message": "Note updated successfully", "note": { ... } }` |
+| **GET** | `/` | Fetch all notes owned by the user (sorted by `updatedAt: -1`) | *None* | `{ "success": true, "notes": [ { "_id": "...", "title": "...", "content": "...", "owner": "...", "createdAt": "...", "updatedAt": "..." } ] }` |
+| **POST** | `/` | Create a note (requires title or content) | `{ "title": "...", "content": "..." }` *(at least one required)* | `{ "success": true, "message": "Note created successfully", "note": { ... } }` |
+| **PUT** | `/:id` | Update an existing note by ID (owner only) | `{ "title": "...", "content": "..." }` *(at least one required)* | `{ "success": true, "message": "Note updated successfully", "note": { ... } }` |
 | **DELETE** | `/:id` | Permanently delete a note by ID (owner only) | *None* | `{ "success": true, "message": "Note deleted successfully" }` |
 
 ---
@@ -142,7 +148,7 @@ Base URL: `/api/v1`
 ## 📂 Project Structure
 
 ```text
-NoteNest/
+ECOW/
 ├── backend/
 │   ├── src/
 │   │   ├── config/
@@ -180,43 +186,45 @@ NoteNest/
 │   │   │   └── notes.js                # Notes CRUD API calls
 │   │   ├── components/
 │   │   │   ├── AuthBootstrap.jsx       # Memoized auth check wrapper with Suspense
-│   │   │   ├── ConfirmDialog.jsx       # Modal confirmation dialog (Escape key support)
+│   │   │   ├── ConfirmDialog.jsx       # Modal confirmation dialog (Escape key & backdrop dismiss)
 │   │   │   ├── Footer.jsx              # Application footer
 │   │   │   ├── LoadingSpinner.jsx      # Reusable loading spinner indicator
-│   │   │   ├── Navbar.jsx              # Sticky header with responsive navigation
-│   │   │   ├── NoteCard.jsx            # Note item card with inline edit & delete confirmation
-│   │   │   ├── NoteForm.jsx            # Note creation form with character counters
+│   │   │   ├── Navbar.jsx              # Sticky header with mobile overflow menu
+│   │   │   ├── NoteCard.jsx            # Note item card linking directly to NoteEditor
+│   │   │   ├── NoteForm.jsx            # Note form component with character counters
 │   │   │   ├── ProtectedRoute.jsx      # Route guard for authenticated users
 │   │   │   ├── PublicRoute.jsx         # Route guard redirecting authenticated users
+│   │   │   ├── RootErrorBoundary.jsx   # Error boundary catching route & chunk load errors
 │   │   │   └── RootRoute.jsx           # Root guard routing to notes or landing page
 │   │   ├── config/
 │   │   │   └── toast.js                # Sonner Toaster configuration
 │   │   ├── context/
 │   │   │   ├── AuthContext.jsx         # User auth & session state provider
-│   │   │   └── NoteContext.jsx         # Notes CRUD state provider
+│   │   │   └── NoteContext.jsx         # Notes CRUD state provider (real-time ordering)
 │   │   ├── hooks/
 │   │   │   └── useToastCleanup.js      # Auto-dismiss toasts on visibility change
 │   │   ├── pages/
-│   │   │   ├── CreateNote.jsx          # Dedicated note creation view
-│   │   │   ├── Home.jsx                # Main notes dashboard with empty states
-│   │   │   ├── Landing.jsx             # Minimalist editorial landing page
+│   │   │   ├── CreateNote.jsx          # Note creation wrapper view
+│   │   │   ├── Home.jsx                # Main thoughts dashboard with empty state
+│   │   │   ├── Landing.jsx             # Minimalist Echo + Flow editorial landing page
 │   │   │   ├── Login.jsx               # Sign-in form with password visibility toggle
 │   │   │   ├── NotFound.jsx            # 404 Not Found fallback view
+│   │   │   ├── NoteEditor.jsx          # Dedicated note creation & edit modal with unsaved checks
 │   │   │   └── Register.jsx            # Registration form with password visibility toggle
 │   │   ├── utils/
-│   │   │   ├── formatNoteDate.js       # Date formatter for note timestamps
+│   │   │   ├── formatNoteDate.js       # Dynamic relative date formatter
 │   │   │   └── sessionHint.js          # Local storage session hint utilities
 │   │   ├── App.jsx                     # Root application component with providers
 │   │   ├── Layout.jsx                  # Main layout shell (Navbar, Main, Footer)
 │   │   ├── index.css                   # Global styles, Tailwind @theme tokens & scrollbar hide
-│   │   ├── main.jsx                    # React entry point
-│   │   └── router.jsx                  # React Router configuration with code splitting
+│   │   ├── main.jsx                    # React entry point with vite:preloadError handler
+│   │   └── router.jsx                  # React Router configuration with errorElement & code splitting
 │   ├── .env.example
 │   ├── .env
 │   ├── .oxlintrc.json                  # Oxlint configuration
 │   ├── index.html                      # HTML document template with meta tags
 │   ├── package.json
-│   ├── vercel.json                     # Vercel SPA rewrite & reverse proxy rules
+│   ├── vercel.json                     # Vercel SPA rewrite, cache headers & reverse proxy rules
 │   └── vite.config.js                  # Vite configuration with Tailwind v4 & dev proxy
 │
 ├── .gitignore
@@ -238,8 +246,8 @@ NoteNest/
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/NoteNest.git
-cd NoteNest
+git clone https://github.com/shivamkumartech/ECOW.git
+cd ECOW
 ```
 
 ---
@@ -251,7 +259,7 @@ Create a `.env` file in the `backend/` directory (refer to `backend/.env.example
 
 ```env
 PORT=4001
-MONGO_URI=mongodb+srv://<username>:<password>@cluster0.example.mongodb.net/notenest
+MONGO_URI=mongodb+srv://<username>:<password>@cluster0.example.mongodb.net/ecow
 FRONTEND_URL=http://localhost:5173
 JWT_ACCESS_SECRET=your_super_secret_access_key_min_32_chars
 JWT_REFRESH_SECRET=your_super_secret_refresh_key_min_32_chars
@@ -259,7 +267,7 @@ NODE_ENV=development
 ```
 
 > [!NOTE]
-> In production, set `FRONTEND_URL` to your production domain(s), e.g., `https://notenest.example.com`. You can supply multiple comma-separated origins. Set `NODE_ENV=production` to enable secure cookies (`secure: true`, `sameSite: "none"`).
+> In production, set `FRONTEND_URL` to your production domain(s), e.g., `https://ecow-in.vercel.app`. You can supply multiple comma-separated origins. Set `NODE_ENV=production` to enable secure cookies (`secure: true`, `sameSite: "none"`).
 
 #### Frontend (`frontend/.env`):
 Create a `.env` file in the `frontend/` directory (refer to `frontend/.env.example`):
@@ -300,10 +308,11 @@ npm run dev
 3. **Password Security:** User passwords are encrypted with `bcryptjs` using a cost factor of 10 salt rounds before persistence. Passwords have `select: false` on the User schema to prevent accidental leaks in database queries.
 4. **Environment-Aware Cookies:** Refresh tokens travel in `httpOnly` cookies with `secure: true` and `sameSite: "none"` in production, defending against XSS access and cross-site scripting vulnerabilities.
 5. **Strict Ownership Enforcement:** All note mutations and reads verify `owner: req.userId` in Mongoose queries, preventing Insecure Direct Object References (IDOR).
-6. **Rate Limiting & Abuse Prevention:** Sensitive auth endpoints (`/register`, `/login`, `/refresh-token`) are guarded by `express-rate-limit` allowing 10 attempts per 15-minute window per IP.
+6. **Rate Limiting & Abuse Prevention:** Sensitive auth endpoints (`/register`, `/login`) are guarded by `express-rate-limit` allowing 10 attempts per 15-minute window per IP.
 7. **HTTP Security Headers:** `helmet` sets hardened HTTP security headers (`Content-Security-Policy`, `X-Frame-Options`, `Strict-Transport-Security`, etc.).
 8. **Request Body Size Limit:** `express.json({ limit: "50kb" })` protects against memory exhaustion and large payload denial-of-service attempts.
 9. **Seamless Token Interceptors:** The frontend Axios client intercepts 401 errors, synchronizes refresh calls through a shared promise queue, and transparently retries failed requests without session disruption.
+10. **Deployment Cache Invalidation:** Strict caching headers in `vercel.json` ensure `index.html` is re-validated on every request while static assets benefit from immutable caching.
 
 ---
 

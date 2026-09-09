@@ -1,7 +1,7 @@
 {
-  "name": "notenest-backend",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "Backend API for the NoteNest full-stack notes application",
+  "description": "Backend API for the ECOW full-stack notes application",
   "license": "ISC",
   "author": "",
   "type": "module",
