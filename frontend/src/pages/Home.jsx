@@ -81,7 +81,7 @@ function Home() {
           </Link>
         </div>
       ) : (
-        <div className="grid grid-cols-1 items-start gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 items-start gap-5  sm:grid-cols-2 lg:grid-cols-4">
           {notes.map((note) => (
             <NoteCard key={note._id} note={note} />
           ))}
@@ -91,11 +91,11 @@ function Home() {
       {/* Mobile Create Note FAB */}
       <Link
         to="/create-note"
-        className="fixed bottom-20 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-(--app-accent) text-(--app-bg) shadow-lg transition hover:bg-(--app-accent-hover) sm:hidden"
+        className="fixed bottom-22 right-6 z-40 flex h-16 w-16 items-center justify-center rounded-full bg-(--app-accent) text-(--app-bg) shadow-lg transition hover:bg-(--app-accent-hover) sm:hidden"
         title="Create note"
         aria-label="Create note"
       >
-        <Plus size={26} />
+        <Plus size={30} />
       </Link>
     </div>
   );

@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 function Layout() {
   const location = useLocation();
@@ -14,19 +15,7 @@ function Layout() {
       <main
         className={`relative flex-1 ${isLanding ? "w-full" : "container mx-auto p-4"}`}
       >
-        <Suspense
-          fallback={
-            <div className="flex min-h-[50vh] items-center justify-center">
-              <div
-                className="h-8 w-8 animate-spin rounded-full border-3"
-                style={{
-                  borderColor: "var(--app-accent-soft)",
-                  borderTopColor: "var(--app-accent)",
-                }}
-              />
-            </div>
-          }
-        >
+        <Suspense fallback={<LoadingSpinner />}>
           <Outlet />
         </Suspense>
       </main>

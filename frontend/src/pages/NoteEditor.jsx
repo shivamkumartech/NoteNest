@@ -217,7 +217,7 @@ function NoteEditor() {
       <div className="fixed inset-0 z-50 flex min-h-screen items-stretch justify-center bg-(--app-bg) sm:items-center sm:bg-black/70 sm:p-6">
         <div className="flex h-full w-full flex-col bg-(--app-bg) sm:h-auto sm:max-h-[90vh] sm:max-w-3xl sm:rounded-2xl sm:border sm:border-(--app-border) sm:bg-(--app-surface)">
           {/* Top Bar */}
-          <div className="flex shrink-0 items-center justify-between px-3 py-8 sm:px-7">
+          <div className="flex shrink-0 items-center justify-between px-3 py-6 sm:px-7">
             {" "}
             {/* Back */}
             <button

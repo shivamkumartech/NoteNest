@@ -59,7 +59,7 @@ function Register() {
   };
 
   return (
-    <div className="mx-auto mt-8 w-full max-w-md px-4 sm:mt-12 sm:px-0">
+    <div className="mx-auto mt-8 w-full max-w-md sm:mt-12 sm:px-0">
       <div className="rounded-2xl border border-(--app-border) bg-(--app-surface) p-6 shadow-sm sm:p-8">
         <div className="mb-7 text-center">
           <h1 className="text-2xl font-semibold tracking-tight text-(--app-text)">
