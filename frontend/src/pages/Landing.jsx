@@ -99,9 +99,9 @@ function Landing() {
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-10 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-20">
             <div>
-              <p className="text-xs font-medium uppercase tracking-[0.18em] text-(--app-text-muted)">
+              <h2 className="text-xs font-medium uppercase tracking-[0.18em] text-(--app-text-muted)">
                 Why Daykeep
-              </p>
+              </h2>
             </div>
 
             <div>
@@ -129,10 +129,9 @@ function Landing() {
       <section className="border-t border-(--app-border) px-6 py-26 sm:px-10 lg:px-16 lg:py-28">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 flex items-end justify-between">
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-(--app-text-muted)">
+            <h2 className="text-xs font-medium uppercase tracking-[0.18em] text-(--app-text-muted)">
               How it works
-            </p>
-
+            </h2>
           </div>
 
           <div className="grid border-t border-(--app-border) md:grid-cols-3">
@@ -146,9 +145,9 @@ function Landing() {
                 <ArrowUpRight className="h-4 w-4 text-(--app-text-muted) opacity-0 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100" />
               </div>
 
-              <h2 className="mt-14 text-lg font-medium tracking-tight">
+              <h3 className="mt-14 text-lg font-medium tracking-tight">
                 Write
-              </h2>
+              </h3>
 
               <p className="mt-3 max-w-xs text-sm leading-6 text-(--app-text-secondary)">
                 Capture the thought while it’s still fresh. Don’t let a good
@@ -166,7 +165,7 @@ function Landing() {
                 <ArrowUpRight className="h-4 w-4 text-(--app-text-muted) opacity-0 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100" />
               </div>
 
-              <h2 className="mt-14 text-lg font-medium tracking-tight">Keep</h2>
+              <h3 className="mt-14 text-lg font-medium tracking-tight">Keep</h3>
 
               <p className="mt-3 max-w-xs text-sm leading-6 text-(--app-text-secondary)">
                 Keep your notes without clutter, distractions, or unnecessary
@@ -184,9 +183,9 @@ function Landing() {
                 <ArrowUpRight className="h-4 w-4 text-(--app-text-muted) opacity-0 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100" />
               </div>
 
-              <h2 className="mt-14 text-lg font-medium tracking-tight">
+              <h3 className="mt-14 text-lg font-medium tracking-tight">
                 Return
-              </h2>
+              </h3>
 
               <p className="mt-3 max-w-xs text-sm leading-6 text-(--app-text-secondary)">
                 Come back to your notes when they become useful. What you wrote
@@ -202,9 +201,9 @@ function Landing() {
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="max-w-2xl text-3xl font-medium leading-tight tracking-[-0.035em] sm:text-4xl">
+              <h2 className="max-w-2xl text-3xl font-medium leading-tight tracking-[-0.035em] sm:text-4xl">
                 Keep what matters.
-              </p>
+              </h2>
 
               <p className="mt-3 text-sm leading-6 text-(--app-text-secondary)">
                 Write it now. Come back to it later.
