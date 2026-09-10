@@ -2,7 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Daykeep" />
+    <link rel="manifest" href="/site.webmanifest" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <meta
@@ -10,13 +16,22 @@
       content="Daykeep is a minimalist, distraction-free space for your ideas, plans, reminders, unfinished thoughts, and everything in between."
     />
     <meta name="theme-color" content="#080808" />
-    <link rel="canonical" href="https://day-keep.vercel.app/" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Shivam Kumar" />
+    <meta
+      name="keywords"
+      content="notes app, minimalist notes, distraction-free writing, note taking app, personal journal, calm productivity, note"
+    />
+    <link rel="canonical" href="https://day-keep.vercel.app" />
 
     <!-- Open Graph / Social Sharing -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://day-keep.vercel.app/" />
+    <meta property="og:url" content="https://day-keep.vercel.app" />
     <meta property="og:site_name" content="Daykeep" />
-    <meta property="og:title" content="Daykeep - Keep the things, worth remembering" />
+    <meta
+      property="og:title"
+      content="Daykeep - Keep the things, worth remembering"
+    />
     <meta
       property="og:description"
       content="Daykeep is a minimalist, distraction-free space for your ideas, plans, reminders, unfinished thoughts, and everything in between."
@@ -28,8 +43,11 @@
 
     <!-- Twitter / X Cards -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://day-keep.vercel.app/" />
-    <meta name="twitter:title" content="Daykeep - Keep the things, worth remembering" />
+    <meta property="twitter:url" content="https://day-keep.vercel.app" />
+    <meta
+      name="twitter:title"
+      content="Daykeep - Keep the things, worth remembering"
+    />
     <meta
       name="twitter:description"
       content="Daykeep is a minimalist, distraction-free space for your ideas, plans, reminders, unfinished thoughts, and everything in between."
@@ -41,6 +59,30 @@
     <meta name="twitter:creator" content="@shivamkumar_dev" />
 
     <title>Daykeep - Keep the things, worth remembering</title>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Daykeep",
+        "url": "https://day-keep.vercel.app",
+        "description": "A minimalist, distraction-free space for your ideas, plans, reminders, unfinished thoughts, and everything in between.",
+        "applicationCategory": "Productivity",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires HTML5",
+        "screenshot": "https://day-keep.vercel.app/og-image.png",
+        "creator": {
+          "@type": "Person",
+          "name": "Shivam Kumar",
+          "url": "https://github.com/shivamkumartech"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0.00",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
   </head>
 
   <body>

@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /$
+Allow: /login
+Allow: /register
+Disallow: /notes
+Disallow: /create-note
+Disallow: /edit-note
+
+Sitemap: https://day-keep.vercel.app/sitemap.xml
